@@ -12,6 +12,9 @@ export default {
         success: "#2DC071",
         secondTextColor: "#737373",
         bgGray: "#FAFAFA",
+        muted: "#BDBDBD",
+        secondary: "#23856D",
+        alert: "#E77C40",
       },
       backgroundImage: {
         "header-bg": "url('./src/assets/header-bg.png')",

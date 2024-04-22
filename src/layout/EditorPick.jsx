@@ -1,12 +1,18 @@
 import React from "react";
 import Card from "../components/Card";
-import Title from "../components/Title";
 
 function EditorPick() {
   return (
-    <div className="w-full pt-20 h-screen">
+    <div className="w-full pt-20 h-screen bg-bgGray">
       {/* Title */}
-      <Title />
+      <div className="pt-20 flex flex-col justify-center items-center">
+        <h3 className="font-bold text-2xl leading-8 tracking-[0.1px] text-headerColor">
+          Editor's Pick
+        </h3>
+        <p className="tracking-[0.2px] leading-5 font-normal text-secondTextColor mt-3">
+          Problems trying to resolve the conflict between
+        </p>
+      </div>
       {/* Category Cards */}
       <div className="text-center lg:flex w-full lg:h-screen justify-center mt-8 h-full">
         <Card
