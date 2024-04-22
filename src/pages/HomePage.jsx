@@ -4,7 +4,7 @@ import Header from "../layout/Header";
 function HomePage() {
   return (
     <div>
-      <Header title={"Merhaba"} />
+      <p>Home</p>
     </div>
   );
 }
