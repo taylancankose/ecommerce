@@ -1,40 +1,64 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Pagination, Scrollbar, Keyboard } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 
 function Header() {
   return (
-    <div className="w-full">
-      {/* Navbar Slogan */}
-      <div className="md:hidden lg:flex items-center bg-headerColor p-6 justify-between">
-        <div className="ml-2 lg:ml-4 flex items-center">
-          <div className="flex items-center">
-            <i class="fa fa-phone fa-sharp text-white lg:mr-2 mr-1 xl:text-lg text-sm"></i>
-            <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
-              (225) 555-0118
-            </p>
+    <div className="font-montserrat md:h-screen">
+      <Navbar />
+      {/* Carousel */}
+      <Swiper
+        slidesPerView={1}
+        className="h-full lg:h-[calc(100vh-18%)] bg-no-repeat"
+        navigation
+        scrollbar
+        pagination
+        modules={[Keyboard, Scrollbar, Navigation, Pagination]}
+      >
+        <SwiperSlide>
+          <div className="bg-header-bg h-full bg-no-repeat bg-cover bg-center md:bg-top flex">
+            <div className="p-6 m-auto text-center md:text-left md:w-3/6 md:flex md:flex-col md:ml-40 md:justify-around md:h-96 ">
+              <h5 className="text-white font-bold leading-6 tracking-[0.1px] mb-4 md:mb-0">
+                SUMMER 2024
+              </h5>
+              <h1 className="font-bold text-white md:text-6xl tracking-[0.2px] leading-[80px] mb-4 md:mb-0 text-4xl">
+                New Collection
+              </h1>
+              <h4 className="tracking-[0.2px] leading-8 font-normal text-xl text-white mb-4 md:mb-0 w-5/6 m-auto md:w-3/6 md:m-0">
+                We know how large objects will act, but things on a small scale.
+              </h4>
+              <div>
+                <button className="bg-success gap-3 py-4 px-10 round rounded-sm text-white font-bold text-xl leading-8 tracking-[0.1px]">
+                  SHOP NOW
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center ml-3 lg:ml-6">
-            <i class="fa-regular fa-envelope text-white lg:mr-2 mr-1"></i>
-            <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
-              michelle.rivera@example.com
-            </p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="bg-header-bg h-full bg-no-repeat bg-cover bg-center md:bg-top flex">
+            <div className="p-6 m-auto text-center md:text-left md:w-3/6 md:flex md:flex-col md:ml-40 md:justify-around md:h-96 ">
+              <h5 className="text-white font-bold leading-6 tracking-[0.1px] mb-4 md:mb-0">
+                SUMMER 2024
+              </h5>
+              <h1 className="font-bold text-white md:text-6xl tracking-[0.2px] leading-[80px] mb-4 md:mb-0 text-4xl">
+                Collection
+              </h1>
+              <h4 className="tracking-[0.2px] leading-8 font-normal text-xl text-white mb-4 md:mb-0 w-5/6 m-auto md:w-3/6 md:m-0">
+                We know how large objects will act, but things on a small scale.
+              </h4>
+              <div>
+                <button className="bg-success gap-3 py-4 px-10 round rounded-sm text-white font-bold text-xl leading-8 tracking-[0.1px]">
+                  SHOP NOW
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div>
-          {" "}
-          <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
-            Follow Us and get a chance to win 80% off
-          </p>
-        </div>
-        <div className="mr-4 flex items-center justify-end">
-          <p className="font-bold text-white tracking-widest font-montserrat text-xs mr-2 lg:mr-4  xl:text-lg">
-            Follow Us:
-          </p>
-          <i class="fa fa-brands fa-instagram text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i class="fa fa-brands fa-youtube text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i class="fa fa-brands fa-facebook text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i class="fa fa-brands fa-twitter text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-        </div>
-      </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 }

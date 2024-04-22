@@ -8,6 +8,17 @@ export default {
       },
       colors: {
         headerColor: "#252B42",
+        primary: "#23A6F0",
+        success: "#2DC071",
+        secondTextColor: "#737373",
+        bgGray: "#FAFAFA",
+      },
+      backgroundImage: {
+        "header-bg": "url('./src/assets/header-bg.png')",
+        "cat-men": "url('./src/assets/cat-men.png')",
+        "cat-women": "url('./src/assets/cat-women.png')",
+        "cat-kids": "url('./src/assets/cat-kids.png')",
+        "cat-accessories": "url('./src/assets/cat-accessories.png')",
       },
     },
   },
