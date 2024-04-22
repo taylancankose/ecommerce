@@ -4,7 +4,7 @@ import Header from "../layout/Header";
 function HomePage() {
   return (
     <div>
-      <p>Home</p>
+      <Header />
     </div>
   );
 }
