@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "SUMMER 2020",
+    "subtitle": "NEW COLLECTION",
+    "description": "We know how large objects will act, but things on a small scale.",
+    "buttonText": "SHOP NOW",
+    "background": "bg-header-bg"
+  },
+  {
+    "id": 2,
+    "title": "AUTMN 2020",
+    "subtitle": "VINTAGE COLLECTION",
+    "description": "We know how large objects will act, but things on a small scale.",
+    "buttonText": "SHOP NOW",
+    "background": "bg-header-bg"
+  }
+]
