@@ -15,6 +15,7 @@ export default {
         muted: "#BDBDBD",
         secondary: "#23856D",
         alert: "#E77C40",
+        error: "#E74040",
       },
       backgroundImage: {
         "header-bg": "url('./src/assets/header-bg.png')",
@@ -22,6 +23,7 @@ export default {
         "cat-women": "url('./src/assets/cat-women.png')",
         "cat-kids": "url('./src/assets/cat-kids.png')",
         "cat-accessories": "url('./src/assets/cat-accessories.png')",
+        "header-2": "url('./src/assets/bg-header-2.png')",
       },
     },
   },

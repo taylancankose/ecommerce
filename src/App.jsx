@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom/";
 import HomePage from "./pages/HomePage";
+import Footer from "./layout/Footer";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }

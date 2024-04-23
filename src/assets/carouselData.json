@@ -1,0 +1,20 @@
+[
+  {
+    "id": 3,
+    "title": "SUMMER 2020",
+    "subtitle": "Vita Classic Product",
+    "description": "We know how large objects will act, but things on a small scale.",
+    "buttonText": "SHOP NOW",
+    "background": "bg-header-2",
+    "price": "$16.48"
+  },
+  {
+    "id": 4,
+    "title": "AUTMN 2020",
+    "subtitle": "VINTAGE COLLECTION",
+    "description": "We know how large objects will act, but things on a small scale.",
+    "buttonText": "SHOP NOW",
+    "background": "bg-header-bg",
+    "price": "$5.78"
+  }
+]

@@ -3,9 +3,9 @@ import Card from "../components/Card";
 
 function EditorPick() {
   return (
-    <div className="w-full pt-20 h-screen bg-bgGray">
+    <div className="w-full h-screen bg-bgGray pt-10">
       {/* Title */}
-      <div className="pt-20 flex flex-col justify-center items-center">
+      <div className=" flex flex-col justify-center items-center">
         <h3 className="font-bold text-2xl leading-8 tracking-[0.1px] text-headerColor">
           Editor's Pick
         </h3>
