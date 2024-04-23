@@ -2,7 +2,6 @@ import React from "react";
 import Header from "../layout/Header";
 import EditorPick from "../layout/EditorPick";
 import FeaturedProducts from "../layout/FeaturedProducts";
-import Navbar from "../components/Navbar";
 // import data from "../assets/data.json";
 // import carouselData from "../assets/carouselData.json";
 import bgHeader from "../assets/header-bg.png";
@@ -13,7 +12,6 @@ import FeaturedBlog from "../layout/FeaturedBlog";
 function HomePage() {
   return (
     <div className="overflow-x-hidden">
-      <Navbar />
       <Header
         background={bgHeader}
         container="bg-primary"

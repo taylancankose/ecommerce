@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
+import { Link } from "react-router-dom/";
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       {/* Navbar Slogan */}
@@ -90,18 +96,54 @@ function Navbar() {
           <div className="w-full md:w-8/12 md:flex lg:w-4/12 md:order-1 ">
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:space-x-4 xl:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="block py-2 px-3 rounded text-gray-900"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
-              <li>
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
-                  Shop
-                </a>
+              {/* Dropdown */}
+              <li className="z-10">
+                <Link
+                  to="/shop"
+                  className="block py-2 px-3 text-gray-900 rounded "
+                >
+                  <div className="relative">
+                    <button
+                      onClick={toggleDropdown}
+                      className=" text-gray-700 font-semibold bg-transparent inline-flex items-center"
+                    >
+                      <span>Shop</span>
+                      <i class="fa-solid fa-chevron-down ml-2"></i>
+                    </button>
+                    {isOpen && (
+                      <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
+                        <div className="py-1">
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Option 1
+                          </a>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Option 2
+                          </a>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Option 3
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Link>
               </li>
               <li>
                 <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
