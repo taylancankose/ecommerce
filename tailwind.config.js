@@ -16,6 +16,9 @@ export default {
         secondary: "#23856D",
         alert: "#E77C40",
         error: "#E74040",
+        lightGray: "#ECECEC",
+        borderGray: "#DDDDDD",
+        dropDownGray: "#F9F9F9",
       },
       backgroundImage: {
         "header-bg": "url('./src/assets/header-bg.png')",

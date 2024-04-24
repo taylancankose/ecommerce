@@ -8,7 +8,6 @@ import bgHeader from "../assets/header-bg.png";
 import carouselHeader from "../assets/bg-header-man.png";
 import FluidContainer from "../layout/FluidContainer";
 import FeaturedBlog from "../layout/FeaturedBlog";
-import logo from "../assets/logo-no-bg.png";
 
 function HomePage() {
   return (
@@ -37,14 +36,6 @@ function HomePage() {
       />
       <FluidContainer />
       <FeaturedBlog />
-      <div className="md:p-20 p-10 md:flex justify-between bg-bgGray">
-        <img src={logo} className="h-14 md:ml-10 mb-4 md:mb-0" />
-        <div className="flex items-center text-primary text-3xl md:mr-10">
-          <i className="fa-brands fa-facebook md:mr-8 mr-2"></i>
-          <i className="fa-brands fa-twitter md:mr-8 mr-2"></i>
-          <i className="fa-brands fa-instagram "></i>
-        </div>
-      </div>
     </div>
   );
 }
