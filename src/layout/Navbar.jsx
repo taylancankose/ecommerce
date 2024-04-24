@@ -116,7 +116,7 @@ function Navbar() {
                       className=" text-gray-700 font-semibold bg-transparent inline-flex items-center"
                     >
                       <span>Shop</span>
-                      <i class="fa-solid fa-chevron-down ml-2"></i>
+                      <i className="fa-solid fa-chevron-down ml-2"></i>
                     </button>
                     {isOpen && (
                       <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">

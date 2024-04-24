@@ -1,10 +1,10 @@
 import React from "react";
 import product from "../assets/product.png";
 
-function ProductCard() {
+function ProductCard({ imgClass }) {
   return (
     <div className="text-center justify-center items-center md:mr-6 mt-10">
-      <img src={product} className="w-96" />
+      <img src={product} className={`${imgClass}`} />
 
       <h5 className="font-bold leading-6 tracking-[0.1px]  text-headerColor mt-4">
         Graphic Design
