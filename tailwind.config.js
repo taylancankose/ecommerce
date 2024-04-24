@@ -24,6 +24,7 @@ export default {
         "cat-kids": "url('./src/assets/cat-kids.png')",
         "cat-accessories": "url('./src/assets/cat-accessories.png')",
         "header-2": "url('./src/assets/bg-header-2.png')",
+        card: "url('./src/assets/card.png')",
       },
     },
   },

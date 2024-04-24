@@ -1,18 +1,9 @@
 import React from "react";
-import logo from "../assets/logo-no-bg.png";
 
 function Footer() {
   return (
     <div className="font-montserrat">
       {/* Company & Socials */}
-      <div className="md:p-20 p-10 md:flex justify-between bg-bgGray">
-        <img src={logo} className="h-14 md:ml-10 mb-4 md:mb-0" />
-        <div className="flex items-center text-primary text-3xl md:mr-10">
-          <i class="fa-brands fa-facebook md:mr-8 mr-2"></i>
-          <i class="fa-brands fa-twitter md:mr-8 mr-2"></i>
-          <i class="fa-brands fa-instagram "></i>
-        </div>
-      </div>
 
       {/* Navs */}
       <div className="md:flex flex-wrap justify-between items-center px-6 md:px-20 py-14 bg-white">
