@@ -2,7 +2,7 @@ import React from "react";
 
 function ContactHeader() {
   return (
-    <div className="flex flex-wrap justify-around items-center">
+    <div className="flex flex-wrap justify-center items-center ">
       {/* Left */}
       <div className="md:w-3/6 2xl:w-2/6 text-center lg:text-left">
         <h5 className="font-bold text-headerColor ">CONTACT US</h5>
@@ -26,7 +26,7 @@ function ContactHeader() {
         </div>
       </div>
       {/* Right */}
-      <div className="lg:w-1/3 px-20 mt-10 md:px-40 lg:px-0 md:mt-0 flex relative">
+      <div className="lg:w-1/3 mt-10 md:px-40 lg:px-0 md:mt-0 flex relative">
         <img src="/src/assets/contact-family.png" />
       </div>
     </div>

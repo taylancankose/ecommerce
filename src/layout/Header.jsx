@@ -40,6 +40,7 @@ function Header({
             containerClass="text-white"
             price={price}
             secondButtonText={secondButtonText}
+            textColor="white"
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -53,6 +54,7 @@ function Header({
             containerClass="text-white"
             price={price}
             secondButtonText={secondButtonText}
+            textColor="white"
           />
         </SwiperSlide>
       </Swiper>

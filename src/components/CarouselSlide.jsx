@@ -8,6 +8,8 @@ export default function CarouselSlide({
   isAbsolute,
   containerClass,
   secondButtonText,
+  color = "success",
+  textColor = "headerColor",
 }) {
   return (
     <div
@@ -31,11 +33,15 @@ export default function CarouselSlide({
               {price}
             </h2>
           )}
-          <button className="bg-success gap-3 py-4 px-10 round rounded-sm  font-bold text-xl leading-8 tracking-[0.1px] m-auto md:m-0 ">
+          <button
+            className={`bg-${color} text-${textColor} gap-3 py-4 px-10 round rounded-sm  font-bold text-xl leading-8 tracking-[0.1px] m-auto md:m-0 `}
+          >
             {buttonText}
           </button>
           {secondButtonText && (
-            <button className="border border-success gap-3 py-3.5 px-7 round rounded-sm font-bold text-xl leading-8 tracking-[0.1px] m-auto md:m-0 md:ml-4 mt-4 lg:mt-0">
+            <button
+              className={`border border-${color} text-${textColor} gap-3 py-3.5 px-7 round rounded-sm font-bold text-xl leading-8 tracking-[0.1px] m-auto md:m-0 md:ml-4 mt-4 lg:mt-0`}
+            >
               {secondButtonText}
             </button>
           )}

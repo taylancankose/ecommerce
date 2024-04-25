@@ -146,9 +146,12 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
+                <Link
+                  to="/about-us"
+                  className="block py-2 px-3 text-gray-900 rounded "
+                >
                   About
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
