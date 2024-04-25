@@ -43,7 +43,7 @@ function Navbar() {
       </div>
       {/* Navbar */}
       <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center">
-        <div className="max-w-full flex flex-wrap items-center justify-between p-6 ml-0 lg:ml-4">
+        <div className="max-w-full flex flex-wrap items-center justify-between p-6 ml-0 lg:mx-24 ">
           <a
             href="#"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -156,9 +156,12 @@ function Navbar() {
                 </a>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
+                <Link
+                  to="/contact"
+                  className="block py-2 px-3 text-gray-900 rounded "
+                >
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="block py-2 px-3 text-gray-900 rounded ">

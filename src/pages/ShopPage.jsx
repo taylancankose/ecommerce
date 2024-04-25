@@ -46,10 +46,10 @@ function ShopPage() {
                 Views:
               </h6>
               <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
-                <i class="fa-brands fa-microsoft text-headerColor"></i>
+                <i className="fa-brands fa-microsoft text-headerColor"></i>
               </div>
               <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
-                <i class="fa-solid fa-list text-headerColor"></i>
+                <i className="fa-solid fa-list text-headerColor"></i>
               </div>
             </div>
             {/* Filter */}
