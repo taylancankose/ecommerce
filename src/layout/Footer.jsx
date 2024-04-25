@@ -4,6 +4,16 @@ import logo from "../assets/logo-no-bg.png";
 function Footer() {
   return (
     <div className="font-montserrat">
+      <div className="md:px-20 p-10  bg-bgGray ">
+        <div className="md:flex items-center text-center justify-between md:text-left md:mx-10">
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-hooli block md:inline"></i>
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-lyft block md:inline"></i>
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-pied-piper-hat block md:inline"></i>
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-stripe block md:inline"></i>
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-aws block md:inline"></i>
+          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-reddit-alien block md:inline"></i>
+        </div>
+      </div>
       {/* Company & Socials */}
       <div className="md:p-20 p-10 md:flex justify-between mx-4 -ml-4 md:ml-4">
         <img src={logo} className="h-14 md:ml-10 mb-4 md:mb-0" />
@@ -16,7 +26,7 @@ function Footer() {
       <div className="md:border-b-2 md:mx-32 hidden md:block" />
 
       {/* Navs */}
-      <div className="md:flex flex-wrap justify-between items-center px-6 md:px-20 py-14 bg-white">
+      <div className="md:flex flex-wrap justify-between items-center px-3 md:px-20 py-14 bg-white">
         {/* Company Info */}
         <div className="md:ml-14 mb-4">
           <h5 className="font-bold leading-6 tracking-[0.1px] text-lg text-headerColor mb-4">
