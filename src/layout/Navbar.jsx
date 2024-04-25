@@ -164,9 +164,12 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
-                  Pages
-                </a>
+                <Link
+                  to="/team"
+                  className="block py-2 px-3 text-gray-900 rounded "
+                >
+                  Team
+                </Link>
               </li>
             </ul>
           </div>
