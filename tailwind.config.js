@@ -11,6 +11,7 @@ export default {
         primary: "#23A6F0",
         success: "#2DC071",
         secondTextColor: "#737373",
+        lightSecontTextColor: "#858585",
         bgGray: "#FAFAFA",
         muted: "#BDBDBD",
         secondary: "#23856D",
@@ -28,6 +29,9 @@ export default {
         "cat-accessories": "url('./src/assets/cat-accessories.png')",
         "header-2": "url('./src/assets/bg-header-2.png')",
         card: "url('./src/assets/card.png')",
+      },
+      boxShadow: {
+        "box-shadow-lg": "10px 10px #EBEBEB;",
       },
     },
   },
