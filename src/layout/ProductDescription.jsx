@@ -24,25 +24,25 @@ function ProductDescription() {
           <div>
             <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
               <span>
-                <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+                <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
               </span>
               the quick fox jumps over the lazy dog
             </h6>
             <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
               <span>
-                <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+                <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
               </span>
               the quick fox jumps over the lazy dog
             </h6>
             <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
               <span>
-                <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+                <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
               </span>
               the quick fox jumps over the lazy dog
             </h6>
             <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
               <span>
-                <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+                <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
               </span>
               the quick fox jumps over the lazy dog
             </h6>
@@ -54,19 +54,19 @@ function ProductDescription() {
           </h3>
           <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
             <span>
-              <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+              <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
             </span>
             the quick fox jumps over the lazy dog
           </h6>
           <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
             <span>
-              <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+              <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
             </span>
             the quick fox jumps over the lazy dog
           </h6>
           <h6 className="text-secondTextColor font-bold text-sm leading-6 ">
             <span>
-              <i class="fa-solid fa-chevron-right mr-4 mt-7"></i>
+              <i className="fa-solid fa-chevron-right mr-4 mt-7"></i>
             </span>
             the quick fox jumps over the lazy dog
           </h6>
