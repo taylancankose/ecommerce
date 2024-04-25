@@ -46,7 +46,7 @@ function ProductDetailsCard() {
               <i className=" fa-regular fa-heart text-headerColor text-lg font-medium"></i>
             </div>
             <div className="mr-3 w-12 h-12 bg-white border-lightSecontTextColor border rounded-full flex items-center justify-center hover:scale-105 transition-transform ease-in duration-300">
-              <i class="fa-regular fa-credit-card text-headerColor text-lg "></i>
+              <i className="fa-regular fa-credit-card text-headerColor text-lg "></i>
             </div>
             <div className="mr-3 w-12 h-12 bg-white border-lightSecontTextColor border rounded-full flex items-center justify-center hover:scale-105 transition-transform ease-in duration-300">
               <i className="fa-solid fa-eye text-headerColor text-lg font-medium"></i>

@@ -1,17 +1,18 @@
 import React from "react";
 import logo from "../assets/logo-no-bg.png";
+import SubscribeInput from "../components/SubscribeInput";
 
 function Footer() {
   return (
-    <div className="font-montserrat">
-      <div className="md:px-20 p-10  bg-bgGray ">
+    <div className="font-montserrat ">
+      <div className="md:px-20 p-10 bg-bgGray ">
         <div className="md:flex items-center text-center justify-between md:text-left md:mx-10">
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-hooli block md:inline"></i>
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-lyft block md:inline"></i>
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-pied-piper-hat block md:inline"></i>
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-stripe block md:inline"></i>
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-aws block md:inline"></i>
-          <i class="md:text-6xl text-8xl lg:text-8xl fa-brands fa-reddit-alien block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-hooli block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-lyft block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-pied-piper-hat block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-stripe block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-aws block md:inline"></i>
+          <i className="md:text-6xl text-8xl lg:text-8xl fa-brands fa-reddit-alien block md:inline"></i>
         </div>
       </div>
       {/* Company & Socials */}
@@ -80,15 +81,7 @@ function Footer() {
           <h5 className="font-bold leading-6 tracking-[0.1px] text-lg text-headerColor mb-4">
             Get In Touch
           </h5>
-          <div className="flex">
-            <input
-              placeholder="Email"
-              className="border border-[#E6E6E6] rounded-tl-md rounded-bl-md h-16 md:px-3 bg-[#F9F9F9]"
-            />
-            <button className="h-16 border border-[#E6E6E6] rounded-tr-md rounded-br-md px-2 bg-primary text-white">
-              Subscribe
-            </button>
-          </div>
+          <SubscribeInput />
           <p className="font-normal text-secondTextColor leading-7 tracking-[0.2px] text-xs mt-2">
             Lore imp sum dolor Amit
           </p>
