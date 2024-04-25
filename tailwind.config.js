@@ -16,6 +16,9 @@ export default {
         secondary: "#23856D",
         alert: "#E77C40",
         error: "#E74040",
+        lightGray: "#ECECEC",
+        borderGray: "#DDDDDD",
+        dropDownGray: "#F9F9F9",
       },
       backgroundImage: {
         "header-bg": "url('./src/assets/header-bg.png')",
@@ -24,6 +27,7 @@ export default {
         "cat-kids": "url('./src/assets/cat-kids.png')",
         "cat-accessories": "url('./src/assets/cat-accessories.png')",
         "header-2": "url('./src/assets/bg-header-2.png')",
+        card: "url('./src/assets/card.png')",
       },
     },
   },

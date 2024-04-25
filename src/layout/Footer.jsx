@@ -5,19 +5,20 @@ function Footer() {
   return (
     <div className="font-montserrat">
       {/* Company & Socials */}
-      <div className="md:p-20 p-10 md:flex justify-between bg-bgGray">
+      <div className="md:p-20 p-10 md:flex justify-between mx-4 -ml-4 md:ml-4">
         <img src={logo} className="h-14 md:ml-10 mb-4 md:mb-0" />
         <div className="flex items-center text-primary text-3xl md:mr-10">
-          <i class="fa-brands fa-facebook md:mr-8 mr-2"></i>
-          <i class="fa-brands fa-twitter md:mr-8 mr-2"></i>
-          <i class="fa-brands fa-instagram "></i>
+          <i className="fa-brands fa-facebook md:mr-8 mr-2"></i>
+          <i className="fa-brands fa-twitter md:mr-8 mr-2"></i>
+          <i className="fa-brands fa-instagram "></i>
         </div>
       </div>
+      <div className="md:border-b-2 md:mx-32 hidden md:block" />
 
       {/* Navs */}
       <div className="md:flex flex-wrap justify-between items-center px-6 md:px-20 py-14 bg-white">
         {/* Company Info */}
-        <div className="md:ml-10 mb-4">
+        <div className="md:ml-14 mb-4">
           <h5 className="font-bold leading-6 tracking-[0.1px] text-lg text-headerColor mb-4">
             Company Info
           </h5>
@@ -65,7 +66,7 @@ function Footer() {
           </ul>
         </div>
         {/* Get in Touch */}
-        <div className="md:mr-10 md:ml-10 lg:ml-0 mb-4 justify-center ">
+        <div className="md:mr-14 md:ml-10 lg:ml-0 mb-4 justify-center ">
           <h5 className="font-bold leading-6 tracking-[0.1px] text-lg text-headerColor mb-4">
             Get In Touch
           </h5>
@@ -85,7 +86,7 @@ function Footer() {
       </div>
 
       {/* Trademark */}
-      <div className="md:px-20 py-8 bg-bgGray ">
+      <div className="md:px-24 py-8 bg-bgGray ">
         <h6 className="md:mx-10 text-secondTextColor font-bold text-sm leading-6 tracking-[0.2px] md:text-left text-center">
           Made With Love By Finland All Right Reserved
         </h6>
