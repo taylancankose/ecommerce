@@ -15,6 +15,7 @@ function Header({
   background,
   container,
   isAbsolute,
+  color,
 }) {
   return (
     <div
@@ -41,6 +42,7 @@ function Header({
             price={price}
             secondButtonText={secondButtonText}
             textColor="white"
+            color={color}
           />
         </SwiperSlide>
         <SwiperSlide>
@@ -55,6 +57,7 @@ function Header({
             price={price}
             secondButtonText={secondButtonText}
             textColor="white"
+            color={color}
           />
         </SwiperSlide>
       </Swiper>

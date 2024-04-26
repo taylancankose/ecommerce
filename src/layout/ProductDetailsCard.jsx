@@ -1,13 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 function ProductDetailsCard() {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
-    <div className="md:mx-24 mx-4">
-      <div className="lg:flex items-center md:justify-between">
-        <div className="lg:w-5/12 w-full md:mr-4 xl:mr-0">
-          <img src="/src/assets/product-detail-1.png" />
+    <div className="md:mx-24 mx-4 ">
+      <div className="lg:flex md:justify-between">
+        <div className="lg:w-4/12 w-full md:mr-4 xl:mr-0">
+          <Swiper
+            spaceBetween={10}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper2"
+          >
+            <SwiperSlide>
+              <img
+                className="aspect-square"
+                src="/src/assets/product-detail-1.png"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                className="aspect-square"
+                src="/src/assets/product-detail-2.png"
+              />
+            </SwiperSlide>
+          </Swiper>
+          <Swiper
+            className="mt-4"
+            onSwiper={setThumbsSwiper}
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
+          >
+            <SwiperSlide>
+              <img
+                className="aspect-square"
+                src="/src/assets/product-detail-2.png"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img
+                className="aspect-square"
+                src="/src/assets/product-detail-1.png"
+              />
+            </SwiperSlide>
+          </Swiper>
         </div>
-        <div className="mt-4 lg:mt-0 lg:w-6/12 ">
+        <div className="mt-4 lg:mt-0 lg:w-7/12 ">
           <h4 className="font-normal text-xl text-headerColor tracking-[0.2px]">
             Floating Phone
           </h4>
@@ -24,7 +72,7 @@ function ProductDetailsCard() {
               In Stock
             </h6>
           </div>
-          <p className="font-normal text-sm tracking-[0.2px] text-lightSecontTextColor mt-8 w-2/3">
+          <p className="font-normal text-sm tracking-[0.2px] text-lightSecontTextColor mt-8 w-2/4">
             Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
             RELIT official consequent door ENIM RELIT Mollie. Excitation venial
             consequent sent nostrum met.
