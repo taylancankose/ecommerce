@@ -20,6 +20,7 @@ export default {
         lightGray: "#ECECEC",
         borderGray: "#DDDDDD",
         dropDownGray: "#F9F9F9",
+        yellow: "#F3CD03",
       },
       backgroundImage: {
         "header-bg": "url('./src/assets/header-bg.png')",

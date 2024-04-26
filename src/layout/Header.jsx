@@ -22,6 +22,10 @@ function Header({
     >
       {/* Carousel */}
       <Swiper
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
+        }}
         slidesPerView={1}
         className="h-screen bg-no-repeat bg-cover" //lg:h-[calc(100vh-18%)]
         navigation
