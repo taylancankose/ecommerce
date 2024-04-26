@@ -1,5 +1,5 @@
 import React from "react";
-import blog from "../assets/blog.png";
+import blog from "../../assets/blog.png";
 
 function BlogPost() {
   return (

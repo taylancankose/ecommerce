@@ -1,5 +1,5 @@
 import React from "react";
-import product from "../assets/product.png";
+import product from "../../assets/product.png";
 import { Link } from "react-router-dom";
 
 function ProductCard({ imgClass, includesColor = true }) {
