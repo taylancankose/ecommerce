@@ -8,7 +8,7 @@ export default function CarouselSlide({
   isAbsolute,
   containerClass,
   secondButtonText,
-  color = "success",
+  color,
   textColor = "headerColor",
 }) {
   return (

@@ -20,8 +20,8 @@ function HomePage() {
         subtitle="NEW COLLECTION"
         description="We know how large objects will act, but things on a small scale."
         buttonText="SHOP NOW"
+        color={"success"}
       />
-      {/* <Header data={data} /> */}
       <EditorPick />
       <FeaturedProducts />
       <Header
@@ -33,6 +33,7 @@ function HomePage() {
         subtitle="Vita Classic Product"
         description="We know how large objects will act, but things on a small scale."
         buttonText="SHOP NOW"
+        color={"success"}
       />
       <FluidContainer />
       <FeaturedBlog />
