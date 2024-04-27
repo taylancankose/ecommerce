@@ -6,11 +6,14 @@ import { Link, useHistory } from "react-router-dom/";
 import "react-toastify/dist/ReactToastify.css";
 import { handleSignUp } from "../fetch/formActions";
 import { toast, Bounce } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserRoles } from "../store/actions/clientActions";
 
 function SignUpPage() {
   const history = useHistory();
   const [form, setForm] = useState({});
-  const [roles, setRoles] = useState(null);
+  const dispatch = useDispatch();
+  const roles = useSelector((state) => state.clientReducer.roles);
 
   const {
     register,
@@ -86,13 +89,8 @@ function SignUpPage() {
     }
   };
 
-  const getRoleData = async () => {
-    const res = await getRoles();
-    setRoles(res);
-  };
-
   useEffect(() => {
-    getRoleData();
+    dispatch(getUserRoles());
   }, []);
 
   const handleRoleChange = (e) => {
@@ -101,6 +99,7 @@ function SignUpPage() {
     });
     reset();
   };
+
   return (
     <div className="flex items-center justify-center py-10 overflow-hidden bg-headerColor font-montserrat">
       <div className="flex items-center justify-center w-5/6 m-auto rounded-tl-2xl rounded-bl-2xl shadow-lg">

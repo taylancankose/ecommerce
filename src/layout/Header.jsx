@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link } from "react-router-dom/";
+import { useSelector } from "react-redux";
+import Avatar from "../components/Other/Avatar";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +10,7 @@ function Header() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  const user = useSelector((state) => state.clientReducer.user);
 
   return (
     <>
@@ -55,15 +58,23 @@ function Header() {
           <div className="flex lg:w-7/12 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
               <div className="hidden lg:flex items-center lg:mr-6 mr-4">
-                <i className="fa-regular fa-user mr-2"></i>
-                <Link to="/sign-in" className="font-bold ">
-                  Login
-                </Link>
-                <p className="font-bold mx-1">/</p>
-                <Link to="/sign-up" className="font-bold">
-                  {" "}
-                  Register
-                </Link>
+                {user.name ? (
+                  <>
+                    <Avatar />
+                    <p className="font-bold">{user?.name}</p>
+                  </>
+                ) : (
+                  <>
+                    <i className="fa-regular fa-user mr-2"></i>
+                    <Link to="/sign-in" className="font-bold ">
+                      Login
+                    </Link>
+                    <p className="font-bold mx-1">/</p>
+                    <Link to="/sign-up" className="font-bold">
+                      Register
+                    </Link>
+                  </>
+                )}
               </div>
               <i className="fa-solid fa-magnifying-glass mr-4 lg:mr-6"></i>
               <div className="lg:mr-6 flex items-center md:mr-4">
