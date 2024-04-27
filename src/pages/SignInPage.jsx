@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom/";
+import SignInForm from "../layout/SignIn/SignInForm";
 import { useForm } from "react-hook-form";
-import { getRoles } from "../fetch/role";
-import Form from "../layout/SignUp/Form";
-import { handleSignUp } from "../fetch/formActions";
-import { Link, useHistory } from "react-router-dom/";
-import { Bounce, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-function SignUpPage() {
-  const history = useHistory();
+function SignInPage() {
+  const location = useLocation();
+  console.log(location);
   const [form, setForm] = useState({
-    role_id: 3,
+    email: "",
+    password: "",
   });
-  const [roles, setRoles] = useState(null);
 
   const {
     register,
@@ -37,60 +34,22 @@ function SignUpPage() {
         });
       }
       try {
-        setForm({
-          ...data,
-          role_id: data.role_id ? data.role_id : 3,
-        });
-        const { validatePassword, ...newForm } = form;
-        const res = await handleSignUp(newForm);
-        console.log(res, "response");
-        toast.warn(
-          "You need to click link in email to activate your account!",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          }
-        );
-        history.goBack();
+        setForm(data);
+        const res = await handleSignUp(data);
+        console.log(res, "res");
       } catch (error) {
-        setError("login", {
-          type: "manual",
-          message: error.message,
-        });
         console.log(error);
       }
     }
   };
 
-  const getRoleData = async () => {
-    const res = await getRoles();
-    setRoles(res);
-  };
-
-  useEffect(() => {
-    getRoleData();
-  }, []);
-
-  const handleRoleChange = (e) => {
-    setForm({
-      role_id: Number(e.target.value),
-    });
-    reset();
-  };
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden bg-headerColor font-montserrat">
       <div className="flex items-center justify-center w-5/6 m-auto h-[90%] rounded-tl-2xl rounded-bl-2xl shadow-lg">
         {/* Image */}
         <div className="hidden lg:inline md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
-            src="/src/assets/signup-bg.jpg"
+            src="/src/assets/signin-bg.jpg"
             className="object-cover h-full rounded-tl-2xl rounded-bl-xl"
           />
         </div>
@@ -98,46 +57,14 @@ function SignUpPage() {
           {/* Form */}
           <form className="lg:p-40 w-full" onSubmit={handleSubmit(onSubmit)}>
             <h1 className="font-bold mb-10 text-center text-headerColor text-3xl">
-              SignUp to Shoppit
+              SignIn to Shoppit
             </h1>
-            {errors.login && (
-              <p className="text-error font-medium text-center">
-                {errors.login.message}
-              </p>
-            )}
-            <Form errors={errors} role_id={form.role_id} register={register} />
+            <SignInForm
+              errors={errors}
+              role_id={form.role_id}
+              register={register}
+            />
             {/* Select */}
-            <div className=" w-full mt-2 mb-6 items-center">
-              <label className="text-headerColor font-bold leading-6 tracking-[0.2px]">
-                Rol*
-              </label>
-              <select
-                defaultValue={3}
-                name="role_id"
-                {...register("role_id")}
-                onChange={handleRoleChange}
-                className="flex mt-2 w-full md:w-2/3 xl:w-2/4 h-full border border-borderGray bg-dropDownGray py-4 pl-3 rounded-md font-normal leading-7 tracking-[0.2px] text-secondTextColor "
-              >
-                {roles
-                  ?.sort((a, b) => Number(b.id) - Number(a.id))
-                  .map((role) => (
-                    <option
-                      key={role.id}
-                      className={`w-full h-full order-2 ${
-                        role.id === 3
-                          ? "order-1"
-                          : role.id === 2
-                          ? "order-2"
-                          : "order-3"
-                      }`}
-                      value={role.id}
-                    >
-                      {role.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
             <div className="flex flex-col justify-center items-center">
               <button
                 disabled={isSubmitting}
@@ -167,13 +94,13 @@ function SignUpPage() {
                     </svg>
                   </span>
                 )}
-                Submit
+                Login
               </button>
               <Link
-                to="/sign-in"
+                to="/sign-up"
                 className="text-secondTextColor underline text-center mt-2 text-sm z-10 "
               >
-                Already have account?
+                Don't have account?
               </Link>
             </div>
           </form>
@@ -183,4 +110,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default SignInPage;

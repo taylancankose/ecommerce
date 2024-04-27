@@ -15,31 +15,31 @@ function Header() {
       <div className="hidden lg:flex items-center bg-headerColor py-6 justify-evenly">
         <div className="flex items-center">
           <div className="flex items-center">
-            <i className="fa fa-phone fa-sharp text-white lg:mr-2 mr-1 xl:text-lg text-sm"></i>
-            <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
+            <i className="fa fa-phone fa-sharp text-white lg:mr-2 mr-1 xl:text-[16px]  2xl:text-lg text-sm"></i>
+            <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
               (225) 555-0118
             </p>
           </div>
           <div className="flex items-center ml-3 lg:ml-6">
             <i className="fa-regular fa-envelope text-white lg:mr-2 mr-1"></i>
-            <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
+            <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
               michelle.rivera@example.com
             </p>
           </div>
         </div>
         <div>
-          <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-lg">
+          <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-[16px] 2xl:text-lg">
             Follow Us and get a chance to win 80% off
           </p>
         </div>
         <div className="mr-4 flex items-center justify-end">
-          <p className="font-bold text-white tracking-widest font-montserrat text-xs mr-2 lg:mr-4  xl:text-lg">
+          <p className="font-bold text-white tracking-widest font-montserrat text-xs mr-2 lg:mr-4 xl:text-[16px]   2xl:text-lg">
             Follow Us:
           </p>
-          <i className="fa fa-brands fa-instagram text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i className="fa fa-brands fa-youtube text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i className="fa fa-brands fa-facebook text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
-          <i className="fa fa-brands fa-twitter text-white mr-2 lg:mr-4 xl:text-lg text-sm"></i>
+          <i className="fa fa-brands fa-instagram text-white mr-2 lg:mr-4 xl:text-[16px]  2xl:text-lg text-sm"></i>
+          <i className="fa fa-brands fa-youtube text-white mr-2 lg:mr-4 xl:text-[16px]  2xl:text-lg text-sm"></i>
+          <i className="fa fa-brands fa-facebook text-white mr-2 lg:mr-4 xl:text-[16px]  2xl:text-lg text-sm"></i>
+          <i className="fa fa-brands fa-twitter text-white mr-2 lg:mr-4 xl:text-[16px]  2xl:text-lg text-sm"></i>
         </div>
       </div>
       {/* Navbar */}
@@ -56,7 +56,14 @@ function Header() {
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
               <div className="hidden lg:flex items-center lg:mr-6 mr-4">
                 <i className="fa-regular fa-user mr-2"></i>
-                <p className="font-bold">Login / Register</p>
+                <Link to="/sign-in" className="font-bold ">
+                  Login
+                </Link>
+                <p className="font-bold mx-1">/</p>
+                <Link to="/sign-up" className="font-bold">
+                  {" "}
+                  Register
+                </Link>
               </div>
               <i className="fa-solid fa-magnifying-glass mr-4 lg:mr-6"></i>
               <div className="lg:mr-6 flex items-center md:mr-4">

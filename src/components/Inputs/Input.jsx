@@ -23,6 +23,7 @@ function Input({
         className="border flex flex-col w-full border-borderGray bg-dropDownGray py-4 pl-3 rounded-md font-normal leading-7 tracking-[0.2px] text-secondTextColor mt-2 mb-6"
         {...register(label, rules)}
         type={type}
+        name={label}
       />
       {/* <input
         onChange={handleChange}

@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import PageContent from "./layout/PageContent";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
   return (
     <div className="">
-      {loggedIn && <Header />}
-      <PageContent loggedIn={loggedIn} />
-      {loggedIn && <Footer />}
+      <Header />
+      <PageContent />
+      <Footer />
+      <ToastContainer />
     </div>
   );
 }

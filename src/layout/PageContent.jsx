@@ -6,38 +6,37 @@ import ContactPage from "../pages/ContactPage";
 import TeamPage from "../pages/TeamPage";
 import AboutPage from "../pages/AboutPage";
 import SignUpPage from "../pages/SignUpPage";
+import SignInPage from "../pages/SignInPage";
 
-function PageContent({ loggedIn }) {
+function PageContent() {
   return (
     <div>
-      {loggedIn ? (
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/shop">
-            <ShopPage />
-          </Route>
-          <Route path="/product/:id">
-            <ProductDetailPage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
-          <Route path="/team">
-            <TeamPage />
-          </Route>
-          <Route path="/about-us">
-            <AboutPage />
-          </Route>
-        </Switch>
-      ) : (
-        <Switch>
-          <Route path="/sign-up">
-            <SignUpPage />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route path="/sign-in">
+          <SignInPage />
+        </Route>
+        <Route path="/sign-up">
+          <SignUpPage />
+        </Route>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/shop">
+          <ShopPage />
+        </Route>
+        <Route path="/product/:id">
+          <ProductDetailPage />
+        </Route>
+        <Route path="/contact">
+          <ContactPage />
+        </Route>
+        <Route path="/team">
+          <TeamPage />
+        </Route>
+        <Route path="/about-us">
+          <AboutPage />
+        </Route>
+      </Switch>
     </div>
   );
 }
