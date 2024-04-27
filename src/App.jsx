@@ -1,34 +1,20 @@
-import { Switch, Route } from "react-router-dom/";
-import HomePage from "./pages/HomePage";
+import { ToastContainer } from "react-toastify";
 import Footer from "./layout/Footer";
-import Navbar from "./layout/Navbar";
-import ShopPage from "./pages/ShopPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import ContactPage from "./pages/ContactPage";
-import TeamPage from "./pages/TeamPage";
+import Header from "./layout/Header";
+import PageContent from "./layout/PageContent";
+import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
     <div className="">
-      <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/shop">
-          <ShopPage />
-        </Route>
-        <Route path="/product/:id">
-          <ProductDetailPage />
-        </Route>
-        <Route path="/contact">
-          <ContactPage />
-        </Route>
-        <Route path="/team">
-          <TeamPage />
-        </Route>
-      </Switch>
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <PageContent />
+        <Footer />
+        <ToastContainer />
+      </Provider>
     </div>
   );
 }

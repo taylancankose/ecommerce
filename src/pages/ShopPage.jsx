@@ -1,7 +1,7 @@
 import React from "react";
-import CategoryCard from "../components/CategoryCard";
-import ProductCard from "../components/ProductCard";
-import Dropdown from "../components/DropDown";
+import CategoryCard from "../components/Cards/CategoryCard";
+import ProductCard from "../components/Cards/ProductCard";
+import Dropdown from "../components/Other/DropDown";
 
 function ShopPage() {
   return (

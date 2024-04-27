@@ -1,7 +1,7 @@
 import React from "react";
-import ContactHeader from "../layout/ContactHeader";
-import ContactCard from "../components/ContactCard";
-import ContactCTA from "../layout/ContactCTA";
+import ContactHeader from "../layout/Contact/ContactHeader";
+import ContactCard from "../components/Cards/ContactCard";
+import ContactCTA from "../layout/Contact/ContactCTA";
 
 function ContactPage() {
   return (

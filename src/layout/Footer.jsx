@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/logo-no-bg.png";
-import SubscribeInput from "../components/SubscribeInput";
+import SubscribeInput from "../components/Inputs/SubscribeInput";
 
 function Footer() {
   return (
