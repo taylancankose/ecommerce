@@ -9,12 +9,3 @@ export const handleSignUp = async (data) => {
     return error;
   }
 };
-
-// export const handleSignUp = async (data) => {
-//   try {
-//     const response = await API.post("https://reqres.in/api/users", data);
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

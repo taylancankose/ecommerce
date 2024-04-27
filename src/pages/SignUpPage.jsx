@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { getRoles } from "../fetch/role";
 import Form from "../layout/SignUp/Form";
-import { handleSignUp } from "../fetch/formActions";
 import { Link, useHistory } from "react-router-dom/";
-import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { handleSignUp } from "../fetch/formActions";
+import { toast, Bounce } from "react-toastify";
 
 function SignUpPage() {
   const history = useHistory();
-  const [form, setForm] = useState({
-    role_id: 3,
-  });
+  const [form, setForm] = useState({});
   const [roles, setRoles] = useState(null);
 
   const {
@@ -37,12 +35,31 @@ function SignUpPage() {
         });
       }
       try {
-        setForm({
-          ...data,
-          role_id: data.role_id ? data.role_id : 3,
-        });
-        const { validatePassword, ...newForm } = form;
-        const res = await handleSignUp(newForm);
+        let newData;
+        if (form.role_id === 2) {
+          newData = {
+            email: data.email,
+            name: data.name,
+            password: data.password,
+            role_id: form.role_id ? form.role_id : 3,
+            store: {
+              name: data.store,
+              phone: data.phone,
+              tax_no: data.tax,
+              bank_account: data.bank,
+            },
+          };
+        } else {
+          newData = {
+            email: data.email,
+            name: data.name,
+            password: data.password,
+            role_id: form.role_id ? form.role_id : 3,
+          };
+        }
+        console.log(newData);
+
+        const res = await handleSignUp(newData);
         console.log(res, "response");
         toast.warn(
           "You need to click link in email to activate your account!",
@@ -96,7 +113,10 @@ function SignUpPage() {
         </div>
         <div className="w-full h-full bg-white rounded-tl-2xl rounded-bl-2xl lg:rounded-tl-none lg:rounded-bl-none rounded-tr-2xl rounded-br-2xl items-center justify-center flex flex-col px-10 lg:px-0">
           {/* Form */}
-          <form className="lg:p-40 w-full" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="lg:px-40 lg:py-20 overflow-y-scroll w-full"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <h1 className="font-bold mb-10 text-center text-headerColor text-3xl">
               SignUp to Shoppit
             </h1>
@@ -109,12 +129,12 @@ function SignUpPage() {
             {/* Select */}
             <div className=" w-full mt-2 mb-6 items-center">
               <label className="text-headerColor font-bold leading-6 tracking-[0.2px]">
-                Rol*
+                Role*
               </label>
               <select
-                defaultValue={3}
                 name="role_id"
                 {...register("role_id")}
+                value={form.role_id}
                 onChange={handleRoleChange}
                 className="flex mt-2 w-full md:w-2/3 xl:w-2/4 h-full border border-borderGray bg-dropDownGray py-4 pl-3 rounded-md font-normal leading-7 tracking-[0.2px] text-secondTextColor "
               >
@@ -142,7 +162,7 @@ function SignUpPage() {
               <button
                 disabled={isSubmitting}
                 type="submit"
-                className={`bg-success py-3 px-24 rounded-md  text-white font-medium leading-6 tracking-[0.2px] cursor-pointer ${
+                className={`bg-success py-3 px-24 rounded-md  text-white mt-4 font-medium leading-6 tracking-[0.2px] cursor-pointer ${
                   isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
