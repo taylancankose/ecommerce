@@ -4,7 +4,7 @@ function ContactHeader() {
   return (
     <div className="flex flex-wrap justify-center items-center ">
       {/* Left */}
-      <div className="md:w-3/6 2xl:w-2/6 text-center lg:text-left">
+      <div className="md:w-3/6 text-center lg:text-left">
         <h5 className="font-bold text-headerColor ">CONTACT US</h5>
         <h5 className="font-bold text-headerColor my-9 text-6xl leading-[80px] tracking-[0.2px]">
           Get in touch today!

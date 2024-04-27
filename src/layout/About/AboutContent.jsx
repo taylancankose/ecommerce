@@ -5,7 +5,7 @@ function AboutContent() {
     <div className="flex flex-col justify-center items-center">
       {/* Content */}
       <div className="w-5/6 2xl:w-2/3 text-center m-auto lg:text-left">
-        <p className="text-error font-normal text-sm tracking-[0.2px] md:justify-start ">
+        <p className="text-error font-medium text-sm tracking-[0.2px] md:justify-start mt-10 md:mt-0">
           Problems trying
         </p>
         <div className="mt-6 lg:flex text-center lg:text-left items-start m-auto">

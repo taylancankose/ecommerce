@@ -1,6 +1,6 @@
 import React from "react";
-import CarouselSlide from "../components/CarouselSlide";
-import couple from "../assets/couple.png";
+import CarouselSlide from "../../components/Other/CarouselSlide";
+import couple from "../../assets/couple.png";
 
 function FluidContainer() {
   return (
@@ -18,6 +18,7 @@ function FluidContainer() {
           buttonText={"BUY NOW"}
           secondButtonText="READ MORE"
           containerClass={"flex-wrap"}
+          color={"success"}
         />
       </div>
     </div>

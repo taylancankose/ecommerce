@@ -52,7 +52,7 @@ export default function CarouselSlide({
           src={background}
           className={`${
             isAbsolute
-              ? "absolute -right-40 h-full lg:right-0 bottom-0"
+              ? "absolute -right-72 sm:-right-80 md:-right-96 h-full xl:-right-12 lg:-right-48 bottom-0"
               : "md:absolute md:right-12 h-5/6 md:bottom-0 md:h-4/6 lg:h-5/6 "
           }`}
         />

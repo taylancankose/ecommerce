@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import Logo from "../assets/logo-no-bg.png";
-import { Link } from "react-router-dom/";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation, Pagination, Scrollbar, Keyboard } from "swiper/modules";
+import "swiper/swiper-bundle.css";
+import CarouselSlide from "../../components/Other/CarouselSlide";
 
-function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-function Header({
+function Slider({
   title,
   subtitle,
   description,
@@ -27,6 +23,10 @@ function Header({
     >
       {/* Carousel */}
       <Swiper
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
+        }}
         slidesPerView={1}
         className="h-screen bg-no-repeat bg-cover" //lg:h-[calc(100vh-18%)]
         navigation
@@ -69,4 +69,4 @@ function Header({
   );
 }
 
-export default Header;
+export default Slider;

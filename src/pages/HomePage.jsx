@@ -1,18 +1,18 @@
 import React from "react";
-import Header from "../layout/Header";
-import EditorPick from "../layout/EditorPick";
-import FeaturedProducts from "../layout/FeaturedProducts";
+import Slider from "../layout/Home/Slider";
+import EditorPick from "../layout/Home/EditorPick";
+import FeaturedProducts from "../layout/Home/FeaturedProducts";
 // import data from "../assets/data.json";
 // import carouselData from "../assets/carouselData.json";
 import bgHeader from "../assets/header-bg.png";
 import carouselHeader from "../assets/bg-header-man.png";
-import FluidContainer from "../layout/FluidContainer";
-import FeaturedBlog from "../layout/FeaturedBlog";
+import FluidContainer from "../layout/Home/FluidContainer";
+import FeaturedBlog from "../layout/Home/FeaturedBlog";
 
 function HomePage() {
   return (
     <div className="overflow-x-hidden">
-      <Header
+      <Slider
         background={bgHeader}
         container="bg-primary"
         isAbsolute={true}
@@ -24,7 +24,7 @@ function HomePage() {
       />
       <EditorPick />
       <FeaturedProducts />
-      <Header
+      <Slider
         isAbsolute={false}
         background={carouselHeader}
         container="bg-secondary"

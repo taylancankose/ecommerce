@@ -1,38 +1,16 @@
-import { Switch, Route } from "react-router-dom/";
-import HomePage from "./pages/HomePage";
+import { ToastContainer } from "react-toastify";
 import Footer from "./layout/Footer";
-import Navbar from "./layout/Navbar";
-import ShopPage from "./pages/ShopPage";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import ContactPage from "./pages/ContactPage";
-import TeamPage from "./pages/TeamPage";
-import AboutPage from "./pages/AboutPage";
+import Header from "./layout/Header";
+import PageContent from "./layout/PageContent";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <div className="">
-      <Navbar />
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/shop">
-          <ShopPage />
-        </Route>
-        <Route path="/product/:id">
-          <ProductDetailPage />
-        </Route>
-        <Route path="/contact">
-          <ContactPage />
-        </Route>
-        <Route path="/team">
-          <TeamPage />
-        </Route>
-        <Route path="/about-us">
-          <AboutPage />
-        </Route>
-      </Switch>
+      <Header />
+      <PageContent />
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../../components/Cards/ProductCard";
 
 function BestSellerProducts() {
   return (
@@ -11,7 +11,7 @@ function BestSellerProducts() {
           </h3>
           <div className="border border-lightGray border-1 mt-4" />
         </div>
-        <div className="flex items-center justify-between flex-wrap pb-6">
+        <div className="flex items-center justify-center md:justify-between flex-wrap pb-6">
           <ProductCard includesColor={false} imgClass={"h-82"} />
           <ProductCard includesColor={false} imgClass={"h-82"} />
           <ProductCard includesColor={false} imgClass={"h-82"} />

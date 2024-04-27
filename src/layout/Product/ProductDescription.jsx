@@ -1,9 +1,9 @@
 import React from "react";
-import Description from "../components/Description";
+import Description from "../../components/Other/Description";
 
 function ProductDescription() {
   return (
-    <div className="flex flex-wrap lg:flex-nowrap items-center mt-10 font-montserrat  ">
+    <div className="flex flex-wrap lg:flex-nowrap items-center mt-10 font-montserrat ">
       {/* 1 */}
       <div className="lg:h-[392px] lg:w-[337px]">
         <img
