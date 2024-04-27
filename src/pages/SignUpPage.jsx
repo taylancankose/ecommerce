@@ -17,7 +17,7 @@ function SignUpPage() {
     handleSubmit,
     setError,
     reset,
-    formState: { errors, isLoading, isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm({ mode: "all" });
 
   const onSubmit = async (data, e) => {
@@ -102,22 +102,22 @@ function SignUpPage() {
     reset();
   };
   return (
-    <div className="flex items-center justify-center h-screen overflow-hidden bg-headerColor font-montserrat">
-      <div className="flex items-center justify-center w-5/6 m-auto h-[90%] rounded-tl-2xl rounded-bl-2xl shadow-lg">
+    <div className="flex items-center justify-center py-10 overflow-hidden bg-headerColor font-montserrat">
+      <div className="flex items-center justify-center w-5/6 m-auto rounded-tl-2xl rounded-bl-2xl shadow-lg">
         {/* Image */}
-        <div className="hidden lg:inline md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
+        <div className="hidden lg:flex md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
             src="/src/assets/signup-bg.jpg"
-            className="object-cover h-full rounded-tl-2xl rounded-bl-xl"
+            className="object-cover rounded-tl-2xl rounded-bl-xl md:h-[948px] xl:h-[911px]"
           />
         </div>
         <div className="w-full h-full bg-white rounded-tl-2xl rounded-bl-2xl lg:rounded-tl-none lg:rounded-bl-none rounded-tr-2xl rounded-br-2xl items-center justify-center flex flex-col px-10 lg:px-0">
           {/* Form */}
           <form
-            className="lg:px-40 lg:py-20 overflow-y-scroll w-full"
+            className="lg:px-40 lg:py-20 py-10 w-full"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="font-bold mb-10 text-center text-headerColor text-3xl">
+            <h1 className="font-bold mb-10 text-center text-headerColor text-3xl ">
               SignUp to Shoppit
             </h1>
             {errors.login && (
@@ -162,7 +162,7 @@ function SignUpPage() {
               <button
                 disabled={isSubmitting}
                 type="submit"
-                className={`bg-success py-3 px-24 rounded-md  text-white mt-4 font-medium leading-6 tracking-[0.2px] cursor-pointer ${
+                className={`bg-success py-3 px-8 md:px-24 rounded-md text-white mt-4 font-medium leading-6 tracking-[0.2px] cursor-pointer ${
                   isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
