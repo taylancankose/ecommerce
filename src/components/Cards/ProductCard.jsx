@@ -6,11 +6,14 @@ function ProductCard({ imgClass, includesColor = true }) {
   return (
     <Link to="/product/imgClass">
       <div
-        className={`justify-center items-center md:mr-6 mt-10 hover:scale-105 transition ease-in duration-500 shadow-sm bg-white pb-4 ${
+        className={`justify-center items-center md:mr-6  mt-10 hover:scale-105 transition ease-in duration-500 shadow-sm bg-white pb-4 ${
           includesColor ? "text-center" : "text-left"
         }`}
       >
-        <img src={product} className={`${imgClass} m-auto`} />
+        <img
+          src={product}
+          className={`${imgClass} m-auto sm:w-[480px] md:w-[640px] lg:w-full`}
+        />
 
         <h5
           className={`font-bold leading-6 tracking-[0.1px]  text-headerColor mt-4 ${
