@@ -16,16 +16,11 @@ function SignInPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ mode: "all" });
-  console.log(history);
+  console.log(user, "19");
   const onSubmit = async (data, e) => {
     e.preventDefault();
     try {
-      dispatch(handleLogin(data));
-      if (rememberMe && user) {
-        localStorage.setItem("credentials", JSON.stringify(user.token));
-      }
-      if (history.length > 1) history.goBack();
-      else history.push("/");
+      await dispatch(handleLogin(data));
     } catch (error) {
       toast.error(error, {
         position: "top-right",
@@ -41,6 +36,13 @@ function SignInPage() {
       console.log(error);
     }
   };
+  console.log(rememberMe);
+  if (rememberMe && user.token) {
+    localStorage.setItem("credentials", JSON.stringify(user.token));
+    if (history.length > 1) history.goBack();
+    else history.push("/");
+  }
+
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden bg-headerColor font-montserrat">
       <div className="flex items-center justify-center w-5/6 m-auto h-[90%] rounded-tl-2xl rounded-bl-2xl shadow-lg">
