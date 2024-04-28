@@ -71,6 +71,7 @@ export const handleLogin = (data) => {
     try {
       dispatch(setUserRequest());
       const response = await handleSignIn(data);
+      console.log(response);
       dispatch(setUser(response));
     } catch (error) {
       console.log(error, "User Login Error");
