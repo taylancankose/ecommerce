@@ -8,6 +8,7 @@ import store from "./store/store";
 import { useEffect } from "react";
 import { verifyToken } from "./fetch/verifyToken";
 import { setUser } from "./store/actions/clientActions";
+import { getCategories } from "./store/actions/productActions";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("credentials"));
@@ -26,6 +27,9 @@ function App() {
           console.error("Token verification failed:", err);
         });
     }
+  }, []);
+  useEffect(() => {
+    dispatch(getCategories());
   }, []);
   return (
     <div className="">

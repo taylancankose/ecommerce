@@ -1,23 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Slider from "../layout/Home/Slider";
 import EditorPick from "../layout/Home/EditorPick";
 import FeaturedProducts from "../layout/Home/FeaturedProducts";
-// import data from "../assets/data.json";
-// import carouselData from "../assets/carouselData.json";
 import bgHeader from "../assets/header-bg.png";
 import carouselHeader from "../assets/bg-header-man.png";
 import FluidContainer from "../layout/Home/FluidContainer";
 import FeaturedBlog from "../layout/Home/FeaturedBlog";
-import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../store/actions/productActions";
+import { useDispatch } from "react-redux";
 import Categories from "../layout/Home/Categories";
 
 function HomePage() {
-  const dispatch = useDispatch();
-  const categories = useSelector((state) => state.productReducer.categories);
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
   return (
     <div className="overflow-x-hidden">
       <Slider

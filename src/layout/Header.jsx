@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link } from "react-router-dom/";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Avatar from "../components/Other/Avatar";
-import { getCategories } from "../store/actions/productActions";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const categories = useSelector((state) => state.productReducer.categories);
-  const dispatch = useDispatch();
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    if (!categories) {
-      dispatch(getCategories());
-    }
-  }, []);
   const user = useSelector((state) => state.clientReducer.user);
-  console.log(categories);
   return (
     <>
       {/* Navbar Slogan */}
       <div className="hidden lg:flex items-center bg-headerColor py-6 justify-evenly">
         <div className="flex items-center">
+          {/* Phone */}
           <div className="flex items-center">
             <i className="fa fa-phone fa-sharp text-white lg:mr-2 mr-1 xl:text-[16px]  2xl:text-lg text-sm"></i>
             <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
               (225) 555-0118
             </p>
           </div>
+          {/* Email */}
           <div className="flex items-center ml-3 lg:ml-6">
             <i className="fa-regular fa-envelope text-white lg:mr-2 mr-1"></i>
             <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
@@ -38,11 +32,13 @@ function Header() {
             </p>
           </div>
         </div>
+        {/* Discount */}
         <div>
           <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-[16px] 2xl:text-lg">
             Follow Us and get a chance to win 80% off
           </p>
         </div>
+        {/* Social */}
         <div className="mr-4 flex items-center justify-end">
           <p className="font-bold text-white tracking-widest font-montserrat text-xs mr-2 lg:mr-4 xl:text-[16px]   2xl:text-lg">
             Follow Us:
@@ -56,6 +52,7 @@ function Header() {
       {/* Navbar */}
       <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center">
         <div className="max-w-full flex flex-wrap items-center justify-between p-6 ml-0  xl:mx-24">
+          {/* Logo */}
           <Link
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -122,6 +119,7 @@ function Header() {
           {/* List */}
           <div className="w-full md:w-8/12 md:flex lg:w-4/12 md:order-1 ">
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:space-x-4 xl:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
+              {/* Home */}
               <li>
                 <Link
                   to="/"
@@ -131,12 +129,9 @@ function Header() {
                   Home
                 </Link>
               </li>
-              {/* Dropdown */}
+              {/* Shop Dropdown */}
               <li className="z-10">
-                <Link
-                  to="/shop"
-                  className="block py-2 px-3 text-gray-900 rounded "
-                >
+                <div className="block py-2 px-3 text-gray-900 rounded ">
                   <div className="relative">
                     <button
                       onClick={toggleDropdown}
@@ -149,10 +144,12 @@ function Header() {
                       <div className="flex justify-between absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
                         <div className="py-1">
                           <p className="border-b ">Kadın</p>
-                          {categories.map(
+                          {categories?.map(
                             (category) =>
                               category.gender === "k" && (
                                 <Link
+                                  onClick={() => setIsOpen(false)}
+                                  key={category.id}
                                   to={`/shop/${
                                     category.gender === "e" ? "erkek" : "kadin"
                                   }/${category.title.toLowerCase()}`}
@@ -165,10 +162,12 @@ function Header() {
                         </div>
                         <div className="py-1">
                           <p className="border-b ">Erkek</p>
-                          {categories.map(
+                          {categories?.map(
                             (category) =>
                               category.gender === "e" && (
                                 <Link
+                                  onClick={() => setIsOpen(false)}
+                                  key={category.id}
                                   to={`/shop/${
                                     category.gender === "e" ? "erkek" : "kadin"
                                   }/${category.title.toLowerCase()}`}
@@ -182,8 +181,9 @@ function Header() {
                       </div>
                     )}
                   </div>
-                </Link>
+                </div>
               </li>
+              {/* About */}
               <li>
                 <Link
                   to="/about-us"
@@ -192,11 +192,13 @@ function Header() {
                   About
                 </Link>
               </li>
+              {/* Blog */}
               <li>
                 <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
                   Blog
                 </a>
               </li>
+              {/* Contact */}
               <li>
                 <Link
                   to="/contact"
@@ -205,6 +207,7 @@ function Header() {
                   Contact
                 </Link>
               </li>
+              {/* Team */}
               <li>
                 <Link
                   to="/team"
