@@ -74,8 +74,6 @@ function ShopPage() {
           <ProductCard imgClass={"md:w-72"} />
           <ProductCard imgClass={"md:w-72"} />
           <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
         </div>
       </div>
     </div>
