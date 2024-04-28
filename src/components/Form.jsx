@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "./Inputs/Input";
 
 const Form = ({ inputConfigs, form, handleChange }) => {
-  console.log(form?.label);
   return (
     <form className="w-full">
       {inputConfigs.map((config, index) => (

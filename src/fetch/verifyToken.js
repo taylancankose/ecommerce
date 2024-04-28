@@ -6,7 +6,6 @@ export const verifyToken = async (token) => {
     const response = await API.get("/verify", {
       Authorization: token,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

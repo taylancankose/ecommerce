@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link } from "react-router-dom/";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../components/Other/Avatar";
+import { getCategories } from "../store/actions/productActions";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const categories = useSelector((state) => state.productReducer.categories);
+  const dispatch = useDispatch();
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const user = useSelector((state) => state.clientReducer.user);
 
+  useEffect(() => {
+    if (!categories) {
+      dispatch(getCategories());
+    }
+  }, []);
+  const user = useSelector((state) => state.clientReducer.user);
+  console.log(categories);
   return (
     <>
       {/* Navbar Slogan */}
@@ -138,26 +146,38 @@ function Header() {
                       <i className="fa-solid fa-chevron-down ml-2"></i>
                     </button>
                     {isOpen && (
-                      <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
+                      <div className="flex justify-between absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
                         <div className="py-1">
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 1
-                          </a>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 2
-                          </a>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 3
-                          </a>
+                          <p className="border-b ">Kadın</p>
+                          {categories.map(
+                            (category) =>
+                              category.gender === "k" && (
+                                <Link
+                                  to={`/shop/${
+                                    category.gender === "e" ? "erkek" : "kadin"
+                                  }/${category.title.toLowerCase()}`}
+                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                  {category.title}
+                                </Link>
+                              )
+                          )}
+                        </div>
+                        <div className="py-1">
+                          <p className="border-b ">Erkek</p>
+                          {categories.map(
+                            (category) =>
+                              category.gender === "e" && (
+                                <Link
+                                  to={`/shop/${
+                                    category.gender === "e" ? "erkek" : "kadin"
+                                  }/${category.title.toLowerCase()}`}
+                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                  {category.title}
+                                </Link>
+                              )
+                          )}
                         </div>
                       </div>
                     )}

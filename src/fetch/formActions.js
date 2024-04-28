@@ -14,9 +14,7 @@ export const handleSignUp = async (data) => {
 export const handleSignIn = async (data) => {
   try {
     const response = await API.post("/login", data);
-    console.log(data);
     console.log(response, "rew");
-    return await response.data;
   } catch (error) {
     console.log(error);
     toast.error(error, {

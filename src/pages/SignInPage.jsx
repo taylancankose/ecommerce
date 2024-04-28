@@ -16,7 +16,6 @@ function SignInPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ mode: "all" });
-  console.log(user, "19");
   const onSubmit = async (data, e) => {
     e.preventDefault();
     try {
@@ -36,7 +35,6 @@ function SignInPage() {
       console.log(error);
     }
   };
-  console.log(rememberMe);
   if (rememberMe && user.token) {
     localStorage.setItem("credentials", JSON.stringify(user.token));
     if (history.length > 1) history.goBack();

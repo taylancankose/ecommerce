@@ -26,7 +26,6 @@ function SignUpPage() {
   const onSubmit = async (data, e) => {
     e.preventDefault();
     if (data?.password !== data.validatePassword) {
-      console.log("first");
       setError("password", {
         type: "manual",
         message: "Passwords do not match.",
@@ -60,10 +59,8 @@ function SignUpPage() {
             role_id: form.role_id ? form.role_id : 3,
           };
         }
-        console.log(newData);
 
         const res = await handleSignUp(newData);
-        console.log(res, "response");
         toast.warn(
           "You need to click link in email to activate your account!",
           {

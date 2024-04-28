@@ -56,7 +56,6 @@ export const getUserRoles = () => {
       try {
         dispatch(setRolesRequest());
         const response = await getRoles();
-        console.log(response);
         dispatch(setRoles(response));
       } catch (error) {
         console.log(error, "User Role Error");
@@ -71,7 +70,6 @@ export const handleLogin = (data) => {
     try {
       dispatch(setUserRequest());
       const response = await handleSignIn(data);
-      console.log(response);
       dispatch(setUser(response));
     } catch (error) {
       console.log(error, "User Login Error");
