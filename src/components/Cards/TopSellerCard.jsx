@@ -7,9 +7,12 @@ function TopSellerCard({ category }) {
   const stars = Array(activeRat).fill(1).concat(Array(passiveRat).fill(0));
   return (
     <Link
-      to={`/shop/${
-        category.gender === "e" ? "erkek" : "kadin"
-      }/${category.title.toLowerCase()}`}
+      to={{
+        pathname: `/shop/${
+          category.gender === "e" ? "erkek" : "kadin"
+        }/${category.title.toLowerCase()}`,
+        state: category.gender,
+      }}
     >
       <div
         key={category.id}

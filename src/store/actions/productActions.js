@@ -2,6 +2,8 @@ import {
   SET_CATEGORIES,
   SET_CATEGORIES_ERROR,
   SET_CATEGORIES_REQUEST,
+  SET_PRODUCT_LIST_ERROR,
+  SET_PRODUCT_LIST_REQUEST,
   SET_FETCH_STATE,
   SET_FILTER,
   SET_LIMIT,
@@ -9,7 +11,7 @@ import {
   SET_PRODUCT_LIST,
   SET_TOTAL,
 } from "../types/product/types";
-import { fetchCategories } from "../../fetch/products";
+import { fetchCategories, fetchProducts } from "../../fetch/products";
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
@@ -28,6 +30,15 @@ export const setCategoriesError = (error) => ({
 export const setProductList = (productList) => ({
   type: SET_PRODUCT_LIST,
   payload: productList,
+});
+
+export const setProductListRequest = () => ({
+  type: SET_PRODUCT_LIST_REQUEST,
+});
+
+export const setProductListError = (error) => ({
+  type: SET_PRODUCT_LIST_ERROR,
+  payload: error,
 });
 
 export const setTotal = (total) => ({
@@ -64,6 +75,20 @@ export const getCategories = () => {
     } catch (error) {
       console.log(error, "category error");
       dispatch(setCategoriesError(error));
+    }
+  };
+};
+
+export const getProducts = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(setProductListRequest());
+      const response = await fetchProducts();
+      dispatch(setTotal(response?.total));
+      dispatch(setProductList(response?.products));
+    } catch (error) {
+      console.log(error, "product error");
+      dispatch(setProductListError(error));
     }
   };
 };
