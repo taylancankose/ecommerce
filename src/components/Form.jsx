@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Inputs/Input";
 
 const Form = ({ inputConfigs, form, handleChange }) => {
@@ -22,20 +22,3 @@ const Form = ({ inputConfigs, form, handleChange }) => {
 };
 
 export default Form;
-
-// const inputConfig = [
-//   { label: "Name", placeholder: "Full Name", type: "text" },
-//   { label: "Email", placeholder: "example@gmail.com", type: "email" },
-//   { label: "Password", placeholder: "Password", type: "password" },
-//   {
-//     label: "Validate Password",
-//     placeholder: "Validate Password",
-//     type: "password",
-//   },
-// ];
-
-/* <Form
-              inputConfigs={inputConfig}
-              form={form}
-              handleChange={handleChange}
-            />   */

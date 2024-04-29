@@ -1,18 +1,6 @@
 import React from "react";
 
-function Input({
-  label,
-  placeholder,
-  rules,
-  register,
-  labelTitle,
-  type,
-  // handleChange,
-  // value,
-  // name,
-  // disabled,
-  // required,
-}) {
+function Input({ label, placeholder, rules, register, labelTitle, type }) {
   return (
     <>
       <label className="text-headerColor font-bold leading-6 tracking-[0.2px] mb-2">
@@ -25,15 +13,6 @@ function Input({
         type={type}
         name={label}
       />
-      {/* <input
-        onChange={handleChange}
-        value={value}
-        type={type}
-        name={name}
-        disabled={disabled}
-        placeholder={`${placeholder}*`}
-        className="border border-borderGray bg-dropDownGray py-4 pl-3 rounded-md fotn-normal leading-7 tracking-[0.2px] text-secondTextColor"
-      /> */}
     </>
   );
 }

@@ -10,7 +10,7 @@ function TopSellerCard({ category }) {
       to={{
         pathname: `/shop/${
           category.gender === "e" ? "erkek" : "kadin"
-        }/${category.title.toLowerCase()}`,
+        }/${category.title.toLowerCase()}/${category?.id}`,
         state: category.gender,
       }}
     >
