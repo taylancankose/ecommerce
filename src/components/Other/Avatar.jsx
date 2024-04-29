@@ -7,8 +7,8 @@ function Avatar() {
   const user = useSelector((state) => state.clientReducer.user);
 
   useEffect(() => {
-    if (user.email) {
-      const emailHash = md5(user.email);
+    if (user?.email) {
+      const emailHash = md5(user?.email);
       setImage(
         `https://www.gravatar.com/avatar/${emailHash}${
           500 ? `?size=${500}` : ""

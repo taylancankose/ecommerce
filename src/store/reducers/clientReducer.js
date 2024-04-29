@@ -5,6 +5,8 @@ import {
   SET_ROLES_REQUEST,
   SET_THEME,
   SET_USER,
+  SET_USER_REQUEST,
+  SET_USER_ERROR,
 } from "../types/client/types";
 
 const initialState = {
@@ -21,11 +23,13 @@ const initialState = {
 
 const clientReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER_REQUEST:
     case SET_ROLES_REQUEST:
       return {
         ...state,
         loading: true,
       };
+    case SET_USER_ERROR:
     case SET_ROLES_ERROR:
       return {
         ...state,
@@ -35,11 +39,13 @@ const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         roles: action.payload,
+        loading: false,
       };
     case SET_USER:
       return {
         ...state,
         user: action.payload,
+        loading: false,
       };
     case SET_LANGUAGE:
       return {
