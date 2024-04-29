@@ -9,3 +9,13 @@ export const fetchCategories = async () => {
     return error;
   }
 };
+
+export const fetchProducts = async () => {
+  try {
+    const response = await API.get("/products");
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

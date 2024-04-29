@@ -17,32 +17,32 @@ function EditorPick() {
       <div className="text-center lg:flex w-full lg:h-screen justify-center mt-8 h-full">
         <Card
           className={
-            "h-[25%] lg:h-4/6 lg:w-2/6 w-96 bg-cat-men lg:mr-10 lg:ml-60 my-4 lg:mb-0 m-auto lg:m-0"
+            "h-[25%] lg:h-4/6 lg:w-2/6 w-96 lg:mr-10 lg:ml-60 my-4 lg:mb-0 m-auto lg:m-0"
           }
           containerClass={"w-0 px-16 py-3"}
           title={"MEN"}
+          src={"/src/assets/cat-men.png"}
         />
         <Card
           className={
-            "h-[25%] lg:h-4/6 lg:w-1/6 w-96 bg-cat-women lg:mr-10 mb-4 lg:mb-0 m-auto lg:m-0"
+            "h-[25%] lg:h-4/6 lg:w-1/6 w-96 lg:mr-10 mb-4 lg:mb-0 m-auto lg:m-0"
           }
           containerClass={"w-0 px-16 py-3"}
           title={"WOMEN"}
+          src={"/src/assets/cat-women.png"}
         />
         <div className="h-[25%] lg:h-4/6 lg:w-2/6 w-96 m-auto lg:m-0">
           <Card
-            className={
-              "h-[calc(50%-8px)] bg-cat-accessories lg:bg-bottom lg:w-1/2 mb-4 lg:mb-0"
-            }
+            className={"h-[calc(50%-8px)]  lg:bg-bottom lg:w-1/2 mb-4 lg:mb-0"}
             containerClass={"w-0 px-20 py-3"}
             title={"ACCESSORIES"}
+            src={"/src/assets/cat-accessories.png"}
           />
           <Card
-            className={
-              "h-[calc(50%-8px)] bg-cat-kids lg:bg-bottom lg:w-1/2 mt-4 "
-            }
+            className={"h-[calc(50%-8px)] lg:bg-bottom lg:w-1/2 mt-4 "}
             containerClass={"w-0 px-16 py-3"}
             title={"KIDS"}
+            src={"/src/assets/cat-kids.png"}
           />
         </div>
       </div>

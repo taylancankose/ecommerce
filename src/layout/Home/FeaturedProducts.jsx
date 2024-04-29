@@ -1,7 +1,9 @@
 import React from "react";
 import ProductCard from "../../components/Cards/ProductCard";
+import { useSelector } from "react-redux";
 
 function FeaturedProducts() {
+  const products = useSelector((state) => state.productReducer.productList);
   return (
     <div className="font-montserrat">
       {/* Title */}
@@ -18,16 +20,11 @@ function FeaturedProducts() {
       </div>
 
       {/* Product Card Container */}
-      <div className="px-10 pb-10 flex justify-center items-center flex-wrap">
+      <div className="px-10 pb-10 flex justify-center items-center flex-wrap  lg:mx-20">
         {/* Product Card */}
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products?.slice(0, 8).map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );

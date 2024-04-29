@@ -6,7 +6,6 @@ import bgHeader from "../assets/header-bg.png";
 import carouselHeader from "../assets/bg-header-man.png";
 import FluidContainer from "../layout/Home/FluidContainer";
 import FeaturedBlog from "../layout/Home/FeaturedBlog";
-import { useDispatch } from "react-redux";
 import Categories from "../layout/Home/Categories";
 
 function HomePage() {
