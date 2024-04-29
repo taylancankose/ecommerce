@@ -17,7 +17,7 @@ export default function CarouselSlide({
         isAbsolute ? "overflow-x-hidden" : "flex-wrap "
       }`}
     >
-      <div className="p-6 m-auto text-center md:text-left w-5/6  md:flex md:flex-col lg:ml-40 md:justify-around md:h-96 z-10">
+      <div className="xl:p-6 m-auto text-center md:text-left w-5/6 2xl:w-4/6 2xl:gap-y-10  md:flex md:flex-col xl:ml-40 md:justify-around md:h-96 z-10">
         <h5 className=" font-bold leading-6 tracking-[0.1px] mb-4 md:mb-0">
           {title}
         </h5>

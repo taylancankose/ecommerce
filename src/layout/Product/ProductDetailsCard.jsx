@@ -6,12 +6,11 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
-function ProductDetailsCard() {
+function ProductDetailsCard({ selectedProduct }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
   return (
-    <div className="xl:mx-24 mx-4">
-      <div className="lg:flex items-center md:justify-left">
+    <div className=" mx-4 md:mx-0">
+      <div className="lg:flex md:justify-left">
         <div className="lg:w-8/12 xl:w-5/12 w-full md:mr-4 xl:mr-0 ">
           <Swiper
             style={{
@@ -23,18 +22,11 @@ function ProductDetailsCard() {
             modules={[FreeMode, Navigation, Thumbs]}
             navigation={true}
           >
-            <SwiperSlide>
-              <img
-                src="/src/assets/product-detail-1.png"
-                className="aspect-square"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="/src/assets/product-detail-2.png"
-                className="aspect-square"
-              />
-            </SwiperSlide>
+            {selectedProduct?.images?.map((img) => (
+              <SwiperSlide key={img.index}>
+                <img src={img.url} className="aspect-square object-cover" />
+              </SwiperSlide>
+            ))}
           </Swiper>
           <div className="w-full mt-4 lg:mt-0">
             <Swiper
@@ -46,24 +38,17 @@ function ProductDetailsCard() {
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
             >
-              <SwiperSlide>
-                <img
-                  src="/src/assets/product-detail-2.png"
-                  className="aspect-square"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src="/src/assets/product-detail-1.png"
-                  className="aspect-square"
-                />
-              </SwiperSlide>
+              {selectedProduct?.images?.map((img) => (
+                <SwiperSlide key={img.index}>
+                  <img src={img.url} className="aspect-square object-cover" />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
-        <div className="mt-4 lg:mt-0 w-full xl:w-5/12 lg:mb-48 xl:ml-36 md:ml-12 ">
+        <div className="mt-4 lg:mt-0 w-full xl:w-5/12 lg:mb-48 xl:ml-28 lg:ml-16 ">
           <h4 className="font-medium text-xl text-headerColor tracking-[0.2px]  lg:w-full ">
-            Floating Phone
+            {selectedProduct?.name}
           </h4>
           {/* Stars */}
           <div className="mt-3  lg:w-full ">
@@ -74,20 +59,18 @@ function ProductDetailsCard() {
             <i className="fa-regular fa-star text-yellow text-2xl"></i>
           </div>
           <h2 className="text-headerColor font-bold text-2xl mt-5  lg:w-full ">
-            $1,139.33
+            $ {selectedProduct?.price}
           </h2>
           <div className="flex items-center mt-3  lg:w-full ">
             <h6 className="text-secondTextColor text-sm font-bold tracking-[0.2px] mr-2">
               Availability :
             </h6>
             <h6 className="text-primary text-sm font-bold tracking-[0.2px]">
-              In Stock
+              {selectedProduct?.stock > 0 ? "In Stock" : "Out of Stock"}
             </h6>
           </div>
           <p className="font-normal text-sm tracking-[0.2px] text-lightSecontTextColor mt-8  lg:w-full ">
-            Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
-            RELIT official consequent door ENIM RELIT Mollie. Excitation venial
-            consequent sent nostrum met.
+            {selectedProduct?.description}
           </p>
           <div className="border-t mt-5 border-1 border-muted  lg:w-full " />
           {/* Colors */}

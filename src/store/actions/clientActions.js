@@ -1,3 +1,4 @@
+import { handleSignIn } from "../../fetch/formActions";
 import { getRoles } from "../../fetch/role";
 import {
   SET_LANGUAGE,
@@ -6,11 +7,22 @@ import {
   SET_ROLES_REQUEST,
   SET_THEME,
   SET_USER,
+  SET_USER_ERROR,
+  SET_USER_REQUEST,
 } from "../types/client/types";
 
 export const setUser = (user) => ({
   type: SET_USER,
   payload: user,
+});
+
+export const setUserError = (error) => ({
+  type: SET_USER_ERROR,
+  error,
+});
+
+export const setUserRequest = () => ({
+  type: SET_USER_REQUEST,
 });
 
 export const setTheme = (theme) => ({
@@ -39,16 +51,29 @@ export const setRolesRequest = () => ({
 
 export const getUserRoles = () => {
   return async (dispatch, getState) => {
-    const { client } = getState();
-    if (client.roles.length <= 0) {
+    const data = getState();
+    if (data?.clientReducer?.roles?.length === 0) {
       try {
         dispatch(setRolesRequest());
         const response = await getRoles();
-        dispatch(setRoles(response.data));
+        dispatch(setRoles(response));
       } catch (error) {
         console.log(error, "User Role Error");
         dispatch(setRolesError(error));
       }
+    }
+  };
+};
+
+export const handleLogin = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setUserRequest());
+      const response = await handleSignIn(data);
+      dispatch(setUser(response));
+    } catch (error) {
+      console.log(error, "User Login Error");
+      dispatch(setUserError(error));
     }
   };
 };

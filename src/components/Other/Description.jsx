@@ -2,7 +2,7 @@ import React from "react";
 
 function Description() {
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="gap-y-4 h-full w-full">
       <h3 className="text-2xl tracking-[0.1px] font-bold text-headerColor mb-4 lg:mb-0">
         the quick fox jumps over
       </h3>

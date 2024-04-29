@@ -1,20 +1,46 @@
+import { getCategories, getProducts } from "./store/actions/productActions";
+import { setUser } from "./store/actions/clientActions";
+import { verifyToken } from "./fetch/verifyToken";
 import { ToastContainer } from "react-toastify";
-import Footer from "./layout/Footer";
-import Header from "./layout/Header";
 import PageContent from "./layout/PageContent";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
-import store from "./store/store";
+import { useDispatch, useSelector } from "react-redux";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import { useEffect } from "react";
 
 function App() {
+  const token = JSON.parse(localStorage.getItem("credentials"));
+  const user = useSelector((state) => state.clientReducer.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (token) {
+      verifyToken()
+        .then((res) => {
+          if (res?.name) {
+            dispatch(setUser(res));
+            localStorage.setItem("credentials", JSON.stringify(res?.token));
+          }
+        })
+        .catch((err) => {
+          localStorage.removeItem("credentials");
+          console.error("Token verification failed:", err);
+        });
+      if (!user?.name) localStorage.removeItem("credentials");
+    }
+  }, []);
+  useEffect(() => {
+    if (user) {
+      dispatch(getCategories());
+      dispatch(getProducts());
+    }
+  }, []);
   return (
     <div className="">
-      <Provider store={store}>
-        <Header />
-        <PageContent />
-        <Footer />
-        <ToastContainer />
-      </Provider>
+      <Header />
+      <PageContent />
+      <Footer />
+      <ToastContainer />
     </div>
   );
 }

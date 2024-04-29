@@ -1,25 +1,30 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link } from "react-router-dom/";
+import { useSelector } from "react-redux";
+import Avatar from "../components/Other/Avatar";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const categories = useSelector((state) => state.productReducer.categories);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  const user = useSelector((state) => state.clientReducer.user);
   return (
     <>
       {/* Navbar Slogan */}
       <div className="hidden lg:flex items-center bg-headerColor py-6 justify-evenly">
         <div className="flex items-center">
+          {/* Phone */}
           <div className="flex items-center">
             <i className="fa fa-phone fa-sharp text-white lg:mr-2 mr-1 xl:text-[16px]  2xl:text-lg text-sm"></i>
             <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
               (225) 555-0118
             </p>
           </div>
+          {/* Email */}
           <div className="flex items-center ml-3 lg:ml-6">
             <i className="fa-regular fa-envelope text-white lg:mr-2 mr-1"></i>
             <p className="font-bold text-white tracking-widest font-montserrat text-xs 2xl:text-lg xl:text-[16px] ">
@@ -27,11 +32,13 @@ function Header() {
             </p>
           </div>
         </div>
+        {/* Discount */}
         <div>
           <p className="font-bold text-white tracking-widest font-montserrat text-xs xl:text-[16px] 2xl:text-lg">
             Follow Us and get a chance to win 80% off
           </p>
         </div>
+        {/* Social */}
         <div className="mr-4 flex items-center justify-end">
           <p className="font-bold text-white tracking-widest font-montserrat text-xs mr-2 lg:mr-4 xl:text-[16px]   2xl:text-lg">
             Follow Us:
@@ -43,8 +50,9 @@ function Header() {
         </div>
       </div>
       {/* Navbar */}
-      <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center">
+      <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center z-100">
         <div className="max-w-full flex flex-wrap items-center justify-between p-6 ml-0  xl:mx-24">
+          {/* Logo */}
           <Link
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -55,15 +63,23 @@ function Header() {
           <div className="flex lg:w-7/12 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
               <div className="hidden lg:flex items-center lg:mr-6 mr-4">
-                <i className="fa-regular fa-user mr-2"></i>
-                <Link to="/sign-in" className="font-bold ">
-                  Login
-                </Link>
-                <p className="font-bold mx-1">/</p>
-                <Link to="/sign-up" className="font-bold">
-                  {" "}
-                  Register
-                </Link>
+                {user?.name ? (
+                  <>
+                    <Avatar />
+                    <p className="font-bold">{user?.name}</p>
+                  </>
+                ) : (
+                  <>
+                    <i className="fa-regular fa-user mr-2"></i>
+                    <Link to="/sign-in" className="font-bold ">
+                      Login
+                    </Link>
+                    <p className="font-bold mx-1">/</p>
+                    <Link to="/sign-up" className="font-bold">
+                      Register
+                    </Link>
+                  </>
+                )}
               </div>
               <i className="fa-solid fa-magnifying-glass mr-4 lg:mr-6"></i>
               <div className="lg:mr-6 flex items-center md:mr-4">
@@ -103,6 +119,7 @@ function Header() {
           {/* List */}
           <div className="w-full md:w-8/12 md:flex lg:w-4/12 md:order-1 ">
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:space-x-4 xl:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
+              {/* Home */}
               <li>
                 <Link
                   to="/"
@@ -112,12 +129,9 @@ function Header() {
                   Home
                 </Link>
               </li>
-              {/* Dropdown */}
-              <li className="z-10">
-                <Link
-                  to="/shop"
-                  className="block py-2 px-3 text-gray-900 rounded "
-                >
+              {/* Shop Dropdown */}
+              <li className="z-20">
+                <div className="block py-2 px-3 text-gray-900 rounded ">
                   <div className="relative">
                     <button
                       onClick={toggleDropdown}
@@ -127,32 +141,55 @@ function Header() {
                       <i className="fa-solid fa-chevron-down ml-2"></i>
                     </button>
                     {isOpen && (
-                      <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
-                        <div className="py-1">
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 1
-                          </a>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 2
-                          </a>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            Option 3
-                          </a>
+                      <div className="text-left flex justify-between absolute left-0 mt-2 w-64 bg-white border rounded-md shadow-lg">
+                        <div className="py-2 px-8">
+                          <p className="border-b mb">Kadın</p>
+                          {categories?.map(
+                            (category) =>
+                              category.gender === "k" && (
+                                <Link
+                                  key={category.id}
+                                  onClick={() => setIsOpen(false)}
+                                  to={{
+                                    pathname: `/shop/kadin/${category.title.toLowerCase()}/${
+                                      category.id
+                                    }`,
+                                    state: category?.gender,
+                                  }}
+                                  className="block py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                  {category.title}
+                                </Link>
+                              )
+                          )}
+                        </div>
+                        <div className="py-2 px-8">
+                          <p className="border-b ">Erkek</p>
+                          {categories?.map(
+                            (category) =>
+                              category.gender === "e" && (
+                                <Link
+                                  onClick={() => setIsOpen(false)}
+                                  key={category.id}
+                                  to={{
+                                    pathname: `/shop/erkek/${category.title.toLowerCase()}/${
+                                      category.id
+                                    }`,
+                                    state: category?.gender,
+                                  }}
+                                  className="block py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                >
+                                  {category.title}
+                                </Link>
+                              )
+                          )}
                         </div>
                       </div>
                     )}
                   </div>
-                </Link>
+                </div>
               </li>
+              {/* About */}
               <li>
                 <Link
                   to="/about-us"
@@ -161,11 +198,13 @@ function Header() {
                   About
                 </Link>
               </li>
+              {/* Blog */}
               <li>
                 <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
                   Blog
                 </a>
               </li>
+              {/* Contact */}
               <li>
                 <Link
                   to="/contact"
@@ -174,6 +213,7 @@ function Header() {
                   Contact
                 </Link>
               </li>
+              {/* Team */}
               <li>
                 <Link
                   to="/team"

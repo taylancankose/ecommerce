@@ -1,20 +1,12 @@
 import { Bounce, toast } from "react-toastify";
 import { API } from "../api/useAxios";
 
-export const handleSignUp = async (data) => {
+export const verifyToken = async (token) => {
   try {
-    const response = await API.post("/signup", data);
+    const response = await API.get("/verify", {
+      Authorization: token,
+    });
     return response.data;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-};
-
-export const handleSignIn = async (data) => {
-  try {
-    const response = await API.post("/login", data);
-    return await response.data;
   } catch (error) {
     console.log(error);
     toast.error(error, {

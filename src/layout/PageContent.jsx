@@ -21,10 +21,16 @@ function PageContent() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/shop">
+        <Route path="/shop/:gender/:categoryName/:categoryId" exact>
           <ShopPage />
         </Route>
-        <Route path="/product/:id">
+        <Route
+          path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
+          exact
+        >
+          {/*
+          <Route path="/product/:id">
+           */}
           <ProductDetailPage />
         </Route>
         <Route path="/contact">

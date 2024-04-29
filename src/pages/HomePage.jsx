@@ -2,12 +2,11 @@ import React from "react";
 import Slider from "../layout/Home/Slider";
 import EditorPick from "../layout/Home/EditorPick";
 import FeaturedProducts from "../layout/Home/FeaturedProducts";
-// import data from "../assets/data.json";
-// import carouselData from "../assets/carouselData.json";
 import bgHeader from "../assets/header-bg.png";
 import carouselHeader from "../assets/bg-header-man.png";
 import FluidContainer from "../layout/Home/FluidContainer";
 import FeaturedBlog from "../layout/Home/FeaturedBlog";
+import Categories from "../layout/Home/Categories";
 
 function HomePage() {
   return (
@@ -23,6 +22,7 @@ function HomePage() {
         color={"success"}
       />
       <EditorPick />
+      <Categories />
       <FeaturedProducts />
       <Slider
         isAbsolute={false}

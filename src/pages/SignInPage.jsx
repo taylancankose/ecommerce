@@ -1,47 +1,45 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom/";
+import { Link, useHistory } from "react-router-dom/";
 import SignInForm from "../layout/SignIn/SignInForm";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLogin } from "../store/actions/clientActions";
+import { Bounce, toast } from "react-toastify";
 
 function SignInPage() {
-  const location = useLocation();
-  console.log(location);
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [rememberMe, setRememberMe] = useState(false);
+  const user = useSelector((state) => state.clientReducer.user);
   const {
     register,
     handleSubmit,
-    setError,
-    reset,
-    formState: { errors, isLoading, isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm({ mode: "all" });
-
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    if (data?.password !== data.validatePassword) {
-      console.log("first");
-      setError("password", {
-        type: "manual",
-        message: "Passwords do not match.",
+    try {
+      await dispatch(handleLogin(data));
+    } catch (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
       });
-    } else {
-      if (form.role_id === 2) {
-        setForm({
-          role_id: 2,
-        });
-      }
-      try {
-        setForm(data);
-        const res = await handleSignUp(data);
-        console.log(res, "res");
-      } catch (error) {
-        console.log(error);
-      }
+      console.log(error);
     }
   };
+  if (rememberMe && user?.token) {
+    localStorage.setItem("credentials", JSON.stringify(user?.token));
+    if (history.length > 1) history.goBack();
+    else history.push("/");
+  }
 
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden bg-headerColor font-montserrat">
@@ -59,12 +57,19 @@ function SignInPage() {
             <h1 className="font-bold mb-10 text-center text-headerColor text-3xl">
               SignIn to Shoppit
             </h1>
-            <SignInForm
-              errors={errors}
-              role_id={form.role_id}
-              register={register}
-            />
+            <SignInForm errors={errors} register={register} />
             {/* Select */}
+            <div className="flex items-center mb-6">
+              <input
+                type="checkbox"
+                id="remember"
+                defaultValue={false}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
+              <label htmlFor="remember" className="ml-2">
+                Remember Me
+              </label>
+            </div>
             <div className="flex flex-col justify-center items-center">
               <button
                 disabled={isSubmitting}

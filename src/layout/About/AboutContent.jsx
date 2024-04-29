@@ -59,5 +59,3 @@ function AboutContent() {
 }
 
 export default AboutContent;
-
-// md:w-3/6 2xl:w-[45%]
