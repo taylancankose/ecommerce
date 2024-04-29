@@ -85,14 +85,16 @@ export const getCategories = () => {
   };
 };
 
-export const getProducts = (categoryId, filter, sort) => {
+export const getProducts = (categoryId, filter, sort, limit, offset) => {
   return async (dispatch) => {
     try {
       dispatch(setProductListRequest());
       const response = await fetchProductsByCategory(
         categoryId !== undefined ? categoryId : "",
         filter !== undefined ? filter : "",
-        sort !== undefined ? sort : ""
+        sort !== undefined ? sort : "",
+        limit !== undefined ? limit : "",
+        offset !== undefined ? offset : ""
       );
       dispatch(setTotal(response?.total));
       dispatch(setProductList(response?.products));
