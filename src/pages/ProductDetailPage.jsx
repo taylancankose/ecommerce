@@ -1,10 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom/";
+import { Link, useHistory } from "react-router-dom/";
 import ProductDetailsCard from "../layout/Product/ProductDetailsCard";
 import ProductDescription from "../layout/Product/ProductDescription";
 import BestSellerProducts from "../layout/Product/BestSellerProducts";
+import { useSelector } from "react-redux";
+import Spinner from "../components/Loaders/Spinner";
 
 function ProductDetailPage() {
+  const history = useHistory();
+  const selectedProduct = useSelector(
+    (state) => state.productReducer.selectedProduct
+  );
+  const loading = useSelector((state) => state.productReducer.loading);
+  console.log(selectedProduct);
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray">
@@ -14,14 +22,24 @@ function ProductDetailPage() {
             Home
           </h2>
           <i className="fa-solid fa-chevron-right font-bold text-xs leading-6 tracking-[0.2px] text-muted mr-2"></i>
-          <h2 className="font-bold text-sm leading-6 tracking-[0.2px] text-muted">
+          <h2
+            onClick={() => history.goBack()}
+            className="cursor-pointer font-bold text-sm leading-6 tracking-[0.2px] text-muted"
+          >
             Shop
+          </h2>
+          <i className="fa-solid fa-chevron-right font-bold text-xs leading-6 tracking-[0.2px] text-muted mx-2"></i>
+          <h2 className="font-bold text-sm leading-6 tracking-[0.2px] text-muted">
+            {selectedProduct.name}
           </h2>
         </div>
       </div>
 
       <div className="p-2 md:p-10 bg-bgGray">
-        <ProductDetailsCard />
+        <div className="lg:mx-24 relative">
+          <ProductDetailsCard selectedProduct={selectedProduct} />
+          {loading && <Spinner />}
+        </div>
       </div>
 
       <div className="p-2 md:pt-10 md:px-10">
@@ -47,10 +65,14 @@ function ProductDetailPage() {
             </Link>
           </div>
           <div className="border border-lightGray border-1 mt-4 bg-gray-500 " />
+        </div>
+        <div className="h-full lg:mx-24">
           <ProductDescription />
         </div>
       </div>
-      <BestSellerProducts />
+      <div>
+        <BestSellerProducts />
+      </div>
     </div>
   );
 }

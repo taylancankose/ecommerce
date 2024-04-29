@@ -35,11 +35,17 @@ export const fetchProductsByCategory = async (
         offset ? `&offset=${offset}` : ""
       }`
     );
-    console.log(
-      `/products?${categoryId ? `category=${categoryId}` : ""}${
-        filter ? `&filter=${filter}` : ""
-      }${sort ? `&sort=${sort}` : ""}`
-    );
+
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const fetchSingleProduct = async (productId) => {
+  try {
+    const response = await API.get(`/products/${productId}`);
     return await response.data;
   } catch (error) {
     console.log(error);
