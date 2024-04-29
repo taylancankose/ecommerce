@@ -148,13 +148,12 @@ function Header() {
                             (category) =>
                               category.gender === "k" && (
                                 <Link
+                                  key={category.id}
                                   onClick={() => setIsOpen(false)}
                                   to={{
-                                    pathname: `/shop/${
-                                      category.gender === "e"
-                                        ? "erkek"
-                                        : "kadin"
-                                    }/${category.title.toLowerCase()}`,
+                                    pathname: `/shop/kadin/${category.title.toLowerCase()}/${
+                                      category.id
+                                    }`,
                                     state: category?.gender,
                                   }}
                                   className="block py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -173,11 +172,9 @@ function Header() {
                                   onClick={() => setIsOpen(false)}
                                   key={category.id}
                                   to={{
-                                    pathname: `/shop/${
-                                      category.gender === "e"
-                                        ? "erkek"
-                                        : "kadin"
-                                    }/${category.title.toLowerCase()}`,
+                                    pathname: `/shop/erkek/${category.title.toLowerCase()}/${
+                                      category.id
+                                    }`,
                                     state: category?.gender,
                                   }}
                                   className="block py-2 text-sm text-gray-700 hover:bg-gray-100"

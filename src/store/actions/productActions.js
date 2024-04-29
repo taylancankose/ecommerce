@@ -11,7 +11,12 @@ import {
   SET_PRODUCT_LIST,
   SET_TOTAL,
 } from "../types/product/types";
-import { fetchCategories, fetchProducts } from "../../fetch/products";
+import {
+  fetchCategories,
+  fetchProducts,
+  fetchProductsByCategory,
+  fetchProductsByFilter,
+} from "../../fetch/products";
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
@@ -79,12 +84,27 @@ export const getCategories = () => {
   };
 };
 
-export const getProducts = () => {
+export const getProducts = (param) => {
   return async (dispatch) => {
     try {
       dispatch(setProductListRequest());
-      const response = await fetchProducts();
+      const response = await fetchProductsByCategory(param);
       dispatch(setTotal(response?.total));
+      dispatch(setProductList(response?.products));
+    } catch (error) {
+      console.log(error, "product error");
+      dispatch(setProductListError(error));
+    }
+  };
+};
+
+export const getProductsByFilter = (param) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setProductListRequest());
+      const response = await fetchProductsByFilter(param);
+      dispatch(setTotal(response?.total));
+      dispatch(setFilter(param));
       dispatch(setProductList(response?.products));
     } catch (error) {
       console.log(error, "product error");

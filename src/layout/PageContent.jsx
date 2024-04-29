@@ -21,7 +21,7 @@ function PageContent() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/shop">
+        <Route path="/shop/:gender/:categoryName/:categoryId">
           <ShopPage />
         </Route>
         <Route path="/product/:id">

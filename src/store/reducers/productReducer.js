@@ -18,7 +18,7 @@ const initialState = {
   total: 0,
   limit: 25,
   offset: 0,
-  filter: "",
+  filter: "Popularity",
   fetchState: "NOT_FETCHED",
 
   loading: false,

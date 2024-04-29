@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CategoryCard from "../components/Cards/CategoryCard";
 import ProductCard from "../components/Cards/ProductCard";
 import Dropdown from "../components/Other/DropDown";
-import { useSelector } from "react-redux";
-import ProductLoader from "../components/Loaders/ProductLoader";
-import { useLocation } from "react-router-dom/";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom/";
+import {
+  getProducts,
+  getProductsByFilter,
+} from "../store/actions/productActions";
 
 function ShopPage() {
   const location = useLocation();
+  const params = useParams();
+  const dispatch = useDispatch();
   const gender = location?.state;
   const products = useSelector((state) => state.productReducer.productList);
   const categories = useSelector((state) => state.productReducer.categories);
   const loading = useSelector((state) => state.productReducer.loading);
-  console.log(categories);
+  const filter = useSelector((state) => state.productReducer.filter);
+
+  const { categoryId } = params;
+  useEffect(() => {
+    dispatch(getProducts(categoryId));
+  }, [categoryId]);
+  const handleFilter = () => {
+    if (filter !== "Popularity") {
+      dispatch(getProductsByFilter(filter));
+    } else {
+      dispatch(getProducts(categoryId));
+    }
+  };
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray w-full">
@@ -66,9 +83,18 @@ function ShopPage() {
             <div className="flex items-center">
               {/* Dropdown */}
               <Dropdown
-                options={["Popularity", "Relevance", "Price Low to High"]}
+                options={[
+                  "Popularity",
+                  "Rating High To Low",
+                  "Rating Low To High",
+                  "Price High To Low",
+                  "Price Low To High",
+                ]}
               />
-              <button className="bg-primary py-4 px-6 text-sm leading-6 tracking-[0.2px] text-white text-center rounded-md mx-4">
+              <button
+                onClick={handleFilter}
+                className="bg-primary py-4 px-6 text-sm leading-6 tracking-[0.2px] text-white text-center rounded-md mx-4"
+              >
                 Filter
               </button>
             </div>

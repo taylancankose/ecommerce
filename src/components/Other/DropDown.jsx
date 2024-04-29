@@ -1,29 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getProductsByFilter,
+  setFilter,
+} from "../../store/actions/productActions";
 
 const Dropdown = ({ title, options, type }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState("Popularity");
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.productReducer.filter);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const selectValue = (value) => {
-    setValue(value);
+  const selectValue = async (value) => {
     setIsOpen(false);
+    let filterValue = "";
+    console.log(value);
+    if (value === "Rating Low To High") {
+      filterValue = "rating:asc";
+    } else if (value === "Rating High To Low") {
+      filterValue = "rating:desc";
+    } else if (value === "Price Low To High") {
+      filterValue = "price:asc";
+    } else if (value === "Price High To Low") {
+      filterValue = "price:desc";
+    }
+    dispatch(setFilter(filterValue));
   };
+
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
   return (
     <div
       className={`relative ${
         type === "ghost"
           ? ""
-          : "border w-48 p-2 h-14 rounded-md border-borderGray bg-dropDownGray flex items-center"
+          : "border w-60 p-2 h-14 rounded-md border-borderGray bg-dropDownGray flex items-center"
       }`}
     >
       <button
         onClick={toggleDropdown}
         className="text-gray-700 font-semibold bg-transparent inline-flex items-center hover:ease-in justify-between w-full"
       >
-        <span>{value}</span>
+        <span>{filter}</span>
         <i className="fa-solid fa-chevron-down mr-2"></i>
       </button>
       <div

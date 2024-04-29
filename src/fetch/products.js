@@ -19,3 +19,23 @@ export const fetchProducts = async () => {
     return error;
   }
 };
+
+export const fetchProductsByCategory = async (id) => {
+  try {
+    const response = await API.get(`/products?category=${id}`);
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const fetchProductsByFilter = async (filter) => {
+  try {
+    const response = await API.get(`/products?sort=${filter}`);
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
