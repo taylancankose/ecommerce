@@ -32,7 +32,7 @@ function ShopPage() {
     // dispatch(setSort("Popularity"));
     setOptionD("Popularity");
   };
-  console.log(products[0]);
+
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray w-full">
