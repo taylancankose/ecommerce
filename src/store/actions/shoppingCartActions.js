@@ -1,11 +1,15 @@
 import { SET_ADDRESS, SET_CART, SET_PAYMENT } from "../types/cart/types";
 
-export const setCart = (cart) => ({
+export const setCart = (product, count, checked) => ({
   type: SET_CART,
-  payload: cart,
+  payload: {
+    product,
+    count,
+    checked,
+  },
 });
 
-export const setPayment = (payment) => ({
+export const setPayment = (payment, qty, checked) => ({
   type: SET_PAYMENT,
   payload: payment,
 });

@@ -1,13 +1,33 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../store/actions/shoppingCartActions";
+import { useParams } from "react-router-dom/";
+import { getSingleProduct } from "../../store/actions/productActions";
 
 function ProductDetailsCard({ selectedProduct }) {
+  const dispatch = useDispatch();
+  const params = useParams();
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const { productId } = params;
+  const cart = useSelector((state) => state.shoppingCartReducer.cart);
+  useEffect(() => {
+    dispatch(getSingleProduct(productId));
+  }, [productId]);
+  console.log(cart);
+
+  const handleAddToCart = (product) => {
+    const checked = true;
+    const count = 1;
+    dispatch(setCart(product, count, checked));
+  };
+
   return (
     <div className=" mx-4 md:mx-0">
       <div className="lg:flex md:justify-left">
@@ -82,8 +102,11 @@ function ProductDetailsCard({ selectedProduct }) {
           </div>
           {/* BTN container */}
           <div className="mt-8 lg:mt-20 flex items-center ">
-            <button className="mr-3 font-bold text-white text-sm leading-6 tracking-[0.2px] bg-primary py-3 px-5 rounded-md hover:opacity-95">
-              Select Options
+            <button
+              onClick={() => handleAddToCart(selectedProduct)}
+              className="mr-3 font-bold text-white text-sm leading-6 tracking-[0.2px] bg-primary py-3 px-5 rounded-md hover:opacity-95"
+            >
+              Add to Cart
             </button>
             <div className="mr-3 w-12 h-12 bg-white border-lightSecontTextColor border rounded-full flex items-center justify-center hover:scale-105 transition-transform ease-in duration-300">
               <i className=" fa-regular fa-heart text-headerColor text-lg font-medium"></i>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link } from "react-router-dom/";
 import { useSelector } from "react-redux";
@@ -6,12 +6,16 @@ import Avatar from "../components/Other/Avatar";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+
   const categories = useSelector((state) => state.productReducer.categories);
+  const user = useSelector((state) => state.clientReducer.user);
+  const cart = useSelector((state) => state.shoppingCartReducer.cart);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const user = useSelector((state) => state.clientReducer.user);
   return (
     <>
       {/* Navbar Slogan */}
@@ -82,9 +86,73 @@ function Header() {
                 )}
               </div>
               <i className="fa-solid fa-magnifying-glass mr-4 lg:mr-6"></i>
-              <div className="lg:mr-6 flex items-center md:mr-4">
+              <div
+                onClick={() => setCartOpen(!cartOpen)}
+                className=" lg:mr-6 flex items-center md:mr-4 relative "
+              >
                 <i className="fa fa-light fa-cart-shopping mr-2"></i>
-                <p>1</p>
+                <p>{cart.length}</p>
+                {cartOpen && (
+                  <div className="text-center flex justify-center absolute top-6 z-[100] -right-12 md:right-4 lg:right-10 md:h-auto mt-2 w-64 md:w-80 bg-white border rounded-md shadow-lg ">
+                    <div className="py-2 ">
+                      {cart?.length > 0 ? (
+                        cart?.map(({ product, count }) => (
+                          <>
+                            <Link
+                              key={product?.id}
+                              onClick={() => setIsOpen(false)}
+                              to={{
+                                pathname: `/shop/kadin/${product?.title?.toLowerCase()}/${
+                                  product?.id
+                                }`,
+                                state: product?.gender,
+                              }}
+                              className="block py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                            >
+                              <div>
+                                <div className="flex items-center px-4 ">
+                                  <img
+                                    src={product.images[0].url}
+                                    alt={product.name}
+                                    className="w-1/4 aspect-square object-cover border-2 rounded-md"
+                                  />
+                                  <div className="text-left flex flex-col ml-4 md:w-[55%]">
+                                    <p className="text-headerColor font-semibold text-">
+                                      {product?.name}
+                                    </p>
+                                    <div className="flex items-center justify-between ">
+                                      <p className="text-sm mt-1 text-secondTextColor font-me">
+                                        {product?.price}
+                                      </p>
+                                      <p className="text-sm mt-1 text-secondTextColor font-me">
+                                        Amount: {count}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                            <div className="border-borderGray m-4 border-b-2 " />
+                          </>
+                        ))
+                      ) : (
+                        <div className="text-headerColor py-4">
+                          <p>Cart is empty...</p>
+                          <Link to="/">
+                            <p className="my-4 bg-primary text-white font-medium py-3 rounded-md">
+                              Go Shopping
+                            </p>
+                          </Link>
+                          <Link to="">
+                            <p className="text-sm text-secondTextColor">
+                              View Shopping Cart
+                            </p>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="items-center hidden lg:flex">
                 <i className="fa-regular fa-heart mr-2"></i>
@@ -151,7 +219,7 @@ function Header() {
                                   key={category.id}
                                   onClick={() => setIsOpen(false)}
                                   to={{
-                                    pathname: `/shop/kadin/${category.title.toLowerCase()}/${
+                                    pathname: `/shop/kadin/${category?.title?.toLowerCase()}/${
                                       category.id
                                     }`,
                                     state: category?.gender,

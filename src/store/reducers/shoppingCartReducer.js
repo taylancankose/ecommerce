@@ -9,10 +9,24 @@ const initialState = {
 const shoppingCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CART:
-      return {
-        ...state,
-        cart: [...state.cart, action.payload],
-      };
+      const existingItemIndex = state.cart.findIndex(
+        (item) => item.product.id === action.payload.product.id
+      );
+      if (existingItemIndex !== -1) {
+        // Eğer ürün sepette ise, miktarı güncelle
+        const updatedCart = [...state.cart];
+        updatedCart[existingItemIndex].count += 1;
+        return {
+          ...state,
+          cart: updatedCart,
+        };
+      } else {
+        // Eğer ürün sepette yoksa, yeni bir öğe olarak ekle
+        return {
+          ...state,
+          cart: [...state.cart, action.payload],
+        };
+      }
     case SET_ADDRESS:
       return {
         ...state,
