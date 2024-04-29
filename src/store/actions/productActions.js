@@ -2,7 +2,6 @@ import {
   SET_CATEGORIES,
   SET_CATEGORIES_ERROR,
   SET_CATEGORIES_REQUEST,
-  SET_PRODUCT_LIST_ERROR,
   SET_PRODUCT_LIST_REQUEST,
   SET_FETCH_STATE,
   SET_FILTER,
@@ -10,7 +9,6 @@ import {
   SET_OFFSET,
   SET_PRODUCT_LIST,
   SET_PRODUCT_LIST_ERROR,
-  SET_PRODUCT_LIST_REQUEST,
   SET_TOTAL,
   SET_SORT,
 } from "../types/product/types";
@@ -96,7 +94,6 @@ export const getProducts = (categoryId, filter, sort) => {
         filter !== undefined ? filter : "",
         sort !== undefined ? sort : ""
       );
-      console.log(categoryId, filter, sort);
       dispatch(setTotal(response?.total));
       dispatch(setProductList(response?.products));
     } catch (error) {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function ProductCard({ product, imgClass, includesColor = true }) {
   return (
     <>
-      <Link to="/product/imgClass" key={product.id}>
+      <Link to="/product/imgClass" key={product?.id}>
         <div
           className={`justify-center items-center md:mr-6 mt-10  shadow-sm bg-white pb-4 ${
             includesColor ? "text-center" : "text-left"
