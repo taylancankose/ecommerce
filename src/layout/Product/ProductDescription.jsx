@@ -8,7 +8,7 @@ function ProductDescription() {
       <div className="lg:h-[392px] lg:w-[337px]">
         <img
           src="/src/assets/description.png"
-          className="h-full w-full shadow-box-shadow-lg rounded-lg object-cover"
+          className="h-full w-full shadow-box-shadow-lg rounded-lg bg-cover obj-cover"
         />
       </div>
       {/* 2 */}

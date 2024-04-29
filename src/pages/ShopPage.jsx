@@ -4,30 +4,70 @@ import ProductCard from "../components/Cards/ProductCard";
 import Dropdown from "../components/Other/DropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom/";
-import { getProducts, setFilter } from "../store/actions/productActions";
+import {
+  getProducts,
+  setFilter,
+  setOffset,
+} from "../store/actions/productActions";
+import Pagination from "../components/Other/Pagination";
 
 function ShopPage() {
   const location = useLocation();
   const params = useParams();
   const dispatch = useDispatch();
-  const gender = location?.state;
+  const gender = location.state;
   const products = useSelector((state) => state.productReducer.productList);
   const categories = useSelector((state) => state.productReducer.categories);
   const loading = useSelector((state) => state.productReducer.loading);
   const sort = useSelector((state) => state.productReducer.sort);
   const filter = useSelector((state) => state.productReducer.filter);
   const [optionD, setOptionD] = useState("Popularity");
+  const total = useSelector((state) => state.productReducer.total);
+  const offset = useSelector((state) => state.productReducer.offset);
+  const limit = useSelector((state) => state.productReducer.limit);
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
 
   const { categoryId } = params;
+  const page = Math.ceil(Number(total / limit));
+
+  const handlePaginate = (newPage) => {
+    if (newPage === "first") {
+      dispatch(setOffset(0));
+      setCurrentPage(1);
+    } else if (newPage === "prev") {
+      if (currentPage === 1) return false;
+      dispatch(setOffset(offset - limit));
+      setCurrentPage(currentPage - 1);
+    } else if (newPage === "next") {
+      if (currentPage === page) return false;
+      dispatch(setOffset(offset + limit));
+      setCurrentPage(currentPage + 1);
+    } else if (newPage === "last") {
+      dispatch(setOffset(limit * (page - 1)));
+      setCurrentPage(page);
+    } else {
+      const nextPage = parseInt(newPage);
+      if (!isNaN(nextPage) && nextPage >= 1 && nextPage <= page) {
+        setCurrentPage(nextPage);
+        dispatch(setOffset(limit * (nextPage - 1)));
+      }
+    }
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Animasyonlu bir şekilde gitmek için
+    });
+  };
   useEffect(() => {
-    dispatch(getProducts(categoryId, filter, sort));
-  }, [categoryId, filter]);
+    dispatch(getProducts(categoryId, filter, sort, limit, offset));
+  }, [categoryId, filter, limit, offset]);
 
   const handleFilter = () => {
-    dispatch(getProducts(categoryId, filter, sort));
+    dispatch(setOffset(0));
+    dispatch(getProducts(categoryId, filter, sort, limit, 0));
   };
 
   const handleChange = (e) => {
+    dispatch(setOffset(0));
     dispatch(setFilter(e.target.value));
     // dispatch(setSort("Popularity"));
     setOptionD("Popularity");
@@ -113,6 +153,7 @@ function ShopPage() {
           </div>
         </div>
         {/* Results */}
+
         <div className="flex items-center justify-center lg:justify-between md:mx-24 flex-wrap pb-6">
           {products?.map((product) =>
             loading ? (
@@ -126,6 +167,12 @@ function ShopPage() {
             )
           )}
         </div>
+
+        <Pagination
+          currentPage={currentPage}
+          page={page}
+          handlePaginate={handlePaginate}
+        />
       </div>
     </div>
   );
