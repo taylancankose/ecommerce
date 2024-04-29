@@ -47,7 +47,7 @@ function SignInPage() {
         {/* Image */}
         <div className="hidden lg:inline md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
-            src="/src/assets/signin-bg.jpg"
+            src="https://i.ibb.co/DQ8SQ9p/woman-with-shopping-bags-jumping.jpg"
             className="object-cover h-full rounded-tl-2xl rounded-bl-xl"
           />
         </div>
