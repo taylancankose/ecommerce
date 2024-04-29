@@ -20,7 +20,7 @@ function AboutHeader() {
 
         {/* Right */}
         <div className="lg:w-1/3 mt-10 px-8 md:px-40 lg:px-0 md:mt-0 flex relative">
-          <img src="/src/assets/about-woman.png" />
+          <img src="https://i.ibb.co/2vk4nh5/about-woman.png" />
         </div>
       </div>
     </>

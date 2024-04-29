@@ -103,7 +103,7 @@ function SignUpPage() {
         {/* Image */}
         <div className="hidden lg:flex md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
-            src="/src/assets/signup-bg.jpg"
+            src="https://i.ibb.co/1ZcjrnG/stylish-woman-with-shopping-bags.jpg"
             className="object-cover rounded-tl-2xl rounded-bl-xl md:h-[948px] xl:h-[911px]"
           />
         </div>
