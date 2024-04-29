@@ -2,14 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function TopSellerCard({ category }) {
-  const activeRat = Math.floor(category.rating);
+  const activeRat = Math.round(category.rating);
   const passiveRat = Number(5 - activeRat);
   const stars = Array(activeRat).fill(1).concat(Array(passiveRat).fill(0));
   return (
     <Link
-      to={`/shop/${
-        category.gender === "e" ? "erkek" : "kadin"
-      }/${category.title.toLowerCase()}`}
+      to={{
+        pathname: `/shop/${
+          category.gender === "e" ? "erkek" : "kadin"
+        }/${category.title.toLowerCase()}`,
+        state: category.gender,
+      }}
     >
       <div
         key={category.id}

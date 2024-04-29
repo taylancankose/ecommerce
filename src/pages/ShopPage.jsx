@@ -2,8 +2,17 @@ import React from "react";
 import CategoryCard from "../components/Cards/CategoryCard";
 import ProductCard from "../components/Cards/ProductCard";
 import Dropdown from "../components/Other/DropDown";
+import { useSelector } from "react-redux";
+import ProductLoader from "../components/Loaders/ProductLoader";
+import { useLocation } from "react-router-dom/";
 
 function ShopPage() {
+  const location = useLocation();
+  const gender = location?.state;
+  const products = useSelector((state) => state.productReducer.productList);
+  const categories = useSelector((state) => state.productReducer.categories);
+  const loading = useSelector((state) => state.productReducer.loading);
+  console.log(categories);
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray w-full">
@@ -24,13 +33,14 @@ function ShopPage() {
         </div>
 
         {/* Category Cards */}
-        <div className="flex justify-center md:justify-between items-center flex-wrap pt-6 md:mx-16">
+        <div className="flex justify-center md:justify-between gap-2 items-center flex-wrap pt-6 md:mx-16">
           {/* Card */}
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+          {categories.map(
+            (category) =>
+              category.gender === gender && (
+                <CategoryCard key={category.id} category={category} />
+              )
+          )}
         </div>
       </div>
       {/* Products */}
@@ -38,7 +48,7 @@ function ShopPage() {
         <div className="md:mx-4 xl:mx-24 mt-4">
           <div className="justify-center flex flex-col md:flex-row md:justify-between items-center">
             <h6 className="font-bold text-secondTextColor text-sm leading-6 decoration-[0.2px] mb-4 md:mb-0">
-              Showing all 12 results
+              Showing all {products?.length} results
             </h6>
             {/* Views */}
             <div className="flex items-center mb-4 md:mb-0">
@@ -65,15 +75,18 @@ function ShopPage() {
           </div>
         </div>
         {/* Results */}
-        <div className="flex items-center justify-between md:mx-24 flex-wrap pb-6">
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
-          <ProductCard imgClass={"md:w-72"} />
+        <div className="flex items-center justify-center lg:justify-between md:mx-24 flex-wrap pb-6">
+          {products?.map((product) =>
+            loading ? (
+              <p>Loading</p>
+            ) : (
+              <ProductCard
+                key={product.id}
+                product={product}
+                imgClass={"md:w-72"}
+              />
+            )
+          )}
         </div>
       </div>
     </div>

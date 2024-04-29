@@ -1,8 +1,9 @@
 import React from "react";
 
-function Card({ className, title, containerClass }) {
+function Card({ src, className, title, containerClass }) {
   return (
     <div className={`${className} bg-no-repeat bg-cover bg-center relative`}>
+      <img src={src} className="relative h-full w-full object-cover" />
       <div
         className={`${containerClass} justify-center items-center flex bg-white absolute bottom-5 left-5 shadow-md`}
       >

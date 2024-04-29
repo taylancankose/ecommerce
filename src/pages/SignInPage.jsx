@@ -35,8 +35,8 @@ function SignInPage() {
       console.log(error);
     }
   };
-  if (rememberMe && user.token) {
-    localStorage.setItem("credentials", JSON.stringify(user.token));
+  if (rememberMe && user?.token) {
+    localStorage.setItem("credentials", JSON.stringify(user?.token));
     if (history.length > 1) history.goBack();
     else history.push("/");
   }

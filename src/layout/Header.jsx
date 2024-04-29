@@ -50,7 +50,7 @@ function Header() {
         </div>
       </div>
       {/* Navbar */}
-      <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center">
+      <nav className="w-full z-20 top-18 start-0 flex md:inline items-center justify-center z-100">
         <div className="max-w-full flex flex-wrap items-center justify-between p-6 ml-0  xl:mx-24">
           {/* Logo */}
           <Link
@@ -63,7 +63,7 @@ function Header() {
           <div className="flex lg:w-7/12 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
               <div className="hidden lg:flex items-center lg:mr-6 mr-4">
-                {user.name ? (
+                {user?.name ? (
                   <>
                     <Avatar />
                     <p className="font-bold">{user?.name}</p>
@@ -130,7 +130,7 @@ function Header() {
                 </Link>
               </li>
               {/* Shop Dropdown */}
-              <li className="z-10">
+              <li className="z-20">
                 <div className="block py-2 px-3 text-gray-900 rounded ">
                   <div className="relative">
                     <button
@@ -141,26 +141,31 @@ function Header() {
                       <i className="fa-solid fa-chevron-down ml-2"></i>
                     </button>
                     {isOpen && (
-                      <div className="flex justify-between absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg">
-                        <div className="py-1">
-                          <p className="border-b ">Kadın</p>
+                      <div className="text-left flex justify-between absolute left-0 mt-2 w-64 bg-white border rounded-md shadow-lg">
+                        <div className="py-2 px-8">
+                          <p className="border-b mb">Kadın</p>
                           {categories?.map(
                             (category) =>
                               category.gender === "k" && (
                                 <Link
                                   onClick={() => setIsOpen(false)}
                                   key={category.id}
-                                  to={`/shop/${
-                                    category.gender === "e" ? "erkek" : "kadin"
-                                  }/${category.title.toLowerCase()}`}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                  to={{
+                                    pathname: `/shop/${
+                                      category.gender === "e"
+                                        ? "erkek"
+                                        : "kadin"
+                                    }/${category.title.toLowerCase()}`,
+                                    state: category?.gender,
+                                  }}
+                                  className="block py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 >
                                   {category.title}
                                 </Link>
                               )
                           )}
                         </div>
-                        <div className="py-1">
+                        <div className="py-2 px-8">
                           <p className="border-b ">Erkek</p>
                           {categories?.map(
                             (category) =>
@@ -168,10 +173,15 @@ function Header() {
                                 <Link
                                   onClick={() => setIsOpen(false)}
                                   key={category.id}
-                                  to={`/shop/${
-                                    category.gender === "e" ? "erkek" : "kadin"
-                                  }/${category.title.toLowerCase()}`}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                  to={{
+                                    pathname: `/shop/${
+                                      category.gender === "e"
+                                        ? "erkek"
+                                        : "kadin"
+                                    }/${category.title.toLowerCase()}`,
+                                    state: category?.gender,
+                                  }}
+                                  className="block py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 >
                                   {category.title}
                                 </Link>
