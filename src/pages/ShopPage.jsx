@@ -157,7 +157,7 @@ function ShopPage() {
         <div className="flex items-center justify-center lg:justify-between md:mx-24 flex-wrap pb-6">
           {products?.map((product) =>
             loading ? (
-              <p>Loading</p>
+              <p key={product.id}>Loading</p>
             ) : (
               <ProductCard
                 key={product.id}

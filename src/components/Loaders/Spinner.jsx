@@ -4,7 +4,7 @@ function Spinner() {
   return (
     <div
       role="status"
-      class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2 h-full w-full z-10 backdrop-blur-md	"
+      className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2 h-full w-full z-10 backdrop-blur-md	"
     >
       <svg
         aria-hidden="true"

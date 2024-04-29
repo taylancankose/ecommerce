@@ -12,7 +12,6 @@ function ProductDetailPage() {
     (state) => state.productReducer.selectedProduct
   );
   const loading = useSelector((state) => state.productReducer.loading);
-  console.log(selectedProduct);
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray">

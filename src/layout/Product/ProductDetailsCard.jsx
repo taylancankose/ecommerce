@@ -10,7 +10,7 @@ function ProductDetailsCard({ selectedProduct }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
     <div className=" mx-4 md:mx-0">
-      <div className="lg:flex items-center md:justify-left">
+      <div className="lg:flex md:justify-left">
         <div className="lg:w-8/12 xl:w-5/12 w-full md:mr-4 xl:mr-0 ">
           <Swiper
             style={{
@@ -23,12 +23,8 @@ function ProductDetailsCard({ selectedProduct }) {
             navigation={true}
           >
             {selectedProduct?.images?.map((img) => (
-              <SwiperSlide>
-                <img
-                  key={img.index}
-                  src={img.url}
-                  className="aspect-square object-cover"
-                />
+              <SwiperSlide key={img.index}>
+                <img src={img.url} className="aspect-square object-cover" />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -43,18 +39,14 @@ function ProductDetailsCard({ selectedProduct }) {
               modules={[FreeMode, Navigation, Thumbs]}
             >
               {selectedProduct?.images?.map((img) => (
-                <SwiperSlide>
-                  <img
-                    key={img.index}
-                    src={img.url}
-                    className="aspect-square object-cover"
-                  />
+                <SwiperSlide key={img.index}>
+                  <img src={img.url} className="aspect-square object-cover" />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
         </div>
-        <div className="mt-4 lg:mt-0 w-full xl:w-5/12 lg:mb-48 xl:ml-36 lg:ml-16 ">
+        <div className="mt-4 lg:mt-0 w-full xl:w-5/12 lg:mb-48 xl:ml-28 lg:ml-16 ">
           <h4 className="font-medium text-xl text-headerColor tracking-[0.2px]  lg:w-full ">
             {selectedProduct?.name}
           </h4>
