@@ -27,7 +27,7 @@ function ContactHeader() {
       </div>
       {/* Right */}
       <div className="lg:w-1/3 mt-10 md:px-40 lg:px-0 md:mt-0 flex relative">
-        <img src="/src/assets/contact-family.png" />
+        <img src="https://i.ibb.co/S6nGYL0/contact-family.png" />
       </div>
     </div>
   );
