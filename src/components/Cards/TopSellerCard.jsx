@@ -5,7 +5,6 @@ function TopSellerCard({ category }) {
   const activeRat = Math.floor(category.rating);
   const passiveRat = Number(5 - activeRat);
   const stars = Array(activeRat).fill(1).concat(Array(passiveRat).fill(0));
-  console.log(category.title.toLowerCase());
   return (
     <Link
       to={{

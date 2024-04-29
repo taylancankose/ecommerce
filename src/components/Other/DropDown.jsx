@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProductsByFilter,
-  setFilter,
-} from "../../store/actions/productActions";
+import { setSort } from "../../store/actions/productActions";
 
-const Dropdown = ({ title, options, type }) => {
+const Dropdown = ({ optionD, setOptionD, options, type }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.productReducer.filter);
+  const sort = useSelector((state) => state.productReducer.filter);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const selectValue = async (value) => {
     setIsOpen(false);
-    let filterValue = "";
-    console.log(value);
+    let sortValue = "";
     if (value === "Rating Low To High") {
-      filterValue = "rating:asc";
+      sortValue = "rating:asc";
+      setOptionD("Rating Low To High");
     } else if (value === "Rating High To Low") {
-      filterValue = "rating:desc";
+      sortValue = "rating:desc";
+      setOptionD("Rating High To Low");
     } else if (value === "Price Low To High") {
-      filterValue = "price:asc";
+      sortValue = "price:asc";
+      setOptionD("Price Low To High");
     } else if (value === "Price High To Low") {
-      filterValue = "price:desc";
+      sortValue = "price:desc";
+      setOptionD("Price High To Low");
     }
-    dispatch(setFilter(filterValue));
+    dispatch(setSort(sortValue));
   };
 
   useEffect(() => {
-    console.log(filter);
-  }, [filter]);
+    console.log(sort);
+  }, [sort]);
   return (
     <div
       className={`relative ${
@@ -44,7 +44,7 @@ const Dropdown = ({ title, options, type }) => {
         onClick={toggleDropdown}
         className="text-gray-700 font-semibold bg-transparent inline-flex items-center hover:ease-in justify-between w-full"
       >
-        <span>{filter}</span>
+        <span>{optionD}</span>
         <i className="fa-solid fa-chevron-down mr-2"></i>
       </button>
       <div

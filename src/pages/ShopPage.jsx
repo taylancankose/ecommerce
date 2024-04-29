@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryCard from "../components/Cards/CategoryCard";
 import ProductCard from "../components/Cards/ProductCard";
 import Dropdown from "../components/Other/DropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom/";
-import {
-  getProducts,
-  getProductsByFilter,
-} from "../store/actions/productActions";
+import { getProducts, setFilter } from "../store/actions/productActions";
 
 function ShopPage() {
   const location = useLocation();
@@ -17,19 +14,25 @@ function ShopPage() {
   const products = useSelector((state) => state.productReducer.productList);
   const categories = useSelector((state) => state.productReducer.categories);
   const loading = useSelector((state) => state.productReducer.loading);
+  const sort = useSelector((state) => state.productReducer.sort);
   const filter = useSelector((state) => state.productReducer.filter);
+  const [optionD, setOptionD] = useState("Popularity");
 
   const { categoryId } = params;
   useEffect(() => {
-    dispatch(getProducts(categoryId));
-  }, [categoryId]);
+    dispatch(getProducts(categoryId, filter, sort));
+  }, [categoryId, filter]);
+
   const handleFilter = () => {
-    if (filter !== "Popularity") {
-      dispatch(getProductsByFilter(filter));
-    } else {
-      dispatch(getProducts(categoryId));
-    }
+    dispatch(getProducts(categoryId, filter, sort));
   };
+
+  const handleChange = (e) => {
+    dispatch(setFilter(e.target.value));
+    // dispatch(setSort("Popularity"));
+    setOptionD("Popularity");
+  };
+  console.log(products[0]);
   return (
     <div className="font-montserrat">
       <div className="p-2 md:p-10 bg-bgGray w-full">
@@ -83,6 +86,8 @@ function ShopPage() {
             <div className="flex items-center">
               {/* Dropdown */}
               <Dropdown
+                optionD={optionD}
+                setOptionD={setOptionD}
                 options={[
                   "Popularity",
                   "Rating High To Low",
@@ -98,6 +103,13 @@ function ShopPage() {
                 Filter
               </button>
             </div>
+          </div>
+          <div className="py-6">
+            <input
+              onChange={handleChange}
+              placeholder="Search the product"
+              className=" bg-dropDownGray w-1/2 py-4 m-auto pl-4 border-borderGray border rounded-md "
+            />
           </div>
         </div>
         {/* Results */}

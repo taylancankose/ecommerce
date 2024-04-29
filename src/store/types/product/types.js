@@ -11,3 +11,4 @@ export const SET_TOTAL = "SET_TOTAL";
 export const SET_LIMIT = "SET_LIMIT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FILTER = "SET_FILTER";
+export const SET_SORT = "SET_SORT";

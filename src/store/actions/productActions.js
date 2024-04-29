@@ -10,13 +10,9 @@ import {
   SET_OFFSET,
   SET_PRODUCT_LIST,
   SET_TOTAL,
+  SET_SORT,
 } from "../types/product/types";
-import {
-  fetchCategories,
-  fetchProducts,
-  fetchProductsByCategory,
-  fetchProductsByFilter,
-} from "../../fetch/products";
+import { fetchCategories, fetchProductsByCategory } from "../../fetch/products";
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
@@ -71,6 +67,11 @@ export const setFilter = (filter) => ({
   payload: filter,
 });
 
+export const setSort = (sort) => ({
+  type: SET_SORT,
+  payload: sort,
+});
+
 export const getCategories = () => {
   return async (dispatch) => {
     try {
@@ -84,27 +85,17 @@ export const getCategories = () => {
   };
 };
 
-export const getProducts = (param) => {
+export const getProducts = (categoryId, filter, sort) => {
   return async (dispatch) => {
     try {
       dispatch(setProductListRequest());
-      const response = await fetchProductsByCategory(param);
+      const response = await fetchProductsByCategory(
+        categoryId !== undefined ? categoryId : "",
+        filter !== undefined ? filter : "",
+        sort !== undefined ? sort : ""
+      );
+      console.log(categoryId, filter, sort);
       dispatch(setTotal(response?.total));
-      dispatch(setProductList(response?.products));
-    } catch (error) {
-      console.log(error, "product error");
-      dispatch(setProductListError(error));
-    }
-  };
-};
-
-export const getProductsByFilter = (param) => {
-  return async (dispatch) => {
-    try {
-      dispatch(setProductListRequest());
-      const response = await fetchProductsByFilter(param);
-      dispatch(setTotal(response?.total));
-      dispatch(setFilter(param));
       dispatch(setProductList(response?.products));
     } catch (error) {
       console.log(error, "product error");
