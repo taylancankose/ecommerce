@@ -11,6 +11,9 @@ import {
   SET_PRODUCT_LIST_ERROR,
   SET_PRODUCT_LIST_REQUEST,
   SET_TOTAL,
+  SET_SELECTED_PRODUCT_ERROR,
+  SET_SELECTED_PRODUCT_REQUEST,
+  SET_SELECTED_PRODUCT,
 } from "../types/product/types";
 
 const initialState = {
@@ -22,6 +25,7 @@ const initialState = {
   sort: "",
   fetchState: "NOT_FETCHED",
   filter: "",
+  selectedProduct: {},
 
   loading: false,
   error: null,
@@ -29,12 +33,14 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SELECTED_PRODUCT_ERROR:
     case SET_PRODUCT_LIST_ERROR:
     case SET_CATEGORIES_ERROR:
       return {
         ...state,
         error: action.error,
       };
+    case SET_SELECTED_PRODUCT_REQUEST:
     case SET_CATEGORIES_REQUEST:
     case SET_PRODUCT_LIST_REQUEST:
       return {
@@ -52,6 +58,12 @@ const productReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         productList: action.payload,
+        loading: false,
+      };
+    case SET_SELECTED_PRODUCT:
+      return {
+        ...state,
+        selectedProduct: action.payload,
         loading: false,
       };
     case SET_TOTAL:

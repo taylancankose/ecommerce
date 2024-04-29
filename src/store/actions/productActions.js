@@ -11,8 +11,15 @@ import {
   SET_PRODUCT_LIST_ERROR,
   SET_TOTAL,
   SET_SORT,
+  SET_SELECTED_PRODUCT,
+  SET_SELECTED_PRODUCT_REQUEST,
+  SET_SELECTED_PRODUCT_ERROR,
 } from "../types/product/types";
-import { fetchCategories, fetchProductsByCategory } from "../../fetch/products";
+import {
+  fetchCategories,
+  fetchProductsByCategory,
+  fetchSingleProduct,
+} from "../../fetch/products";
 
 export const setCategories = (categories) => ({
   type: SET_CATEGORIES,
@@ -39,6 +46,20 @@ export const setProductListRequest = () => ({
 
 export const setProductListError = (error) => ({
   type: SET_PRODUCT_LIST_ERROR,
+  payload: error,
+});
+
+export const setSelectedProductList = (productList) => ({
+  type: SET_SELECTED_PRODUCT,
+  payload: productList,
+});
+
+export const setSelectedProductListRequest = () => ({
+  type: SET_SELECTED_PRODUCT_REQUEST,
+});
+
+export const setSelectedProductListError = (error) => ({
+  type: SET_SELECTED_PRODUCT_ERROR,
   payload: error,
 });
 
@@ -101,6 +122,19 @@ export const getProducts = (categoryId, filter, sort, limit, offset) => {
     } catch (error) {
       console.log(error, "product error");
       dispatch(setProductListError(error));
+    }
+  };
+};
+
+export const getSingleProduct = (productId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setSelectedProductListRequest());
+      const response = await fetchSingleProduct(productId);
+      dispatch(setSelectedProductList(response));
+    } catch (error) {
+      console.log(error, "product error");
+      dispatch(setSelectedProductListError(error));
     }
   };
 };
