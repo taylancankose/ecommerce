@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../store/actions/shoppingCartActions";
 import OrderSummary from "../layout/Shop/OrderSummary";
 import ShoppingCart from "../layout/Shop/ShoppingCart";
+import { calculateTotalPrice } from "../utils/calculatePrice";
 
 function CartPage() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [discountPrice, setDiscountPrice] = useState(totalPrice);
-  const [promo, setPromo] = useState("");
   const [shippingPrice, setShippingPrice] = useState(0);
+
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
   const dispatch = useDispatch();
 
@@ -50,32 +50,8 @@ function CartPage() {
     }
   };
 
-  const calculateTotalPrice = () => {
-    let result = 0;
-    cart.forEach((item) => {
-      const checked = item?.checked;
-      const price = item?.product?.price;
-      const count = item?.count;
-      if (checked) {
-        result += price * count;
-        setTotalPrice(result);
-        setShippingPrice(result * 0.05);
-      } else {
-        setTotalPrice(0);
-        setShippingPrice(0);
-      }
-    });
-  };
-
-  const handleApply = (e) => {
-    e.preventDefault();
-    if (promo.toLowerCase().trim() === "taylan24") {
-      setDiscountPrice(totalPrice * 0.2);
-    }
-  };
-
   useEffect(() => {
-    calculateTotalPrice();
+    calculateTotalPrice(cart, setTotalPrice, setShippingPrice);
   }, [cart]);
 
   return (
@@ -106,14 +82,9 @@ function CartPage() {
           </div>
 
           {/* Order Summary */}
-          <OrderSummary
-            cart={cart}
-            setPromo={setPromo}
-            handleApply={handleApply}
-            totalPrice={totalPrice}
-            discountPrice={discountPrice}
-            shippingPrice={shippingPrice}
-          />
+          <div className="xl:w-[25%] lg:w-1/5 w-3/4">
+            <OrderSummary />
+          </div>
         </div>
       </div>
     </section>

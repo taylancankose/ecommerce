@@ -8,6 +8,7 @@ import AboutPage from "../pages/AboutPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
 import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 function PageContent() {
   return (
@@ -40,8 +41,11 @@ function PageContent() {
         <Route path="/about-us">
           <AboutPage />
         </Route>
-        <Route path="/cart">
+        <Route path="/cart" exact>
           <CartPage />
+        </Route>
+        <Route path="/cart/checkout/:id">
+          <CheckoutPage />
         </Route>
       </Switch>
     </div>

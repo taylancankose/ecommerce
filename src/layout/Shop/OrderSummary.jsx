@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { calculateTotalPrice } from "../../utils/calculatePrice";
 
-function OrderSummary({
-  setPromo,
-  handleApply,
-  discountPrice,
-  totalPrice,
-  cart,
-  shippingPrice,
-}) {
+function OrderSummary() {
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(totalPrice);
+  const [promo, setPromo] = useState("");
+  const [shippingPrice, setShippingPrice] = useState(0);
+  const cart = useSelector((state) => state.shoppingCartReducer.cart);
+
+  const handleApply = (e) => {
+    e.preventDefault();
+    if (promo.toLowerCase().trim() === "taylan24") {
+      setDiscountPrice(totalPrice * 0.2);
+    }
+  };
+
+  useEffect(() => {
+    calculateTotalPrice(cart, setTotalPrice, setShippingPrice);
+  }, [cart]);
+
+  const handlePromoChange = (e) => setPromo(e.target.value);
   return (
-    <div className="xl:w-[25%] lg:w-1/5 w-3/4 py-12 lg:py-24">
+    <div className="w-full py-12 lg:py-24">
       <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
         Order Summary
       </h2>
@@ -31,7 +45,7 @@ function OrderSummary({
           <div className="flex pb-4 w-full">
             <div className="relative w-full ">
               <input
-                onChange={(e) => setPromo(e.target.value)}
+                onChange={handlePromoChange}
                 type="text"
                 className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
                 placeholder="xxxx xxxx xxxx"
@@ -66,9 +80,12 @@ function OrderSummary({
               ${(totalPrice + shippingPrice - discountPrice).toFixed(2)}
             </p>
           </div>
-          <button className="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">
+          <Link
+            to={`/cart/checkout/${Date.now()}`}
+            className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
+          >
             Checkout
-          </button>
+          </Link>
         </form>
       </div>
     </div>
