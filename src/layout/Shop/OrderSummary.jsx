@@ -3,9 +3,10 @@ import React from "react";
 function OrderSummary({
   setPromo,
   handleApply,
-  totalPriceDiscounted,
+  discountPrice,
   totalPrice,
   cart,
+  shippingPrice,
 }) {
   return (
     <div className="xl:w-[25%] lg:w-1/5 w-3/4 py-12 lg:py-24">
@@ -45,17 +46,24 @@ function OrderSummary({
               Apply
             </button>
           </div>
-          <div className="flex items-center justify-between py-8">
-            <p className="font-medium text-xl leading-8 text-black">
-              {cart?.length > 1
-                ? `${cart?.length} items`
-                : `${cart?.length} item`}
+          <div className="flex items-center justify-between pt-4">
+            <p className=" font-medium leading-8 text-alert">Shipping:</p>
+            <p className=" font-medium leading-8 text-alert">
+              ${shippingPrice.toFixed(2)}
             </p>
+          </div>
+          {discountPrice > 0 && (
+            <div className="flex items-center justify-between pt-2 pb-4">
+              <p className=" font-medium leading-8 text-success">Discount:</p>
+              <p className=" font-medium leading-8 text-success">
+                ${discountPrice.toFixed(2)}
+              </p>
+            </div>
+          )}
+          <div className="flex items-center justify-between pb-8">
+            <p className="font-medium text-xl leading-8 text-black">Total:</p>
             <p className="font-semibold text-xl leading-8 text-indigo-600">
-              $
-              {totalPriceDiscounted === 0
-                ? totalPrice.toFixed(2)
-                : totalPriceDiscounted.toFixed(2)}
+              ${(totalPrice + shippingPrice - discountPrice).toFixed(2)}
             </p>
           </div>
           <button className="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">

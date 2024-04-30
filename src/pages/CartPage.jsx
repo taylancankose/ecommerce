@@ -6,8 +6,9 @@ import ShoppingCart from "../layout/Shop/ShoppingCart";
 
 function CartPage() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalPriceDiscounted, setTotalPriceDiscounted] = useState(totalPrice);
+  const [discountPrice, setDiscountPrice] = useState(totalPrice);
   const [promo, setPromo] = useState("");
+  const [shippingPrice, setShippingPrice] = useState(0);
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
   const dispatch = useDispatch();
 
@@ -58,8 +59,10 @@ function CartPage() {
       if (checked) {
         result += price * count;
         setTotalPrice(result);
+        setShippingPrice(result * 0.05);
       } else {
         setTotalPrice(0);
+        setShippingPrice(0);
       }
     });
   };
@@ -67,7 +70,7 @@ function CartPage() {
   const handleApply = (e) => {
     e.preventDefault();
     if (promo.toLowerCase().trim() === "taylan24") {
-      setTotalPriceDiscounted(totalPrice * 0.75);
+      setDiscountPrice(totalPrice * 0.2);
     }
   };
 
@@ -108,7 +111,8 @@ function CartPage() {
             setPromo={setPromo}
             handleApply={handleApply}
             totalPrice={totalPrice}
-            totalPriceDiscounted={totalPriceDiscounted}
+            discountPrice={discountPrice}
+            shippingPrice={shippingPrice}
           />
         </div>
       </div>
