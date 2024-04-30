@@ -25,7 +25,22 @@ function ProductDetailsCard({ selectedProduct }) {
   const handleAddToCart = (product) => {
     const checked = true;
     const count = 1;
-    dispatch(setCart(product, count, checked));
+    const existingItemIndex = cart.findIndex(
+      (item) => item.product.id === product.id
+    );
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].count += 1;
+      dispatch(
+        setCart(
+          updatedCart[existingItemIndex].product,
+          updatedCart[existingItemIndex].count,
+          updatedCart[existingItemIndex].checked
+        )
+      );
+    } else {
+      dispatch(setCart(product, count, checked));
+    }
   };
 
   return (

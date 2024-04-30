@@ -1,4 +1,9 @@
-import { SET_ADDRESS, SET_CART, SET_PAYMENT } from "../types/cart/types";
+import {
+  REMOVE_CART,
+  SET_ADDRESS,
+  SET_CART,
+  SET_PAYMENT,
+} from "../types/cart/types";
 
 export const setCart = (product, count, checked) => ({
   type: SET_CART,
@@ -7,6 +12,11 @@ export const setCart = (product, count, checked) => ({
     count,
     checked,
   },
+});
+
+export const removeCart = (productId) => ({
+  type: REMOVE_CART,
+  payload: productId,
 });
 
 export const setPayment = (payment, qty, checked) => ({
