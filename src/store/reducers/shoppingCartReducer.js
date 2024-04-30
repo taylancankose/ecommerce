@@ -1,4 +1,9 @@
-import { SET_ADDRESS, SET_CART, SET_PAYMENT } from "../types/cart/types";
+import {
+  REMOVE_CART,
+  SET_ADDRESS,
+  SET_CART,
+  SET_PAYMENT,
+} from "../types/cart/types";
 
 const initialState = {
   cart: [],
@@ -15,7 +20,10 @@ const shoppingCartReducer = (state = initialState, action) => {
       if (existingItemIndex !== -1) {
         // Eğer ürün sepette ise, miktarı güncelle
         const updatedCart = [...state.cart];
-        updatedCart[existingItemIndex].count;
+        updatedCart[existingItemIndex] = {
+          ...updatedCart[existingItemIndex], // Mevcut ürünün kopyasını oluştur
+          checked: action.payload.checked, // Güncelleme yap
+        };
         return {
           ...state,
           cart: updatedCart,
@@ -27,6 +35,14 @@ const shoppingCartReducer = (state = initialState, action) => {
           cart: [...state.cart, action.payload],
         };
       }
+    case REMOVE_CART:
+      const removedCart = state.cart.filter(
+        (item) => item.product.id !== action.payload
+      );
+      return {
+        ...state,
+        cart: removedCart,
+      };
     case SET_ADDRESS:
       return {
         ...state,

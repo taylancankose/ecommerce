@@ -93,7 +93,7 @@ function Header() {
                 <i className="fa fa-light fa-cart-shopping mr-2"></i>
                 <p>{cart.length}</p>
                 {cartOpen && (
-                  <div className="text-center flex justify-center absolute top-6 z-[100] -right-12 md:right-4 lg:right-10 md:h-auto mt-2 w-64 md:w-80 bg-white border rounded-md shadow-lg ">
+                  <div className="text-center flex justify-center absolute top-6 z-[100] -right-20 w-80 md:right-4 lg:right-10 md:h-auto mt-2  lg:w-96 bg-white border rounded-md shadow-lg ">
                     <div className="py-2 ">
                       {cart?.length > 0 ? (
                         <div>
