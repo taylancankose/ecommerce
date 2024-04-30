@@ -7,6 +7,7 @@ import TeamPage from "../pages/TeamPage";
 import AboutPage from "../pages/AboutPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
+import CartPage from "../pages/CartPage";
 
 function PageContent() {
   return (
@@ -28,9 +29,6 @@ function PageContent() {
           path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
           exact
         >
-          {/*
-          <Route path="/product/:id">
-           */}
           <ProductDetailPage />
         </Route>
         <Route path="/contact">
@@ -41,6 +39,9 @@ function PageContent() {
         </Route>
         <Route path="/about-us">
           <AboutPage />
+        </Route>
+        <Route path="/cart">
+          <CartPage />
         </Route>
       </Switch>
     </div>

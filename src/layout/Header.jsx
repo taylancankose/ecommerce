@@ -142,9 +142,12 @@ function Header() {
                             );
                           })}
                           <div className="flex items-center justify-between mx-4 gap-x-2 pb-3">
-                            <button className="w-36 h-10 rounded-md border-borderGray text-xs bg-lightGray text-headerColor font-bold">
+                            <Link
+                              to="/cart"
+                              className="w-36 h-10 rounded-md border-borderGray text-xs bg-lightGray text-headerColor font-bold flex items-center justify-center"
+                            >
                               Sepete Git
-                            </button>
+                            </Link>
                             <button className="w-36 h-10 rounded-md text-white font-bold text-xs bg-success">
                               Siparişi Tamamla
                             </button>

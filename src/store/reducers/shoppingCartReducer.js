@@ -15,7 +15,7 @@ const shoppingCartReducer = (state = initialState, action) => {
       if (existingItemIndex !== -1) {
         // Eğer ürün sepette ise, miktarı güncelle
         const updatedCart = [...state.cart];
-        updatedCart[existingItemIndex].count += 1;
+        updatedCart[existingItemIndex].count;
         return {
           ...state,
           cart: updatedCart,
