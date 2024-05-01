@@ -23,8 +23,14 @@ function CheckoutPage() {
   const newAddress = useSelector(
     (state) => state.shoppingCartReducer.newAddress
   );
-
+  console.log(active);
   const address = useSelector((state) => state.shoppingCartReducer.address);
+  const receiptAddress = useSelector(
+    (state) => state.shoppingCartReducer.receiptAddress
+  );
+  const shippingAddress = useSelector(
+    (state) => state.shoppingCartReducer.shippingAddress
+  );
 
   const user = useSelector((state) => state.clientReducer.user);
   const onClose = () => setModal(false);
@@ -74,7 +80,9 @@ function CheckoutPage() {
               </div>
             </div>
             <div
-              onClick={() => setActive("Cards")}
+              onClick={() =>
+                shippingAddress.id & receiptAddress.id && setActive("Cards")
+              }
               className={`w-1/2 border border-borderGray h-24 items-center flex rounded-r-lg shadow-md cursor-pointer ${
                 active === "Cards" ? "bg-white" : "bg-bgGray"
               }`}
