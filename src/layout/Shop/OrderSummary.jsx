@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { calculateTotalPrice } from "../../utils/calculatePrice";
 
-function OrderSummary() {
+function OrderSummary({ isPaying = false }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(totalPrice);
   const [promo, setPromo] = useState("");
@@ -80,12 +80,22 @@ function OrderSummary() {
               ${(totalPrice + shippingPrice - discountPrice).toFixed(2)}
             </p>
           </div>
-          <Link
-            to={`/cart/checkout/${Date.now()}`}
-            className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
-          >
-            Checkout
-          </Link>
+
+          {isPaying ? (
+            <button
+              type="submit"
+              className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
+            >
+              Checkout
+            </button>
+          ) : (
+            <Link
+              to={`/cart/checkout/${Date.now()}`}
+              className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
+            >
+              Checkout
+            </Link>
+          )}
         </form>
       </div>
     </div>

@@ -16,6 +16,7 @@ function Header() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
       {/* Navbar Slogan */}
@@ -67,7 +68,7 @@ function Header() {
           <div className="flex lg:w-7/12 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
               <div className="hidden lg:flex items-center lg:mr-6 mr-4">
-                {user?.name ? (
+                {user?.email ? (
                   <>
                     <Avatar />
                     <p className="font-bold">{user?.name}</p>

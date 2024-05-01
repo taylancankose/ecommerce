@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom/";
+import { Switch, Route, Redirect } from "react-router-dom/";
 import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
@@ -11,6 +11,7 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 
 function PageContent() {
+  const token = JSON.stringify(localStorage.getItem("credentials"));
   return (
     <div>
       <Switch>
@@ -45,7 +46,7 @@ function PageContent() {
           <CartPage />
         </Route>
         <Route path="/cart/checkout/:id">
-          <CheckoutPage />
+          {token ? <CheckoutPage /> : <Redirect to="/sign-in" />}
         </Route>
       </Switch>
     </div>
