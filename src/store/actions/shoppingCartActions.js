@@ -1,19 +1,24 @@
-import axios from "axios";
 import {
+  addPayments,
   changeAddress,
   deleteAddresses,
+  deletePayment,
   fetchAddresses,
+  fetchPayments,
   saveAddresses,
 } from "../../fetch/cart";
 import {
   DELETE_ADDRESS,
   REMOVE_CART,
+  SELECT_CARD,
   SET_ADDRESS,
   SET_ADDRESS_ERROR,
   SET_ADDRESS_REQUEST,
   SET_CART,
   SET_ONE_ADDRESS,
   SET_PAYMENT,
+  SET_PAYMENT_ERROR,
+  SET_PAYMENT_REQUEST,
   SET_RECEIPT_ADDRESS,
   SET_SHIPPING_ADDRESS,
   UPDATE_ADDRESS,
@@ -28,14 +33,28 @@ export const setCart = (product, count, checked) => ({
   },
 });
 
+export const selectCard = (card) => ({
+  type: SELECT_CARD,
+  payload: card,
+});
+
 export const removeCart = (productId) => ({
   type: REMOVE_CART,
   payload: productId,
 });
 
-export const setPayment = (payment, qty, checked) => ({
+export const setPayment = (payment) => ({
   type: SET_PAYMENT,
   payload: payment,
+});
+
+export const setPaymentRequest = () => ({
+  type: SET_PAYMENT_REQUEST,
+});
+
+export const setPaymentError = (error) => ({
+  type: SET_PAYMENT_ERROR,
+  payload: error,
 });
 
 export const setAddress = (address) => ({
@@ -121,7 +140,47 @@ export const removeAddress = (id) => {
     try {
       dispatch(setAddressRequest());
       await deleteAddresses(id);
-      dispatch(deleteAddress(id));
+      dispatch(getAddresses());
+    } catch (error) {
+      console.log(error, "address error");
+      dispatch(setAddressError(error));
+    }
+  };
+};
+
+export const getPayment = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(setPaymentRequest());
+      const response = await fetchPayments();
+      dispatch(setPayment(response));
+    } catch (error) {
+      console.log(error, "payment error");
+      dispatch(setPaymentError(error));
+    }
+  };
+};
+
+export const savePayment = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setPaymentRequest());
+      const response = await addPayments(data);
+      dispatch(getPayment());
+      console.log(response);
+    } catch (error) {
+      console.log(error, "payment error");
+      dispatch(setPaymentError(error));
+    }
+  };
+};
+
+export const removePayment = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setPaymentRequest());
+      await deletePayment(id);
+      dispatch(getPayment());
     } catch (error) {
       console.log(error, "address error");
       dispatch(setAddressError(error));

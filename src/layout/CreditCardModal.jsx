@@ -12,7 +12,7 @@ function CreditCardModal({ handleSubmit, sendForm, onClose, register }) {
             {/* Name */}
             <Input
               labelTitle={"Full Name"}
-              label="name"
+              label="name_on_card"
               register={register}
               rules={{
                 required: "You have to enter a name",
@@ -27,7 +27,7 @@ function CreditCardModal({ handleSubmit, sendForm, onClose, register }) {
             {/* Phone */}
             <Input
               labelTitle={"Card Number"}
-              label="card"
+              label="card_no"
               register={register}
               rules={{
                 required: "You have to enter a card number",
@@ -43,7 +43,7 @@ function CreditCardModal({ handleSubmit, sendForm, onClose, register }) {
             <div className="w-full">
               <Input
                 labelTitle={"MM"}
-                label="card"
+                label="expire_month"
                 register={register}
                 rules={{
                   required: true,
@@ -57,27 +57,13 @@ function CreditCardModal({ handleSubmit, sendForm, onClose, register }) {
             <div className="w-full">
               <Input
                 labelTitle={"YYYY"}
-                label="card"
+                label="expire_year"
                 register={register}
                 rules={{
                   required: true,
                   maxLength: 4,
                 }}
                 placeholder="YYYY"
-                type={"number"}
-                className={"h-10 px-8"}
-              />
-            </div>
-            <div className="w-full">
-              <Input
-                labelTitle={"CVV"}
-                label="card"
-                register={register}
-                rules={{
-                  required: true,
-                  maxLength: 3,
-                }}
-                placeholder="XX"
                 type={"number"}
                 className={"h-10 px-8"}
               />

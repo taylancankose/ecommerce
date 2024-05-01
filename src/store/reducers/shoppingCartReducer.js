@@ -1,12 +1,15 @@
 import {
   DELETE_ADDRESS,
   REMOVE_CART,
+  SELECT_CARD,
   SET_ADDRESS,
   SET_ADDRESS_ERROR,
   SET_ADDRESS_REQUEST,
   SET_CART,
   SET_ONE_ADDRESS,
   SET_PAYMENT,
+  SET_PAYMENT_ERROR,
+  SET_PAYMENT_REQUEST,
   SET_RECEIPT_ADDRESS,
   SET_SHIPPING_ADDRESS,
   UPDATE_ADDRESS,
@@ -19,6 +22,7 @@ const initialState = {
   newAddress: {},
   shippingAddress: {},
   receiptAddress: {},
+  paymentCard: {},
 
   loading: false,
   error: null,
@@ -70,12 +74,14 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         newAddress: action.payload,
       };
+    case SET_PAYMENT_ERROR:
     case SET_ADDRESS_ERROR:
       return {
         ...state,
         error: action.error,
         loading: false,
       };
+    case SET_PAYMENT_REQUEST:
     case SET_ADDRESS_REQUEST:
       return {
         ...state,
@@ -111,6 +117,11 @@ const shoppingCartReducer = (state = initialState, action) => {
       return {
         ...state,
         payment: action.payload,
+      };
+    case SELECT_CARD:
+      return {
+        ...state,
+        paymentCard: action.payload,
       };
     default:
       return state;

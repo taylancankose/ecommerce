@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import CreditCard from "../../components/Cards/CreditCard";
 import CreditCardModal from "../CreditCardModal";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getPayment,
+  savePayment,
+} from "../../store/actions/shoppingCartActions";
 
 function Payment({ setPaySavedCard, paySavedCard }) {
   const [modal, setModal] = useState(false);
   const { handleSubmit, register } = useForm({ mode: "all" });
-  const sendForm = (data) => {
+
+  const dispatch = useDispatch();
+  const cards = useSelector((state) => state.shoppingCartReducer.payment);
+  useEffect(() => {
+    dispatch(getPayment());
+  }, []);
+  console.log(cards);
+
+  const handleAddCard = (data) => {
+    dispatch(savePayment(data));
     console.log(data);
   };
   return (
@@ -27,8 +41,9 @@ function Payment({ setPaySavedCard, paySavedCard }) {
                 </div>
               </div>
             </div>
-            <CreditCard />
-            <CreditCard />
+            {cards.map((card, i) => (
+              <CreditCard key={i} card={card} />
+            ))}
           </div>
         ) : (
           <div className="lg:mt-0 w-11/12 2xl:w-7/12">
@@ -131,7 +146,7 @@ function Payment({ setPaySavedCard, paySavedCard }) {
           onClose={() => setModal(false)}
           handleSubmit={handleSubmit}
           register={register}
-          sendForm={sendForm}
+          sendForm={handleAddCard}
         />
       )}
     </div>

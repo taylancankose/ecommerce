@@ -1,6 +1,6 @@
 import { API } from "../api/useAxios";
 
-export const fetchAddresses = async (token) => {
+export const fetchAddresses = async () => {
   try {
     const response = await API.get("/user/address");
     return await response?.data;
@@ -49,9 +49,45 @@ export const changeAddress = async (data) => {
 
 export const deleteAddresses = async (id) => {
   try {
-    await API.delete(`/user/address/${id}`);
+    const response = await API.delete(`/user/address/${id}`);
+    return await response.data;
   } catch (error) {
     console.error("deleteAddresses error:", error);
+    throw error.message;
+  }
+};
+
+export const fetchPayments = async () => {
+  try {
+    const response = await API.get("/user/card");
+    return await response.data;
+  } catch (error) {
+    console.error("fetchCarts error:", error);
+    throw error.message;
+  }
+};
+
+export const addPayments = async (data) => {
+  try {
+    const response = await API.post("/user/card", {
+      card_no: data.card_no,
+      expire_month: data.expire_month,
+      expire_year: data.expire_year,
+      name_on_card: data.name_on_card,
+    });
+    return await response.data;
+  } catch (error) {
+    console.error("fetchCarts error:", error);
+    throw error.message;
+  }
+};
+
+export const deletePayment = async (id) => {
+  try {
+    const response = await API.delete("/user/card/" + id);
+    return await response.data;
+  } catch (error) {
+    console.error("deletePayment error:", error);
     throw error.message;
   }
 };
