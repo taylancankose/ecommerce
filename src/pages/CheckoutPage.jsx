@@ -9,10 +9,9 @@ import {
   setShippingAddress,
 } from "../store/actions/shoppingCartActions";
 import Modal from "../layout/Modal";
-import AddressContainer from "../layout/Shop/AddressContainer";
-import ReceiptAddressContainer from "../layout/Shop/ReceiptAddressContainer";
 import AddressCard from "../components/Cards/AddressCard";
-import { saveAddresses } from "../fetch/cart";
+import EditModal from "../layout/EditModal";
+import Payment from "../layout/Payment";
 
 function CheckoutPage() {
   const dispatch = useDispatch();
@@ -24,25 +23,15 @@ function CheckoutPage() {
     (state) => state.shoppingCartReducer.newAddress
   );
 
-  const shippingAddress = useSelector(
-    (state) => state.shoppingCartReducer.shippingAddress
-  );
   const address = useSelector((state) => state.shoppingCartReducer.address);
-  const receiptAddress = useSelector(
-    (state) => state.shoppingCartReducer.receiptAddress
-  );
+
   const user = useSelector((state) => state.clientReducer.user);
   const onClose = () => setModal(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({ mode: "all" });
+  const { register, handleSubmit } = useForm({ mode: "all" });
 
   const sendForm = async (data) => {
     dispatch(postAddresses(data));
-    console.log(data);
     setModal(false);
   };
 
@@ -51,19 +40,17 @@ function CheckoutPage() {
   }, [newAddress]);
 
   const handleSelectAddress = (data) => {
-    if (sameAddress) {
-      dispatch(setShippingAddress(data.shippingAddress));
-      dispatch(setReceiptAddress(data.shippingAddress));
-    } else {
-      dispatch(setShippingAddress(data.shippingAddress));
-      dispatch(setReceiptAddress(data.billingAddress));
-    }
-    console.log(data);
+    dispatch(setShippingAddress(data));
   };
+
+  const handleSelectRecAddress = (data) => {
+    dispatch(setReceiptAddress(data));
+  };
+
   return (
-    <div className="p-6 lg:flex font-montserrat ">
+    <div className="p-6 lg:flex font-montserrat justify-evenly">
       {/* Left */}
-      <div className="w-full lg:w-4/5 xl:w-3/5 m-auto lg:m-0">
+      <div className="w-full lg:w-4/5 xl:w-3/5 m-auto lg:m-0 ">
         {/* Top Nav */}
         <div className="lg:mx-12">
           <div className="flex items-center lg:justify-between w-full lg:w-4/5 ">
@@ -103,18 +90,26 @@ function CheckoutPage() {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold ">{active}</h3>
             <div className="flex items-center justify-center gap-2">
-              <input
-                onChange={() => setSameAddress(!sameAddress)}
-                defaultChecked
-                type="checkbox"
-                id="receiptAd"
-              />
-              <label
-                className="text-sm font-medium text-secondTextColor"
-                htmlFor="receiptAd"
-              >
-                Send my receipt to same address.
-              </label>
+              {active === "Address" ? (
+                <>
+                  <input
+                    onChange={() => setSameAddress(!sameAddress)}
+                    defaultChecked
+                    type="checkbox"
+                    id="receiptAd"
+                  />
+                  <label
+                    className="text-sm font-medium text-secondTextColor"
+                    htmlFor="receiptAd"
+                  >
+                    Send my receipt to same address.
+                  </label>
+                </>
+              ) : (
+                <p className="text-sm underline text-secondTextColor font-medium cursor-pointer">
+                  Pay with saved cards
+                </p>
+              )}
             </div>
           </div>
           {active === "Address" ? (
@@ -135,7 +130,13 @@ function CheckoutPage() {
                 onSubmit={handleSubmit(handleSelectAddress)}
                 className="flex gap-x-8 flex-wrap lg:flex-nowrap"
               >
-                <fieldset className="w-full md:w-6/12">
+                <fieldset
+                  className={`${
+                    !sameAddress
+                      ? " w-full md:w-6/12"
+                      : "flex w-full justify-between flex-wrap"
+                  }`}
+                >
                   <legend>Shipping Address</legend>
                   {address.map((item) => (
                     <AddressCard
@@ -143,7 +144,8 @@ function CheckoutPage() {
                       item={item}
                       key={item.id}
                       registerLabel={"shippingAddress"}
-                      onChange={() => handleSelectAddress(item.id)}
+                      onChange={() => handleSelectAddress(item)}
+                      sameAddress={sameAddress}
                     />
                   ))}
                 </fieldset>
@@ -151,29 +153,35 @@ function CheckoutPage() {
                 {!sameAddress && (
                   <fieldset className="w-full md:w-6/12">
                     <legend>Receipt Address</legend>
-                    {address.map((item) => (
-                      <AddressCard
-                        register={register}
-                        registerLabel={"billingAddress"}
-                        item={item}
-                        key={item.id}
-                        onChange={() => handleSelectAddress(item.id)}
-                      />
-                    ))}
+                    <div className="">
+                      {address.map((item) => {
+                        return (
+                          <AddressCard
+                            register={register}
+                            registerLabel={"billingAddress"}
+                            item={item}
+                            key={item.id}
+                            onChange={() => handleSelectRecAddress(item)}
+                            sameAddress={sameAddress}
+                          />
+                        );
+                      })}
+                    </div>
                   </fieldset>
                 )}
-                <button type="submit">send</button>
               </form>
             </>
           ) : (
-            <form></form>
+            <>
+              <Payment />
+            </>
           )}
         </div>
       </div>
 
       {/* Right */}
-      <div className="xl:w-[30%] lg:w-1/5 w-3/4 m-auto">
-        <OrderSummary isPaying={true} />
+      <div className="xl:w-[30%] lg:w-1/5 w-3/4 ">
+        <OrderSummary isPaying={true} setActive={setActive} />
       </div>
 
       {modal && (

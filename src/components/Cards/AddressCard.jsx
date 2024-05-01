@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAddress } from "../../store/actions/shoppingCartActions";
+import EditModal from "../../layout/EditModal";
+import { useForm } from "react-hook-form";
 
-function AddressCard({ item, register, registerLabel, onChange }) {
+function AddressCard({ sameAddress, item, register, registerLabel, onChange }) {
   const dispatch = useDispatch();
+
   const shippingAddress = useSelector(
     (state) => state.shoppingCartReducer.shippingAddress
   );
   const receiptAddress = useSelector(
     (state) => state.shoppingCartReducer.receiptAddress
   );
+
+  const { handleSubmit } = useForm();
   return (
-    <>
+    <div className={`${sameAddress && "w-[48%]"}`}>
       <div className="flex justify-between items-center mt-5 ">
         {/* select */}
         <div className="">
           <input
             type="radio"
             {...register(registerLabel)}
-            value={item.id}
+            value={item}
             id={item.id}
             onChange={onChange}
           />
@@ -26,7 +31,12 @@ function AddressCard({ item, register, registerLabel, onChange }) {
         </div>
         {/* edit & remove */}
         <div className="flex items-center gap-x-8">
-          <p className="text-sm underline cursor-pointer">Edit</p>
+          <p
+            className="text-sm underline cursor-pointer"
+            onClick={() => setEdit(true)}
+          >
+            Edit
+          </p>
           <p
             onClick={() => dispatch(removeAddress(item.id))}
             className="text-sm underline cursor-pointer"
@@ -61,7 +71,15 @@ function AddressCard({ item, register, registerLabel, onChange }) {
           </p>
         </div>
       </div>
-    </>
+      {/* {edit && (
+        <EditModal
+          item={item}
+          onClose={() => setEdit(false)}
+          register={register}
+          handleSubmit={handleSubmit}
+        />
+      )} */}
+    </div>
   );
 }
 

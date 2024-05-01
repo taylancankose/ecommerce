@@ -4,7 +4,6 @@ import { removeAddress } from "../../store/actions/shoppingCartActions";
 
 function ReceiptAddressCard({ item, selectedAddress, handleSelectReceipt }) {
   const dispatch = useDispatch();
-  console.log(item);
   return (
     <div className="w-96" key={item.id}>
       <div className="flex justify-between mb-2">

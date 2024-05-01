@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { calculateTotalPrice } from "../../utils/calculatePrice";
 
-function OrderSummary({ isPaying = false }) {
+function OrderSummary({ isPaying = false, setActive }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(totalPrice);
   const [promo, setPromo] = useState("");
@@ -22,6 +22,10 @@ function OrderSummary({ isPaying = false }) {
   }, [cart]);
 
   const handlePromoChange = (e) => setPromo(e.target.value);
+  const handleCheck = (e) => {
+    e.preventDefault();
+    setActive("Cards");
+  };
   return (
     <div className="w-full py-12 lg:py-24">
       <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
@@ -39,27 +43,32 @@ function OrderSummary({ isPaying = false }) {
           </p>
         </div>
         <form>
-          <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
-            Promo Code
-          </label>
-          <div className="flex pb-4 w-full">
-            <div className="relative w-full ">
-              <input
-                onChange={handlePromoChange}
-                type="text"
-                className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                placeholder="xxxx xxxx xxxx"
-              />
-            </div>
-          </div>
-          <div className="flex items-center border-b border-gray-200">
-            <button
-              onClick={handleApply}
-              className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/80"
-            >
-              Apply
-            </button>
-          </div>
+          {!isPaying && (
+            <>
+              <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+                Promo Code
+              </label>
+              <div className="flex pb-4 w-full">
+                <div className="relative w-full ">
+                  <input
+                    onChange={handlePromoChange}
+                    type="text"
+                    className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
+                    placeholder="xxxx xxxx xxxx"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center border-b border-gray-200">
+                <button
+                  onClick={handleApply}
+                  className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/80"
+                >
+                  Apply
+                </button>
+              </div>
+            </>
+          )}
+
           <div className="flex items-center justify-between pt-4">
             <p className=" font-medium leading-8 text-alert">Shipping:</p>
             <p className=" font-medium leading-8 text-alert">
@@ -83,14 +92,21 @@ function OrderSummary({ isPaying = false }) {
 
           {isPaying ? (
             <button
-              type="submit"
+              onClick={handleCheck}
               className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
             >
               Checkout
             </button>
           ) : (
             <Link
-              to={`/cart/checkout/${Date.now()}`}
+              to={{
+                pathname: `/cart/checkout/${Date.now()}`,
+                state: {
+                  totalPrice,
+                  shippingPrice,
+                  discountPrice,
+                },
+              }}
               className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
             >
               Checkout

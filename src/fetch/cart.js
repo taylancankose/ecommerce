@@ -3,7 +3,6 @@ import { API } from "../api/useAxios";
 export const fetchAddresses = async (token) => {
   try {
     const response = await API.get("/user/address");
-    console.log(response);
     return await response?.data;
   } catch (error) {
     console.error("fetchAddresses error:", error);
@@ -31,7 +30,16 @@ export const saveAddresses = async (data) => {
 
 export const changeAddress = async (data) => {
   try {
-    const response = await API.put("/user/address", data);
+    const response = await API.put("/user/address", {
+      title: data.title,
+      name: data.name,
+      surname: data.surname,
+      phone: data.phone,
+      city: data.city,
+      district: data.district,
+      neighborhood: data.neighborhood,
+    });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("changeAddress error:", error);
