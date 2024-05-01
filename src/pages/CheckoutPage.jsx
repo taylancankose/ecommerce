@@ -11,12 +11,13 @@ import {
 import Modal from "../layout/Modal";
 import AddressCard from "../components/Cards/AddressCard";
 import EditModal from "../layout/EditModal";
-import Payment from "../layout/Payment";
+import Payment from "../layout/Shop/Payment";
 
 function CheckoutPage() {
   const dispatch = useDispatch();
   const [active, setActive] = useState("Address");
   const [modal, setModal] = useState(false);
+  const [paySavedCard, setPaySavedCard] = useState(false);
   const [city, setCity] = useState("");
   const [sameAddress, setSameAddress] = useState(true);
   const newAddress = useSelector(
@@ -40,6 +41,9 @@ function CheckoutPage() {
   }, [newAddress]);
 
   const handleSelectAddress = (data) => {
+    if (sameAddress) {
+      dispatch(setReceiptAddress(data));
+    }
     dispatch(setShippingAddress(data));
   };
 
@@ -106,7 +110,10 @@ function CheckoutPage() {
                   </label>
                 </>
               ) : (
-                <p className="text-sm underline text-secondTextColor font-medium cursor-pointer">
+                <p
+                  onClick={() => setPaySavedCard(true)}
+                  className="text-sm underline text-secondTextColor font-medium cursor-pointer"
+                >
                   Pay with saved cards
                 </p>
               )}
@@ -172,9 +179,10 @@ function CheckoutPage() {
               </form>
             </>
           ) : (
-            <>
-              <Payment />
-            </>
+            <Payment
+              setPaySavedCard={setPaySavedCard}
+              paySavedCard={paySavedCard}
+            />
           )}
         </div>
       </div>

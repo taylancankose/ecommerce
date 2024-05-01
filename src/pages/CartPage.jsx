@@ -83,7 +83,7 @@ function CartPage() {
 
           {/* Order Summary */}
           <div className="xl:w-[25%] lg:w-1/5 w-3/4">
-            <OrderSummary />
+            <OrderSummary navigationPath={`/cart/checkout/${Date.now()}`} />
           </div>
         </div>
       </div>

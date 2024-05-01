@@ -26,6 +26,9 @@ function AddressCard({ sameAddress, item, register, registerLabel, onChange }) {
             value={item}
             id={item.id}
             onChange={onChange}
+            checked={
+              shippingAddress.id === item.id || receiptAddress.id === item.id
+            }
           />
           <label className="ml-2 font-medium text-sm">{item?.title}</label>
         </div>

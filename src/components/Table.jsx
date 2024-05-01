@@ -5,7 +5,7 @@ function Table() {
   const location = useLocation();
   const { totalPrice, shippingPrice, discountPrice } = location.state;
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg h-full">
+    <div className="2xl:w-4/12 w-full 2xl:mt-0 mt-4 relative overflow-x-auto shadow-md sm:rounded-lg h-full">
       <table className="w-full text-sm text-left rtl:text-right">
         <thead className="text-xs text-black uppercase bg-borderGray">
           <tr>
@@ -93,10 +93,10 @@ function Table() {
               scope="row"
               className="px-6 py-4 font-medium  whitespace-nowrap text-headerColor"
             >
-              3 Months
+              6 Months
             </th>
             <td className="px-6 py-4">
-              {((totalPrice + shippingPrice - discountPrice) / 9).toFixed(2)}
+              {((totalPrice + shippingPrice - discountPrice) / 6).toFixed(2)}
             </td>
           </tr>
           <tr className="bg-bgGray border-b">
@@ -116,10 +116,10 @@ function Table() {
               scope="row"
               className="px-6 py-4 font-medium  whitespace-nowrap text-headerColor"
             >
-              3 Months
+              9 Months
             </th>
             <td className="px-6 py-4">
-              {((totalPrice + shippingPrice - discountPrice) / 6).toFixed(2)}
+              {((totalPrice + shippingPrice - discountPrice) / 9).toFixed(2)}
             </td>
           </tr>
           <tr className="bg-bgGray border-b">

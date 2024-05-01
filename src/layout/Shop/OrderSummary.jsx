@@ -3,13 +3,24 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { calculateTotalPrice } from "../../utils/calculatePrice";
 
-function OrderSummary({ isPaying = false, setActive }) {
+function OrderSummary({
+  navigationPath,
+  isPaying = false,
+  setActive,
+  isOrder = false,
+}) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(totalPrice);
   const [promo, setPromo] = useState("");
   const [shippingPrice, setShippingPrice] = useState(0);
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
-
+  const shippingAddress = useSelector(
+    (state) => state.shoppingCartReducer.shippingAddress
+  );
+  const receiptAddress = useSelector(
+    (state) => state.shoppingCartReducer.receiptAddress
+  );
+  console.log(shippingAddress.id, receiptAddress.id);
   const handleApply = (e) => {
     e.preventDefault();
     if (promo.toLowerCase().trim() === "taylan24") {
@@ -93,14 +104,19 @@ function OrderSummary({ isPaying = false, setActive }) {
           {isPaying ? (
             <button
               onClick={handleCheck}
-              className="w-full flex py-3 px-6 rounded-xl justify-center items-center text-center bg-indigo-600  font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700"
+              disabled={!shippingAddress.id || !receiptAddress.id}
+              className={`w-full flex py-3 px-6 rounded-xl justify-center items-center text-center ${
+                !shippingAddress.id || !receiptAddress.id
+                  ? "bg-muted hover:bg-lightSecontTextColor"
+                  : "bg-indigo-600 hover:bg-indigo-700"
+              }   font-semibold text-lg text-white transition-all duration-500 `}
             >
               Checkout
             </button>
           ) : (
             <Link
               to={{
-                pathname: `/cart/checkout/${Date.now()}`,
+                pathname: navigationPath,
                 state: {
                   totalPrice,
                   shippingPrice,
