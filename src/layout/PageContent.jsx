@@ -48,10 +48,10 @@ function PageContent() {
           <CartPage />
         </Route>
         <Route path="/cart/checkout/:id">
-          {token ? <CheckoutPage /> : <Redirect to="/sign-in" />}
+          {token === "null" ? <Redirect to="/sign-in" /> : <CheckoutPage />}
         </Route>
         <Route path="/order-history" exact>
-          {token ? <OrderHistory /> : <Redirect to="/sign-in" />}
+          {token === "null" ? <Redirect to="/sign-in" /> : <OrderHistory />}
         </Route>
         <Route path="/*">
           <ErrorPage />

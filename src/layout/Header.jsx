@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
-import { Link } from "react-router-dom/";
+import { Link, useHistory } from "react-router-dom/";
 import { useSelector } from "react-redux";
 import Avatar from "../components/Other/Avatar";
 import slugify from "../utils/slugify";
@@ -8,7 +8,7 @@ import slugify from "../utils/slugify";
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-
+  const history = useHistory();
   const categories = useSelector((state) => state.productReducer.categories);
   const user = useSelector((state) => state.clientReducer.user);
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
@@ -173,10 +173,13 @@ function Header() {
                   </div>
                 )}
               </div>
-              <Link to="/order-history" className="items-center hidden lg:flex">
+              <div
+                onClick={() => history.push("/order-history")}
+                className="items-center hidden lg:flex"
+              >
                 <i className="fa-solid fa-box-archive mr-2"></i>
                 <p>4</p>
-              </Link>
+              </div>
             </div>
             <button
               data-collapse-toggle="navbar-sticky"

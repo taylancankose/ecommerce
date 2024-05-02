@@ -21,6 +21,8 @@ import {
   SET_SHIPPING_ADDRESS,
   UPDATE_ADDRESS,
 } from "../types/cart/types";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   cart: [],
@@ -35,6 +37,12 @@ const initialState = {
 
   loading: false,
   error: null,
+};
+
+const cartPersistConfig = {
+  key: "cart",
+  storage: storage,
+  whitelist: ["cart"], // List of reducers to be persisted
 };
 
 const shoppingCartReducer = (state = initialState, action) => {
@@ -156,4 +164,4 @@ const shoppingCartReducer = (state = initialState, action) => {
   }
 };
 
-export default shoppingCartReducer;
+export default persistReducer(cartPersistConfig, shoppingCartReducer);

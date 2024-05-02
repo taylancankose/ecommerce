@@ -16,6 +16,8 @@ import {
 function App() {
   const token = JSON.parse(localStorage.getItem("credentials"));
   const user = useSelector((state) => state.clientReducer.user);
+  const categories = useSelector((state) => state.productReducer.categories);
+  const products = useSelector((state) => state.clientReducer.productList);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,12 +36,14 @@ function App() {
       if (!user?.name) localStorage.removeItem("credentials");
     }
   }, []);
+
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts());
     dispatch(getOrderHistory());
     dispatch(getAddresses());
   }, []);
+
   return (
     <div className="">
       <Header />

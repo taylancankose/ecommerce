@@ -17,7 +17,9 @@ export const handleSignIn = async (data) => {
       email: data.email,
       password: data.password,
     });
-    return await response.data;
+    const user = await response.data;
+    localStorage.setItem("credentials", JSON.stringify(user.token));
+    return user;
   } catch (error) {
     console.log(error);
     toast.error(error, {

@@ -4,41 +4,39 @@ import SignInForm from "../layout/SignIn/SignInForm";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { handleLogin } from "../store/actions/clientActions";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function SignInPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [rememberMe, setRememberMe] = useState(false);
   const user = useSelector((state) => state.clientReducer.user);
+  const loading = useSelector((state) => state.clientReducer.loading);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ mode: "all" });
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
+
+  const onSubmit = (data) => {
     try {
-      await dispatch(handleLogin(data));
+      dispatch(handleLogin(data));
+      if (rememberMe && user?.token) {
+        localStorage.setItem("credentials", JSON.stringify(user?.token));
+        history.push("/");
+      }
     } catch (error) {
-      toast.error(error, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      console.log(error);
+      toast.error("An error occurred during login.");
     }
   };
-  if (rememberMe && user?.token) {
-    localStorage.setItem("credentials", JSON.stringify(user?.token));
-    if (history.length > 1) history.goBack();
-    else history.push("/");
+
+  if (!loading) {
+    if (rememberMe && user?.token) {
+      localStorage.setItem("credentials", JSON.stringify(user?.token));
+      if (history.length > 1) history.goBack();
+      else history.push("/");
+    }
   }
 
   return (
