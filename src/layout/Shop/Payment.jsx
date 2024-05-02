@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import CreditCard from "../../components/Cards/CreditCard";
-import CreditCardModal from "../CreditCardModal";
+import CreditCardModal from "../Modals/CreditCardModal";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,11 +9,12 @@ import {
   savePayment,
 } from "../../store/actions/shoppingCartActions";
 import CardForm from "./CardForm";
+import { useLocation } from "react-router-dom/";
 
 function Payment({ setPaySavedCard, paySavedCard }) {
   const [modal, setModal] = useState(false);
   const { handleSubmit, register } = useForm({ mode: "all" });
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const cards = useSelector((state) => state.shoppingCartReducer.payment);
   useEffect(() => {
@@ -23,8 +24,8 @@ function Payment({ setPaySavedCard, paySavedCard }) {
   const handleAddCard = (data) => {
     dispatch(savePayment(data));
     setModal(false);
-    console.log(data);
   };
+
   return (
     <div className="font-montserrat">
       <div className="flex flex-wrap items-start xl:justify-between">

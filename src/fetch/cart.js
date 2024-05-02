@@ -31,7 +31,6 @@ export const saveAddresses = async (data) => {
 export const changeAddress = async (data) => {
   try {
     const response = await API.put("/user/address", data);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("changeAddress error:", error);
@@ -90,6 +89,27 @@ export const changePayment = async (data) => {
     return response.data;
   } catch (error) {
     console.error("changePayment error:", error);
+    throw error;
+  }
+};
+
+export const makeOrder = async (data) => {
+  const {
+    shippingAddress,
+    formattedTime,
+    payment_card,
+    totalPrice,
+    discountPrice,
+    shippingPrice,
+    products,
+  } = data;
+  console.log(payment_card, "api data");
+  try {
+    const response = await API.post("/order", data);
+    console.log(response, "makeOrder API");
+    return await response.data;
+  } catch (error) {
+    console.error("makeOrder error:", error);
     throw error;
   }
 };

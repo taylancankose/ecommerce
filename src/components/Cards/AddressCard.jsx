@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAddress } from "../../store/actions/shoppingCartActions";
-import EditModal from "../../layout/EditModal";
+import EditModal from "../../layout/Modals/EditModal";
 import { useForm } from "react-hook-form";
 
 function AddressCard({ sameAddress, item, register, registerLabel, onChange }) {

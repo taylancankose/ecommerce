@@ -6,9 +6,11 @@ import {
   deletePayment,
   fetchAddresses,
   fetchPayments,
+  makeOrder,
   saveAddresses,
 } from "../../fetch/cart";
 import {
+  CLEAR_CART,
   DELETE_ADDRESS,
   REMOVE_CART,
   SELECT_CARD,
@@ -17,6 +19,9 @@ import {
   SET_ADDRESS_REQUEST,
   SET_CART,
   SET_ONE_ADDRESS,
+  SET_ORDER,
+  SET_ORDER_ERROR,
+  SET_ORDER_REQUEST,
   SET_PAYMENT,
   SET_PAYMENT_ERROR,
   SET_PAYMENT_REQUEST,
@@ -44,6 +49,11 @@ export const removeCart = (productId) => ({
   payload: productId,
 });
 
+export const clearCart = (payload) => ({
+  type: CLEAR_CART,
+  payload,
+});
+
 export const setPayment = (payment) => ({
   type: SET_PAYMENT,
   payload: payment,
@@ -56,6 +66,20 @@ export const setPaymentRequest = () => ({
 export const setPaymentError = (error) => ({
   type: SET_PAYMENT_ERROR,
   payload: error,
+});
+
+export const setOrderRequest = () => ({
+  type: SET_ORDER_REQUEST,
+});
+
+export const setOrderError = (error) => ({
+  type: SET_ORDER_ERROR,
+  payload: error,
+});
+
+export const setOrder = (order) => ({
+  type: SET_ORDER,
+  payload: order,
 });
 
 export const setAddress = (address) => ({
@@ -199,6 +223,20 @@ export const editPayment = (data) => {
     } catch (error) {
       console.log(error, "address error");
       dispatch(setAddressError(error));
+    }
+  };
+};
+
+export const sendOrder = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setOrderRequest());
+      const response = await makeOrder(data);
+      console.log(response, "ACTIONS");
+      dispatch(setOrder(data));
+    } catch (error) {
+      console.log("sendORderError", error.message);
+      dispatch(setOrderError(error));
     }
   };
 };

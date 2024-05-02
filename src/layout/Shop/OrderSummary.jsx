@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
 import { calculateTotalPrice } from "../../utils/calculatePrice";
+import { clearCart, sendOrder } from "../../store/actions/shoppingCartActions";
+import { toast } from "react-toastify";
 
-function OrderSummary({
-  navigationPath,
-  isPaying = false,
-  setActive,
-  isOrder = false,
-}) {
+function OrderSummary({ navigationPath, isPaying = false, setActive, active }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(totalPrice);
   const [promo, setPromo] = useState("");
   const [shippingPrice, setShippingPrice] = useState(0);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
   const shippingAddress = useSelector(
     (state) => state.shoppingCartReducer.shippingAddress
@@ -20,7 +19,7 @@ function OrderSummary({
   const receiptAddress = useSelector(
     (state) => state.shoppingCartReducer.receiptAddress
   );
-  console.log(shippingAddress.id, receiptAddress.id);
+
   const handleApply = (e) => {
     e.preventDefault();
     if (promo.toLowerCase().trim() === "taylan24") {
@@ -33,10 +32,42 @@ function OrderSummary({
   }, [cart]);
 
   const handlePromoChange = (e) => setPromo(e.target.value);
+
+  const payment_card = useSelector(
+    (state) => state.shoppingCartReducer.paymentCard
+  );
+
+  const time = new Date();
+  const formattedTime = time.toISOString().slice(0, 16);
+
+  const products = cart.map((item) => ({
+    product_id: item.product.id,
+    count: item.count,
+    detail: item.product.description,
+  }));
+  const newObj = {
+    address_id: shippingAddress.id,
+    order_date: formattedTime,
+    card_no: payment_card.card_no,
+    card_name: payment_card.name_on_card,
+    card_expire_month: payment_card.expire_month,
+    card_expire_year: payment_card.expire_year,
+    card_ccv: 321,
+    price: Number(totalPrice + shippingPrice - discountPrice).toFixed(2),
+    products: products,
+  };
   const handleCheck = (e) => {
     e.preventDefault();
-    setActive("Cards");
+    if (active === "Cards") {
+      dispatch(sendOrder(newObj));
+      dispatch(clearCart());
+      toast.success("Order has been created successfully");
+      history.push("/");
+    } else {
+      setActive("Cards");
+    }
   };
+
   return (
     <div className="w-full py-12 lg:py-24">
       <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">

@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../components/Inputs/Input";
-import { cities, districts } from "../utils/countries";
+import Input from "../../components/Inputs/Input";
+import { cities, districts } from "../../utils/countries";
 
 function Modal({ city, handleSubmit, register, sendForm, onClose, setCity }) {
   return (

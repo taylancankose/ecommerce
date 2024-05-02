@@ -4,7 +4,7 @@ import {
   removePayment,
   selectCard,
 } from "../../store/actions/shoppingCartActions";
-import EditCreditCardModal from "../../layout/EditCreditCardModal";
+import EditCreditCardModal from "../../layout/Modals/EditCreditCardModal";
 
 function CreditCard({ card }) {
   const dispatch = useDispatch();
@@ -13,14 +13,12 @@ function CreditCard({ card }) {
   );
   const [edit, setEdit] = useState(false);
   const handleChange = () => {
-    console.log(card);
     dispatch(selectCard(card));
   };
 
   const handleRemove = () => {
     dispatch(removePayment(card?.id));
   };
-  console.log(selectedCard);
   return (
     <>
       <div class="my-3">

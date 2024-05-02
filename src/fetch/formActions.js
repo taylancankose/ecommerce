@@ -13,7 +13,10 @@ export const handleSignUp = async (data) => {
 
 export const handleSignIn = async (data) => {
   try {
-    const response = await API.post("/login", data);
+    const response = await API.post("/login", {
+      email: data.email,
+      password: data.password,
+    });
     return await response.data;
   } catch (error) {
     console.log(error);
