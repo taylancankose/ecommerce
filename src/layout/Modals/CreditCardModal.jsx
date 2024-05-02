@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../components/Inputs/Input";
+import Input from "../../components/Inputs/Input";
 
 function CreditCardModal({ handleSubmit, sendForm, onClose, register }) {
   return (

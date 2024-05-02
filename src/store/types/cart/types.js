@@ -17,3 +17,9 @@ export const SET_SHIPPING_ADDRESS = "SET_SHIPPING_ADDRESS";
 export const SET_RECEIPT_ADDRESS = "SET_RECEIPT_ADDRESS";
 
 export const SELECT_CARD = "SELECT_CARD";
+
+export const SET_ORDER = "SET_ORDER";
+export const SET_ORDER_REQUEST = "SET_ORDER_REQUEST";
+export const SET_ORDER_ERROR = "SET_ORDER_ERROR";
+
+export const CLEAR_CART = "CLEAR_CART";

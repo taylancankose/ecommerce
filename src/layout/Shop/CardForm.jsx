@@ -15,7 +15,6 @@ function CardForm() {
       [name]: value,
     });
   };
-  console.log(form);
   return (
     <div className="lg:mt-0 w-11/12 2xl:w-7/12">
       <p className="text-gray-400">

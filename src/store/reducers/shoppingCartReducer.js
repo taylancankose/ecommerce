@@ -1,4 +1,5 @@
 import {
+  CLEAR_CART,
   DELETE_ADDRESS,
   REMOVE_CART,
   SELECT_CARD,
@@ -7,6 +8,9 @@ import {
   SET_ADDRESS_REQUEST,
   SET_CART,
   SET_ONE_ADDRESS,
+  SET_ORDER,
+  SET_ORDER_ERROR,
+  SET_ORDER_REQUEST,
   SET_PAYMENT,
   SET_PAYMENT_ERROR,
   SET_PAYMENT_REQUEST,
@@ -23,6 +27,7 @@ const initialState = {
   shippingAddress: {},
   receiptAddress: {},
   paymentCard: {},
+  order: {},
 
   loading: false,
   error: null,
@@ -60,6 +65,11 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: removedCart,
       };
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
     case SET_ADDRESS:
       const addressArray = Array.isArray(action.payload)
         ? action.payload
@@ -75,6 +85,7 @@ const shoppingCartReducer = (state = initialState, action) => {
         newAddress: action.payload,
       };
     case SET_PAYMENT_ERROR:
+    case SET_ORDER_ERROR:
     case SET_ADDRESS_ERROR:
       return {
         ...state,
@@ -82,6 +93,7 @@ const shoppingCartReducer = (state = initialState, action) => {
         loading: false,
       };
     case SET_PAYMENT_REQUEST:
+    case SET_ORDER_REQUEST:
     case SET_ADDRESS_REQUEST:
       return {
         ...state,
@@ -117,6 +129,11 @@ const shoppingCartReducer = (state = initialState, action) => {
       return {
         ...state,
         payment: action.payload,
+      };
+    case SET_ORDER:
+      return {
+        ...state,
+        order: action.payload,
       };
     case SELECT_CARD:
       return {

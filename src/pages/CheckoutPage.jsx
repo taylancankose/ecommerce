@@ -8,9 +8,8 @@ import {
   setReceiptAddress,
   setShippingAddress,
 } from "../store/actions/shoppingCartActions";
-import Modal from "../layout/Modal";
+import Modal from "../layout/Modals/Modal";
 import AddressCard from "../components/Cards/AddressCard";
-import EditModal from "../layout/EditModal";
 import Payment from "../layout/Shop/Payment";
 
 function CheckoutPage() {
@@ -23,7 +22,6 @@ function CheckoutPage() {
   const newAddress = useSelector(
     (state) => state.shoppingCartReducer.newAddress
   );
-  console.log(active);
   const address = useSelector((state) => state.shoppingCartReducer.address);
   const receiptAddress = useSelector(
     (state) => state.shoppingCartReducer.receiptAddress
@@ -204,7 +202,7 @@ function CheckoutPage() {
 
       {/* Right */}
       <div className="xl:w-[30%] lg:w-1/5 w-3/4 ">
-        <OrderSummary isPaying={true} setActive={setActive} />
+        <OrderSummary isPaying={true} setActive={setActive} active={active} />
       </div>
 
       {modal && (

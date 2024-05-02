@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Input from "../components/Inputs/Input";
-import { cities, districts } from "../utils/countries";
+import Input from "../../components/Inputs/Input";
+import { cities, districts } from "../../utils/countries";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { editAddress } from "../store/actions/shoppingCartActions";
+import { editAddress } from "../../store/actions/shoppingCartActions";
 
 function EditModal({ onClose, item }) {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ function EditModal({ onClose, item }) {
     onClose();
   };
 
-  console.log(form);
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg w-2/6">

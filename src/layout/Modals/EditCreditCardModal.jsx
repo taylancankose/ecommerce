@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editPayment } from "../store/actions/shoppingCartActions";
+import { editPayment } from "../../store/actions/shoppingCartActions";
 
 function EditCreditCardModal({ onClose, item }) {
   const dispatch = useDispatch();
