@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 function AddressCard({ sameAddress, item, register, registerLabel, onChange }) {
   const dispatch = useDispatch();
-
+  const [edit, setEdit] = useState(false);
   const shippingAddress = useSelector(
     (state) => state.shoppingCartReducer.shippingAddress
   );
@@ -74,14 +74,7 @@ function AddressCard({ sameAddress, item, register, registerLabel, onChange }) {
           </p>
         </div>
       </div>
-      {/* {edit && (
-        <EditModal
-          item={item}
-          onClose={() => setEdit(false)}
-          register={register}
-          handleSubmit={handleSubmit}
-        />
-      )} */}
+      {edit && <EditModal item={item} onClose={() => setEdit(false)} />}
     </div>
   );
 }

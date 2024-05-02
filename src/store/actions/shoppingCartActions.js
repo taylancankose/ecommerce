@@ -1,6 +1,7 @@
 import {
   addPayments,
   changeAddress,
+  changePayment,
   deleteAddresses,
   deletePayment,
   fetchAddresses,
@@ -115,7 +116,7 @@ export const postAddresses = (data) => {
       dispatch(setAddressRequest());
       await saveAddresses(data);
       dispatch(setOneAddress(data));
-      getAddresses();
+      dispatch(getAddresses());
     } catch (error) {
       console.log(error, "address error");
       dispatch(setAddressError(error));
@@ -128,6 +129,7 @@ export const editAddress = (data) => {
     try {
       dispatch(setAddressRequest());
       await changeAddress(data);
+      dispatch(getAddresses());
     } catch (error) {
       console.log(error, "address error");
       dispatch(setAddressError(error));
@@ -180,6 +182,19 @@ export const removePayment = (id) => {
     try {
       dispatch(setPaymentRequest());
       await deletePayment(id);
+      dispatch(getPayment());
+    } catch (error) {
+      console.log(error, "address error");
+      dispatch(setAddressError(error));
+    }
+  };
+};
+
+export const editPayment = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setPaymentRequest());
+      await changePayment(data);
       dispatch(getPayment());
     } catch (error) {
       console.log(error, "address error");

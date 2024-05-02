@@ -117,12 +117,19 @@ function CheckoutPage() {
                     Send my receipt to same address.
                   </label>
                 </>
-              ) : (
+              ) : !paySavedCard ? (
                 <p
                   onClick={() => setPaySavedCard(true)}
                   className="text-sm underline text-secondTextColor font-medium cursor-pointer"
                 >
                   Pay with saved cards
+                </p>
+              ) : (
+                <p
+                  onClick={() => setPaySavedCard(false)}
+                  className="text-sm underline text-secondTextColor font-medium cursor-pointer"
+                >
+                  Pay with an other card
                 </p>
               )}
             </div>

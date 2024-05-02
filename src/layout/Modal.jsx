@@ -72,7 +72,7 @@ function Modal({ city, handleSubmit, register, sendForm, onClose, setCity }) {
             </div>
           </div>
           {/* City & Distinct */}
-          <div className="flex items-center justify-around my-4 w-full bg-red-300">
+          <div className="flex items-center justify-around my-4 w-full ">
             {/* City */}
             <div className="w-5/12">
               <label className="text-headerColor font-bold leading-6 tracking-[0.2px] mb-2">

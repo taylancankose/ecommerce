@@ -30,15 +30,7 @@ export const saveAddresses = async (data) => {
 
 export const changeAddress = async (data) => {
   try {
-    const response = await API.put("/user/address", {
-      title: data.title,
-      name: data.name,
-      surname: data.surname,
-      phone: data.phone,
-      city: data.city,
-      district: data.district,
-      neighborhood: data.neighborhood,
-    });
+    const response = await API.put("/user/address", data);
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -89,5 +81,15 @@ export const deletePayment = async (id) => {
   } catch (error) {
     console.error("deletePayment error:", error);
     throw error.message;
+  }
+};
+
+export const changePayment = async (data) => {
+  try {
+    const response = await API.put("/user/card", data);
+    return response.data;
+  } catch (error) {
+    console.error("changePayment error:", error);
+    throw error;
   }
 };

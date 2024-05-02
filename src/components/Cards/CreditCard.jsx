@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removePayment,
   selectCard,
 } from "../../store/actions/shoppingCartActions";
+import EditCreditCardModal from "../../layout/EditCreditCardModal";
 
 function CreditCard({ card }) {
   const dispatch = useDispatch();
   const selectedCard = useSelector(
     (state) => state.shoppingCartReducer.paymentCard
   );
-
+  const [edit, setEdit] = useState(false);
   const handleChange = () => {
     console.log(card);
     dispatch(selectCard(card));
@@ -35,7 +36,10 @@ function CreditCard({ card }) {
             <label htmlFor={card.id}>{card?.name_on_card}</label>
           </div>
           <div className="flex items-center gap-x-6">
-            <p className="mb-2 text-right text-sm underline text-secondTextColor cursor-pointer">
+            <p
+              onClick={() => setEdit(true)}
+              className="mb-2 text-right text-sm underline text-secondTextColor cursor-pointer"
+            >
               Edit
             </p>
             <p
@@ -79,6 +83,10 @@ function CreditCard({ card }) {
             </div>
           </div>
         </div>
+
+        {edit && (
+          <EditCreditCardModal item={card} onClose={() => setEdit(false)} />
+        )}
       </div>
     </>
   );
