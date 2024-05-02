@@ -20,7 +20,6 @@ function ProductDetailsCard({ selectedProduct }) {
   useEffect(() => {
     dispatch(getSingleProduct(productId));
   }, [productId]);
-  console.log(cart);
 
   const handleAddToCart = (product) => {
     const checked = true;

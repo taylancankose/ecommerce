@@ -8,10 +8,10 @@ export const useAxios = () => {
 
   if (token) {
     instance.defaults.headers.common["Authorization"] = token;
+    instance.defaults.headers.common["Content-Type"] = "application/json";
   } else {
     delete instance.defaults.headers.common["Authorization"];
   }
-
   return instance;
 };
 

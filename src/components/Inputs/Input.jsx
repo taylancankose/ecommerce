@@ -8,11 +8,12 @@ function Input({
   labelTitle,
   type,
   className,
+  defaultValue,
 }) {
   return (
     <>
       <label className="text-headerColor font-bold leading-6 tracking-[0.2px] mb-2">
-        {labelTitle}*
+        {labelTitle ? labelTitle + "*" : ""}
       </label>
       <input
         placeholder={`${placeholder}*`}
@@ -20,6 +21,7 @@ function Input({
         {...register(label, rules)}
         type={type}
         name={label}
+        defaultValue={defaultValue}
       />
     </>
   );

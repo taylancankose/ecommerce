@@ -12,8 +12,6 @@ import { useEffect } from "react";
 function App() {
   const token = JSON.parse(localStorage.getItem("credentials"));
   const user = useSelector((state) => state.clientReducer.user);
-  const categories = useSelector((state) => state.productReducer.categories);
-  console.log(categories);
 
   const dispatch = useDispatch();
   useEffect(() => {

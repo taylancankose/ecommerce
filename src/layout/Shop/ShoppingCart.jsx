@@ -13,7 +13,6 @@ function ShoppingCart({ item, handleDecrease, handleIncrease }) {
     dispatch(setCart(item.product, item.count, checked)); // Burada item.checked doğrudan değiştiriliyor
   };
 
-  console.log(item.checked);
   return (
     <div className="border border-borderGray rounded-md mt-5">
       <div className="py-1 bg-bgGray">

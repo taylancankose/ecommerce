@@ -1,30 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OrderSummary from "../layout/Shop/OrderSummary";
-import { useSelector } from "react-redux";
-import Input from "../components/Inputs/Input";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import {
+  getAddresses,
+  postAddresses,
+  setReceiptAddress,
+  setShippingAddress,
+} from "../store/actions/shoppingCartActions";
+import Modal from "../layout/Modal";
+import AddressCard from "../components/Cards/AddressCard";
+import EditModal from "../layout/EditModal";
+import Payment from "../layout/Shop/Payment";
 
 function CheckoutPage() {
+  const dispatch = useDispatch();
   const [active, setActive] = useState("Address");
   const [modal, setModal] = useState(false);
+  const [paySavedCard, setPaySavedCard] = useState(false);
+  const [city, setCity] = useState("");
+  const [sameAddress, setSameAddress] = useState(true);
+  const newAddress = useSelector(
+    (state) => state.shoppingCartReducer.newAddress
+  );
+  console.log(active);
   const address = useSelector((state) => state.shoppingCartReducer.address);
-  const payment = useSelector((state) => state.shoppingCartReducer.payment);
+  const receiptAddress = useSelector(
+    (state) => state.shoppingCartReducer.receiptAddress
+  );
+  const shippingAddress = useSelector(
+    (state) => state.shoppingCartReducer.shippingAddress
+  );
 
-  console.log(address);
+  const user = useSelector((state) => state.clientReducer.user);
   const onClose = () => setModal(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({ mode: "all" });
+  const { register, handleSubmit } = useForm({ mode: "all" });
+
+  const sendForm = async (data) => {
+    dispatch(postAddresses(data));
+    setModal(false);
+  };
+
+  useEffect(() => {
+    dispatch(getAddresses(user.token));
+  }, [newAddress]);
+
+  const handleSelectAddress = (data) => {
+    if (sameAddress) {
+      dispatch(setReceiptAddress(data));
+    }
+    dispatch(setShippingAddress(data));
+  };
+
+  const handleSelectRecAddress = (data) => {
+    dispatch(setReceiptAddress(data));
+  };
 
   return (
-    <div className="p-6 lg:flex flex-wrap font-montserrat ">
+    <div className="p-6 lg:flex font-montserrat justify-evenly">
       {/* Left */}
-      <div className="md:w-3/5 w-full m-auto lg:m-0">
+      <div className="w-full lg:w-4/5 xl:w-3/5 m-auto lg:m-0 ">
         {/* Top Nav */}
-        <div className="lg:mx-16">
+        <div className="lg:mx-12">
           <div className="flex items-center lg:justify-between w-full lg:w-4/5 ">
             <div
               onClick={() => setActive("Address")}
@@ -42,7 +80,9 @@ function CheckoutPage() {
               </div>
             </div>
             <div
-              onClick={() => setActive("Cards")}
+              onClick={() =>
+                shippingAddress.id & receiptAddress.id && setActive("Cards")
+              }
               className={`w-1/2 border border-borderGray h-24 items-center flex rounded-r-lg shadow-md cursor-pointer ${
                 active === "Cards" ? "bg-white" : "bg-bgGray"
               }`}
@@ -58,98 +98,124 @@ function CheckoutPage() {
         </div>
 
         {/* Form */}
-        <div className="lg:mx-16 my-12 border p-4 border-borderGray rounded-md shadow-sm relative">
-          <h3 className="text-xl font-bold mb-2">{active}</h3>
-          {active === "Address" ? (
-            <div className="flex flex-wrap gap-6 ">
-              {/* New Address */}
-              <div
-                onClick={() => setModal(!modal)}
-                className="mt-8 shadow-sm w-96 p-4 h-28 flex flex-col gap-y-2 justify-center items-center text-center bg-lightGray border border-borderGray rounded-md"
-              >
-                <i className="fa-solid fa-plus text-alert font-bold text-xl"></i>
-                <h4 className="text-sm font-medium text-headerColor">
-                  Add New Address
-                </h4>
-              </div>
-              {/* Address Cart */}
-              <div className="w-96 ">
-                <div className="flex justify-between mb-2">
-                  <div>
-                    <input id="address" type="radio" />
-                    <label
-                      htmlFor="address"
-                      className="ml-2 font-medium text-sm"
-                    >
-                      Ev
-                    </label>
-                  </div>
-                  <p className="text-sm underline"> Edit</p>
-                </div>
-                <div className="shadow-sm p-4 md:h-28 flex flex-col gap-y-2 justify-center bg-lightGray border border-borderGray rounded-md font-medium ">
-                  <div className="md:flex items-center justify-between w-full text-sm mb-2">
-                    <div className="my-2 md:my-0 flex items-center gap-x-2">
-                      <i class="fa-solid fa-user text-alert"></i>
-                      <p>Username</p>
-                    </div>
-                    <div className="flex items-center gap-x-2 text-sm">
-                      <i class="fa-solid fa-mobile-screen-button"></i>
-                      <p>(534) *** ** 26</p>
-                    </div>
-                  </div>
-                  <div className="mt-2 text-sm">
-                    <p>1671/1 sk. no: 10 daire: 4 Çiçek Apt</p>
-                  </div>
-                </div>
-              </div>
+        <div className="lg:mx-12  my-12 border p-4 border-borderGray rounded-md shadow-sm relative">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold ">{active}</h3>
+            <div className="flex items-center justify-center gap-2">
+              {active === "Address" ? (
+                <>
+                  <input
+                    onChange={() => setSameAddress(!sameAddress)}
+                    defaultChecked
+                    type="checkbox"
+                    id="receiptAd"
+                  />
+                  <label
+                    className="text-sm font-medium text-secondTextColor"
+                    htmlFor="receiptAd"
+                  >
+                    Send my receipt to same address.
+                  </label>
+                </>
+              ) : !paySavedCard ? (
+                <p
+                  onClick={() => setPaySavedCard(true)}
+                  className="text-sm underline text-secondTextColor font-medium cursor-pointer"
+                >
+                  Pay with saved cards
+                </p>
+              ) : (
+                <p
+                  onClick={() => setPaySavedCard(false)}
+                  className="text-sm underline text-secondTextColor font-medium cursor-pointer"
+                >
+                  Pay with an other card
+                </p>
+              )}
             </div>
+          </div>
+          {active === "Address" ? (
+            <>
+              <div>
+                {/* New Address */}
+                <div
+                  onClick={() => setModal(!modal)}
+                  className="my-8 shadow-sm w-full p-4 h-28 flex flex-col gap-y-2 justify-center items-center text-center bg-lightGray border border-borderGray rounded-md"
+                >
+                  <i className="fa-solid fa-plus text-alert font-bold text-xl"></i>
+                  <h4 className="text-sm font-medium text-headerColor">
+                    Add New Address
+                  </h4>
+                </div>
+              </div>
+              <form
+                onSubmit={handleSubmit(handleSelectAddress)}
+                className="flex gap-x-8 flex-wrap lg:flex-nowrap"
+              >
+                <fieldset
+                  className={`${
+                    !sameAddress
+                      ? " w-full md:w-6/12"
+                      : "flex w-full justify-between flex-wrap"
+                  }`}
+                >
+                  <legend>Shipping Address</legend>
+                  {address.map((item) => (
+                    <AddressCard
+                      register={register}
+                      item={item}
+                      key={item.id}
+                      registerLabel={"shippingAddress"}
+                      onChange={() => handleSelectAddress(item)}
+                      sameAddress={sameAddress}
+                    />
+                  ))}
+                </fieldset>
+
+                {!sameAddress && (
+                  <fieldset className="w-full md:w-6/12">
+                    <legend>Receipt Address</legend>
+                    <div className="">
+                      {address.map((item) => {
+                        return (
+                          <AddressCard
+                            register={register}
+                            registerLabel={"billingAddress"}
+                            item={item}
+                            key={item.id}
+                            onChange={() => handleSelectRecAddress(item)}
+                            sameAddress={sameAddress}
+                          />
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                )}
+              </form>
+            </>
           ) : (
-            <form></form>
+            <Payment
+              setPaySavedCard={setPaySavedCard}
+              paySavedCard={paySavedCard}
+            />
           )}
         </div>
       </div>
 
       {/* Right */}
-      <div className="xl:w-[30%] lg:w-1/5 w-3/4 m-auto">
-        <OrderSummary />
+      <div className="xl:w-[30%] lg:w-1/5 w-3/4 ">
+        <OrderSummary isPaying={true} setActive={setActive} />
       </div>
 
       {modal && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg w-2/6">
-            <button onClick={onClose}>Kapat</button>
-            <form>
-              <div className="flex items-center justify-around my-4">
-                <div>
-                  <Input
-                    labelTitle={"Ad"}
-                    label="name"
-                    register={register}
-                    rules={{
-                      required: "You have to enter a name",
-                    }}
-                    placeholder="Name"
-                    type={"text"}
-                    className={"h-10  px-8"}
-                  />
-                </div>
-                <div>
-                  <Input
-                    labelTitle={"Soyad"}
-                    label="surname"
-                    register={register}
-                    rules={{
-                      required: "You have to enter a surname",
-                    }}
-                    placeholder="Surname"
-                    type={"text"}
-                    className={"h-10 px-8"}
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <Modal
+          onClose={onClose}
+          register={register}
+          sendForm={sendForm}
+          setCity={setCity}
+          handleSubmit={handleSubmit}
+          city={city}
+        />
       )}
     </div>
   );
