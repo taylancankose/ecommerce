@@ -14,14 +14,11 @@ import {
 } from "./store/actions/shoppingCartActions";
 
 function App() {
-  const token = JSON.parse(localStorage.getItem("credentials"));
   const user = useSelector((state) => state.clientReducer.user);
-  const categories = useSelector((state) => state.productReducer.categories);
-  const products = useSelector((state) => state.clientReducer.productList);
-
+  console.log(user.token);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (token) {
+    if (user?.token) {
       verifyToken()
         .then((res) => {
           if (res?.name) {
