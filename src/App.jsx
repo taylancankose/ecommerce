@@ -12,6 +12,7 @@ import { useEffect } from "react";
 function App() {
   const token = JSON.parse(localStorage.getItem("credentials"));
   const user = useSelector((state) => state.clientReducer.user);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (token) {
@@ -30,10 +31,8 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    if (user) {
-      dispatch(getCategories());
-      dispatch(getProducts());
-    }
+    dispatch(getCategories());
+    dispatch(getProducts());
   }, []);
   return (
     <div className="">

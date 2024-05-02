@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom/";
+import { Switch, Route, Redirect } from "react-router-dom/";
 import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
@@ -7,8 +7,11 @@ import TeamPage from "../pages/TeamPage";
 import AboutPage from "../pages/AboutPage";
 import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
+import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 function PageContent() {
+  const token = JSON.stringify(localStorage.getItem("credentials"));
   return (
     <div>
       <Switch>
@@ -28,9 +31,6 @@ function PageContent() {
           path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
           exact
         >
-          {/*
-          <Route path="/product/:id">
-           */}
           <ProductDetailPage />
         </Route>
         <Route path="/contact">
@@ -41,6 +41,12 @@ function PageContent() {
         </Route>
         <Route path="/about-us">
           <AboutPage />
+        </Route>
+        <Route path="/cart" exact>
+          <CartPage />
+        </Route>
+        <Route path="/cart/checkout/:id">
+          {token ? <CheckoutPage /> : <Redirect to="/sign-in" />}
         </Route>
       </Switch>
     </div>

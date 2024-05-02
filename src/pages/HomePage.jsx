@@ -7,8 +7,11 @@ import carouselHeader from "../assets/bg-header-man.png";
 import FluidContainer from "../layout/Home/FluidContainer";
 import FeaturedBlog from "../layout/Home/FeaturedBlog";
 import Categories from "../layout/Home/Categories";
+import { useSelector } from "react-redux";
 
 function HomePage() {
+  const cart = useSelector((state) => state.clientReducer.cart);
+  console.log(cart);
   return (
     <div className="overflow-x-hidden">
       <Slider

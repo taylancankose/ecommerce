@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function Categories() {
   const categories = useSelector((state) => state.productReducer.categories);
   const [activeCategory, setActiveCategory] = useState("e");
-  const sortedCats = categories.sort((a, b) => b.rating - a.rating);
+  const sortedCats = categories?.sort((a, b) => b.rating - a.rating);
   const catsByGender = sortedCats
     .filter((cat) => cat.gender === activeCategory)
     .slice(0, 5);
