@@ -5,6 +5,7 @@ import {
   deleteAddresses,
   deletePayment,
   fetchAddresses,
+  fetchOrders,
   fetchPayments,
   makeOrder,
   saveAddresses,
@@ -21,6 +22,9 @@ import {
   SET_ONE_ADDRESS,
   SET_ORDER,
   SET_ORDER_ERROR,
+  SET_ORDER_HISTORY,
+  SET_ORDER_HISTORY_ERROR,
+  SET_ORDER_HISTORY_REQUEST,
   SET_ORDER_REQUEST,
   SET_PAYMENT,
   SET_PAYMENT_ERROR,
@@ -119,6 +123,20 @@ export const setAddressRequest = () => ({
 export const setAddressError = (error) => ({
   type: SET_ADDRESS_ERROR,
   payload: error,
+});
+
+export const setOrderHistoryRequest = () => ({
+  type: SET_ORDER_HISTORY_REQUEST,
+});
+
+export const setOrderHistoryError = (error) => ({
+  type: SET_ORDER_HISTORY_ERROR,
+  payload: error,
+});
+
+export const setOrderHistory = (orderHistory) => ({
+  type: SET_ORDER_HISTORY,
+  payload: orderHistory,
 });
 
 export const getAddresses = () => {
@@ -237,6 +255,19 @@ export const sendOrder = (data) => {
     } catch (error) {
       console.log("sendORderError", error.message);
       dispatch(setOrderError(error));
+    }
+  };
+};
+
+export const getOrderHistory = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(setOrderHistoryRequest());
+      const response = await fetchOrders();
+      dispatch(setOrderHistory(response));
+    } catch (error) {
+      dispatch(setOrderHistoryError(error));
+      console.log(error.message, "getorderHistory");
     }
   };
 };

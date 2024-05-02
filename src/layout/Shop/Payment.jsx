@@ -32,10 +32,10 @@ function Payment({ setPaySavedCard, paySavedCard }) {
         {paySavedCard ? (
           <div className="lg:mt-0 w-11/12 2xl:w-7/12 flex justify-between flex-wrap">
             {/* Add New Card */}
-            <div class="my-10">
+            <div className="my-10">
               <div
                 onClick={() => setModal(true)}
-                class=" cursor-pointer h-48 w-80 rounded-xl bg-gradient-to-r from-gray-500 to-gray-400 text-white shadow-2xl transition-transform sm:h-48/ sm:w-80 sm:hover:scale-105"
+                className=" cursor-pointer h-48 w-80 rounded-xl bg-gradient-to-r from-gray-500 to-gray-400 text-white shadow-2xl transition-transform sm:h-48/ sm:w-80 sm:hover:scale-105"
               >
                 <div className="flex flex-col gap-y-4 justify-center items-center w-full h-full">
                   <i className="fa-solid fa-plus font-bold text-xl"></i>

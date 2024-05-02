@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import { useEffect } from "react";
+import {
+  getAddresses,
+  getOrderHistory,
+} from "./store/actions/shoppingCartActions";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("credentials"));
@@ -33,6 +37,8 @@ function App() {
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getProducts());
+    dispatch(getOrderHistory());
+    dispatch(getAddresses());
   }, []);
   return (
     <div className="">

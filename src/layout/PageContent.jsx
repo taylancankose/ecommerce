@@ -9,6 +9,8 @@ import SignUpPage from "../pages/SignUpPage";
 import SignInPage from "../pages/SignInPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import OrderHistory from "../pages/OrderHistory";
+import ErrorPage from "../pages/ErrorPage";
 
 function PageContent() {
   const token = JSON.stringify(localStorage.getItem("credentials"));
@@ -47,6 +49,12 @@ function PageContent() {
         </Route>
         <Route path="/cart/checkout/:id">
           {token ? <CheckoutPage /> : <Redirect to="/sign-in" />}
+        </Route>
+        <Route path="/order-history" exact>
+          {token ? <OrderHistory /> : <Redirect to="/sign-in" />}
+        </Route>
+        <Route path="/*">
+          <ErrorPage />
         </Route>
       </Switch>
     </div>

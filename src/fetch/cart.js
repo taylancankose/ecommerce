@@ -94,22 +94,22 @@ export const changePayment = async (data) => {
 };
 
 export const makeOrder = async (data) => {
-  const {
-    shippingAddress,
-    formattedTime,
-    payment_card,
-    totalPrice,
-    discountPrice,
-    shippingPrice,
-    products,
-  } = data;
-  console.log(payment_card, "api data");
   try {
     const response = await API.post("/order", data);
     console.log(response, "makeOrder API");
     return await response.data;
   } catch (error) {
     console.error("makeOrder error:", error);
+    throw error;
+  }
+};
+
+export const fetchOrders = async () => {
+  try {
+    const response = await API.get("/order");
+    return await response.data;
+  } catch (error) {
+    console.error("fetchOrders error:", error);
     throw error;
   }
 };
