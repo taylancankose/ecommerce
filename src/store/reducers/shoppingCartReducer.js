@@ -10,6 +10,9 @@ import {
   SET_ONE_ADDRESS,
   SET_ORDER,
   SET_ORDER_ERROR,
+  SET_ORDER_HISTORY,
+  SET_ORDER_HISTORY_ERROR,
+  SET_ORDER_HISTORY_REQUEST,
   SET_ORDER_REQUEST,
   SET_PAYMENT,
   SET_PAYMENT_ERROR,
@@ -18,6 +21,8 @@ import {
   SET_SHIPPING_ADDRESS,
   UPDATE_ADDRESS,
 } from "../types/cart/types";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   cart: [],
@@ -28,9 +33,16 @@ const initialState = {
   receiptAddress: {},
   paymentCard: {},
   order: {},
+  orderHistory: [],
 
   loading: false,
   error: null,
+};
+
+const cartPersistConfig = {
+  key: "cart",
+  storage: storage,
+  whitelist: ["cart"], // List of reducers to be persisted
 };
 
 const shoppingCartReducer = (state = initialState, action) => {
@@ -84,6 +96,7 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         newAddress: action.payload,
       };
+    case SET_ORDER_HISTORY_ERROR:
     case SET_PAYMENT_ERROR:
     case SET_ORDER_ERROR:
     case SET_ADDRESS_ERROR:
@@ -92,6 +105,7 @@ const shoppingCartReducer = (state = initialState, action) => {
         error: action.error,
         loading: false,
       };
+    case SET_ORDER_HISTORY_REQUEST:
     case SET_PAYMENT_REQUEST:
     case SET_ORDER_REQUEST:
     case SET_ADDRESS_REQUEST:
@@ -140,9 +154,14 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         paymentCard: action.payload,
       };
+    case SET_ORDER_HISTORY:
+      return {
+        ...state,
+        orderHistory: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default shoppingCartReducer;
+export default persistReducer(cartPersistConfig, shoppingCartReducer);

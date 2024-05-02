@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const useAxios = () => {
-  const token = JSON.parse(localStorage.getItem("credentials"));
+  const token = JSON.parse(localStorage.getItem("credentials")) || null;
+  console.log(token, typeof token);
   const instance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
   });
@@ -12,6 +13,7 @@ export const useAxios = () => {
   } else {
     delete instance.defaults.headers.common["Authorization"];
   }
+
   return instance;
 };
 
