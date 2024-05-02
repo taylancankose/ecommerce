@@ -41,7 +41,7 @@ function CheckoutPage() {
   };
 
   useEffect(() => {
-    dispatch(getAddresses(user.token));
+    dispatch(getAddresses());
   }, [newAddress]);
 
   const handleSelectAddress = (data) => {
