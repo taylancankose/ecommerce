@@ -7,6 +7,7 @@ import {
   SET_USER,
   SET_USER_REQUEST,
   SET_USER_ERROR,
+  LOGOUT_USER,
 } from "../types/client/types";
 
 const initialState = {
@@ -51,6 +52,11 @@ const clientReducer = (state = initialState, action) => {
       return {
         ...state,
         language: action.payload,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {},
       };
     case SET_THEME:
       return {

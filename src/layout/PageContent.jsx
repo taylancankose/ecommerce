@@ -11,6 +11,7 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import OrderHistory from "../pages/OrderHistory";
 import ErrorPage from "../pages/ErrorPage";
+import OrderSuccess from "../pages/OrderSuccess";
 
 function PageContent() {
   const token = JSON.stringify(localStorage.getItem("credentials"));
@@ -52,6 +53,9 @@ function PageContent() {
         </Route>
         <Route path="/order-history" exact>
           {token === "null" ? <Redirect to="/sign-in" /> : <OrderHistory />}
+        </Route>
+        <Route path="/order-success/:id" exact>
+          {token === "null" ? <Redirect to="/sign-in" /> : <OrderSuccess />}
         </Route>
         <Route path="/*">
           <ErrorPage />

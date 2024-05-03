@@ -62,7 +62,11 @@ function OrderSummary({ navigationPath, isPaying = false, setActive, active }) {
       dispatch(sendOrder(newObj));
       dispatch(clearCart());
       toast.success("Order has been created successfully");
-      history.push("/");
+      const generateOrderNum = `S${(Math.random() + 1)
+        .toString(36)
+        .substring(7)
+        .toUpperCase()}T`;
+      history.push(`/order-success/${generateOrderNum}`);
     } else {
       setActive("Cards");
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../../store/actions/productActions";
 
-const Dropdown = ({ optionD, setOptionD, options, type }) => {
+const Dropdown = ({ updateURL, optionD, setOptionD, options, type }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.productReducer.filter);
@@ -25,8 +25,11 @@ const Dropdown = ({ optionD, setOptionD, options, type }) => {
     } else if (value === "Price High To Low") {
       sortValue = "price:desc";
       setOptionD("Price High To Low");
+    } else {
+      setOptionD("Popularity");
     }
     dispatch(setSort(sortValue));
+    updateURL();
   };
 
   useEffect(() => {

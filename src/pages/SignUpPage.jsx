@@ -62,18 +62,7 @@ function SignUpPage() {
 
         const res = await handleSignUp(newData);
         toast.success(
-          "You need to click link in email to activate your account!",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          }
+          "You need to click link in email to activate your account!"
         );
         history.goBack();
       } catch (error) {
@@ -104,7 +93,7 @@ function SignUpPage() {
         <div className="hidden lg:flex md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
             src="https://i.ibb.co/1ZcjrnG/stylish-woman-with-shopping-bags.jpg"
-            className="object-cover rounded-tl-2xl rounded-bl-xl md:h-[948px] xl:h-[911px]"
+            className="object-cover rounded-tl-2xl rounded-bl-xl md:h-[948px] xl:h-[911px] h-full"
           />
         </div>
         <div className="w-full h-full bg-white rounded-tl-2xl rounded-bl-2xl lg:rounded-tl-none lg:rounded-bl-none rounded-tr-2xl rounded-br-2xl items-center justify-center flex flex-col px-10 lg:px-0">

@@ -6,3 +6,4 @@ export const SET_ROLES_ERROR = "SET_ROLES_ERROR";
 export const SET_ROLES_REQUEST = "SET_ROLES_REQUEST";
 export const SET_THEME = "SET_THEME";
 export const SET_LANGUAGE = "SET_LANGUAGE";
+export const LOGOUT_USER = "LOGOUT_USER";

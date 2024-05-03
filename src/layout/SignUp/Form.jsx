@@ -15,11 +15,11 @@ function Form({ register, errors, role_id }) {
         placeholder="Full Name"
         type="text"
       />
-      {errors.name && (
+      {
         <p className="text-error text-xs -mt-4 mb-2 font-medium">
-          {errors.name.message}
+          {errors.name && errors.name.message}
         </p>
-      )}
+      }
       <Input
         labelTitle={"Email"}
         label="email"

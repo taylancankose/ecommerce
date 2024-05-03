@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo-no-bg.png";
 import { Link, useHistory } from "react-router-dom/";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../components/Other/Avatar";
 import slugify from "../utils/slugify";
+import { handleLogout } from "../store/actions/clientActions";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
   const categories = useSelector((state) => state.productReducer.categories);
   const user = useSelector((state) => state.clientReducer.user);
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
@@ -18,7 +21,11 @@ function Header() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
+  console.log(openProfile);
+  const logout = () => {
+    localStorage.removeItem("credentials");
+    dispatch(handleLogout());
+  };
   return (
     <>
       {/* Navbar Slogan */}
@@ -69,11 +76,64 @@ function Header() {
           {/* Cart */}
           <div className="flex lg:w-7/12 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex lg:mr-8 mr-0 w-full justify-end items-center text-black lg:text-primary tracking-widest">
-              <div className="hidden lg:flex items-center lg:mr-6 mr-4">
+              <div className="hidden lg:flex items-center lg:mr-6 mr-4 relative">
                 {user?.email ? (
                   <>
-                    <Avatar />
-                    <p className="font-bold">{user?.name}</p>
+                    <button
+                      class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full  md:me-0 "
+                      type="button"
+                      onClick={() => setOpenProfile(!openProfile)}
+                    >
+                      <span class="sr-only">Open user menu</span>
+                      <Avatar />
+                      <p className="font-bold text-primary ml-2 items-center text-base">
+                        {user?.name}
+                      </p>
+                      <svg
+                        class="w-2.5 h-2.5 ms-3"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 10 6"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m1 1 4 4 4-4"
+                        />
+                      </svg>
+                    </button>
+
+                    {openProfile && (
+                      <div class="z-[200] shadow-lg shodow absolute top-10 right-0 bg-white text-headerColor p-4 shadow-b-2 shadow-t-[12px] shadow-spread-2">
+                        <div class="px-4 py-3 text-sm  ">
+                          <div class="font-medium ">User</div>
+                          <div class="truncate">{user?.email}</div>
+                        </div>
+                        <div
+                          onClick={() => {
+                            history.push("/order-history");
+                            setOpenProfile(false);
+                          }}
+                          className="px-4 py-2 items-center flex hover:bg-gray-100 cursor-pointer"
+                        >
+                          <i className="block fa-solid fa-box-archive mr-2"></i>
+                          <p className="block ">
+                            Orders: {orderHistory.length}
+                          </p>
+                        </div>
+                        <div class="py-2">
+                          <button
+                            onClick={logout}
+                            class="block px-4 py-3 text-sm  hover:bg-gray-100   "
+                          >
+                            Sign out
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </>
                 ) : (
                   <>
@@ -174,13 +234,6 @@ function Header() {
                     </div>
                   </div>
                 )}
-              </div>
-              <div
-                onClick={() => history.push("/order-history")}
-                className="items-center hidden lg:flex"
-              >
-                <i className="fa-solid fa-box-archive mr-2"></i>
-                <p>{orderHistory.length}</p>
               </div>
             </div>
             <button

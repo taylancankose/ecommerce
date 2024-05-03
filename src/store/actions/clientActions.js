@@ -1,6 +1,7 @@
 import { handleSignIn } from "../../fetch/formActions";
 import { getRoles } from "../../fetch/role";
 import {
+  LOGOUT_USER,
   SET_LANGUAGE,
   SET_ROLES,
   SET_ROLES_ERROR,
@@ -47,6 +48,11 @@ export const setRolesError = (error) => ({
 
 export const setRolesRequest = () => ({
   type: SET_ROLES_REQUEST,
+});
+
+export const handleLogout = (payload) => ({
+  type: LOGOUT_USER,
+  payload: payload,
 });
 
 export const getUserRoles = () => {

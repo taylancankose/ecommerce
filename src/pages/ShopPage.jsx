@@ -3,7 +3,7 @@ import CategoryCard from "../components/Cards/CategoryCard";
 import ProductCard from "../components/Cards/ProductCard";
 import Dropdown from "../components/Other/DropDown";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom/";
+import { useLocation, useParams, useHistory } from "react-router-dom/";
 import {
   getProducts,
   setFilter,
@@ -14,6 +14,7 @@ import Pagination from "../components/Other/Pagination";
 function ShopPage() {
   const location = useLocation();
   const params = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   const gender = location.state;
   const products = useSelector((state) => state.productReducer.productList);
@@ -26,9 +27,26 @@ function ShopPage() {
   const offset = useSelector((state) => state.productReducer.offset);
   const limit = useSelector((state) => state.productReducer.limit);
   const [currentPage, setCurrentPage] = useState(1); // Current page state
-
   const { categoryId } = params;
   const page = Math.ceil(Number(total / limit));
+
+  const updateURL = () => {
+    const queryParams = new URLSearchParams();
+
+    // Filtreleri ve diğer parametreleri URL'ye ekleyin
+    queryParams.append("categoryId", categoryId);
+    queryParams.append("filter", filter);
+    queryParams.append("sort", sort);
+    queryParams.append("limit", limit);
+    queryParams.append("offset", offset);
+
+    // URL'yi güncelleyin
+    history.push({
+      pathname: location.pathname,
+      search: queryParams.toString(),
+      state: location.state,
+    });
+  };
 
   const handlePaginate = (newPage) => {
     if (newPage === "first") {
@@ -56,14 +74,21 @@ function ShopPage() {
       top: 0,
       behavior: "smooth", // Animasyonlu bir şekilde gitmek için
     });
+    updateURL();
   };
   useEffect(() => {
     dispatch(getProducts(categoryId, filter, sort, limit, offset));
+    updateURL();
   }, [categoryId, filter, limit, offset]);
 
   const handleFilter = () => {
     dispatch(setOffset(0));
-    dispatch(getProducts(categoryId, filter, sort, limit, 0));
+    if (optionD === "Popularity") {
+      dispatch(getProducts(categoryId, "", null, 25, 0));
+    } else {
+      dispatch(getProducts(categoryId, filter, sort, limit, 0));
+    }
+    updateURL();
   };
 
   const handleChange = (e) => {
@@ -71,6 +96,7 @@ function ShopPage() {
     dispatch(setFilter(e.target.value));
     // dispatch(setSort("Popularity"));
     setOptionD("Popularity");
+    updateURL();
   };
 
   return (
@@ -103,31 +129,43 @@ function ShopPage() {
           )}
         </div>
       </div>
+
       {/* Products */}
       <div className="p-4 bg-white">
         <div className="md:mx-4 xl:mx-24 mt-4">
           <div className="justify-center flex flex-col md:flex-row md:justify-between items-center">
-            <h6 className="font-bold text-secondTextColor text-sm leading-6 decoration-[0.2px] mb-4 md:mb-0">
-              Showing all {products?.length} results
-            </h6>
-            {/* Views */}
-            <div className="flex items-center mb-4 md:mb-0">
-              <h6 className="font-bold text-secondTextColor text-sm leading-6 decoration-[0.2px] mr-4">
-                Views:
+            <div className="">
+              <h6 className="font-bold text-secondTextColor text-sm leading-6 decoration-[0.2px] mb-4 md:mb-0">
+                Showing {products?.length} from {total} results
               </h6>
-              <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
-                <i className="fa-brands fa-microsoft text-headerColor"></i>
-              </div>
-              <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
-                <i className="fa-solid fa-list text-headerColor"></i>
+              {/* Views */}
+              <div className="flex items-center mb-4 md:mb-0 mt-4">
+                <h6 className="font-bold text-secondTextColor text-sm leading-6 decoration-[0.2px] mr-4">
+                  Views:
+                </h6>
+                <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
+                  <i className="fa-brands fa-microsoft text-headerColor"></i>
+                </div>
+                <div className="items-center justify-center flex border border-lightGray rounded-md w-10 h-10 mr-4">
+                  <i className="fa-solid fa-list text-headerColor"></i>
+                </div>
               </div>
             </div>
+            {/* Input */}
+            <div className="w-2/5 justify-center flex m-auto ">
+              <input
+                onChange={handleChange}
+                placeholder="Search the product"
+                className=" bg-dropDownGray w-full py-4 m-auto pl-4 border-borderGray border rounded-md "
+              />
+            </div>
             {/* Filter */}
-            <div className="flex items-center">
+            <div className="flex items-center ">
               {/* Dropdown */}
               <Dropdown
                 optionD={optionD}
                 setOptionD={setOptionD}
+                updateURL={updateURL}
                 options={[
                   "Popularity",
                   "Rating High To Low",
@@ -144,16 +182,9 @@ function ShopPage() {
               </button>
             </div>
           </div>
-          <div className="py-6">
-            <input
-              onChange={handleChange}
-              placeholder="Search the product"
-              className=" bg-dropDownGray w-1/2 py-4 m-auto pl-4 border-borderGray border rounded-md "
-            />
-          </div>
         </div>
-        {/* Results */}
 
+        {/* Results */}
         <div className="flex items-center justify-center lg:justify-between md:mx-24 flex-wrap pb-6">
           {products?.map((product) =>
             loading ? (
@@ -167,7 +198,6 @@ function ShopPage() {
             )
           )}
         </div>
-
         <Pagination
           currentPage={currentPage}
           page={page}

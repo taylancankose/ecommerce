@@ -11,7 +11,7 @@ function Input({
   defaultValue,
 }) {
   return (
-    <>
+    <div className="h-18">
       <label className="text-headerColor font-bold leading-6 tracking-[0.2px] mb-2">
         {labelTitle ? labelTitle + "*" : ""}
       </label>
@@ -23,7 +23,7 @@ function Input({
         name={label}
         defaultValue={defaultValue}
       />
-    </>
+    </div>
   );
 }
 
