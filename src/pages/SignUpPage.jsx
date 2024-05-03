@@ -61,7 +61,7 @@ function SignUpPage() {
         }
 
         const res = await handleSignUp(newData);
-        toast.warn(
+        toast.success(
           "You need to click link in email to activate your account!",
           {
             position: "top-right",

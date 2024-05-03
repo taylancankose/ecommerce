@@ -12,7 +12,9 @@ function Header() {
   const categories = useSelector((state) => state.productReducer.categories);
   const user = useSelector((state) => state.clientReducer.user);
   const cart = useSelector((state) => state.shoppingCartReducer.cart);
-
+  const orderHistory = useSelector(
+    (state) => state.shoppingCartReducer.orderHistory
+  );
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -178,7 +180,7 @@ function Header() {
                 className="items-center hidden lg:flex"
               >
                 <i className="fa-solid fa-box-archive mr-2"></i>
-                <p>4</p>
+                <p>{orderHistory.length}</p>
               </div>
             </div>
             <button
@@ -207,13 +209,13 @@ function Header() {
             </button>
           </div>
           {/* List */}
-          <div className="w-full md:w-8/12 md:flex lg:w-4/12 md:order-1 ">
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:space-x-4 xl:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
+          <div className="w-full md:w-8/12 md:flex lg:w-4/12 md:order-1">
+            <ul className="flex gap-y-2 lg:gap-y-0 flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:space-x-4 xl:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
               {/* Home */}
               <li>
                 <Link
                   to="/"
-                  className="block py-2 px-3 rounded text-gray-900"
+                  className="block py-2 px-3 rounded text-gray-900 text-2xl leading-6 md:text-base"
                   aria-current="page"
                 >
                   Home
@@ -221,7 +223,7 @@ function Header() {
               </li>
               {/* Shop Dropdown */}
               <li className="z-20">
-                <div className="block py-2 px-3 text-gray-900 rounded ">
+                <div className="block py-2 px-3 text-gray-900 rounded text-2xl leading-6 md:text-base">
                   <div className="relative">
                     <button
                       onClick={toggleDropdown}
@@ -280,34 +282,37 @@ function Header() {
                 </div>
               </li>
               {/* About */}
-              <li>
+              <li className="relative">
                 <Link
                   to="/about-us"
-                  className="block py-2 px-3 text-gray-900 rounded "
+                  className="block py-2 px-3 text-gray-900 rounded text-2xl leading-6 md:text-base z-10"
                 >
                   About
                 </Link>
               </li>
               {/* Blog */}
-              <li>
-                <a href="#" className="block py-2 px-3 text-gray-900 rounded ">
+              <li className="relative">
+                <a
+                  href="#"
+                  className="block py-2 px-3 text-gray-900 rounded text-2xl leading-6 md:text-base z-10"
+                >
                   Blog
                 </a>
               </li>
               {/* Contact */}
-              <li>
+              <li className="relative">
                 <Link
                   to="/contact"
-                  className="block py-2 px-3 text-gray-900 rounded "
+                  className="block py-2 px-3 text-gray-900 rounded text-2xl leading-6 md:text-base z-10"
                 >
                   Contact
                 </Link>
               </li>
               {/* Team */}
-              <li>
+              <li className="relative">
                 <Link
                   to="/team"
-                  className="block py-2 px-3 text-gray-900 rounded "
+                  className="block py-2 px-3 text-gray-900 rounded text-2xl leading-6 md:text-base z-10"
                 >
                   Team
                 </Link>

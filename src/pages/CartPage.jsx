@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../store/actions/shoppingCartActions";
+import { getAddresses, setCart } from "../store/actions/shoppingCartActions";
 import OrderSummary from "../layout/Shop/OrderSummary";
 import ShoppingCart from "../layout/Shop/ShoppingCart";
 import { calculateTotalPrice } from "../utils/calculatePrice";
@@ -52,6 +52,7 @@ function CartPage() {
 
   useEffect(() => {
     calculateTotalPrice(cart, setTotalPrice, setShippingPrice);
+    dispatch(getAddresses());
   }, [cart]);
 
   return (

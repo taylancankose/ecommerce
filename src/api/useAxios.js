@@ -18,3 +18,7 @@ export const useAxios = () => {
 };
 
 export let API = useAxios();
+
+export const renewAPI = () => {
+  API = useAxios();
+};

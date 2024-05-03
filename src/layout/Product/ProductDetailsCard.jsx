@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../store/actions/shoppingCartActions";
 import { useParams } from "react-router-dom/";
 import { getSingleProduct } from "../../store/actions/productActions";
+import { toast } from "react-toastify";
 
 function ProductDetailsCard({ selectedProduct }) {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function ProductDetailsCard({ selectedProduct }) {
     } else {
       dispatch(setCart(product, count, checked));
     }
+    toast.success("Added to cart successfully");
   };
 
   return (

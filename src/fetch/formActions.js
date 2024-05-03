@@ -1,5 +1,5 @@
 import { Bounce, toast } from "react-toastify";
-import { API } from "../api/useAxios";
+import { API, renewAPI } from "../api/useAxios";
 
 export const handleSignUp = async (data) => {
   try {
@@ -19,6 +19,7 @@ export const handleSignIn = async (data) => {
     });
     const user = await response.data;
     localStorage.setItem("credentials", JSON.stringify(user.token));
+    renewAPI();
     return user;
   } catch (error) {
     console.log(error);
