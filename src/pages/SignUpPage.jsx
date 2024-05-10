@@ -85,14 +85,13 @@ function SignUpPage() {
     });
     reset();
   };
-
   return (
     <div className="flex items-center justify-center py-10 overflow-hidden bg-headerColor font-montserrat">
       <div className="flex items-center justify-center w-5/6 m-auto rounded-tl-2xl rounded-bl-2xl shadow-lg">
         {/* Image */}
         <div className="hidden lg:flex md:w-3/6 2xl:w-3/6 h-full rounded-tl-2xl rounded-bl-xl">
           <img
-            src="https://i.ibb.co/1ZcjrnG/stylish-woman-with-shopping-bags.jpg"
+            src="/src/assets/signup-bg.jpg"
             className="object-cover rounded-tl-2xl rounded-bl-xl md:h-[948px] xl:h-[911px] h-full"
           />
         </div>
